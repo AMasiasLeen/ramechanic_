@@ -12,7 +12,9 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = Brand::all();
+
+        return view("brands.index")->with(["brands" => $brands]);
     }
 
     /**

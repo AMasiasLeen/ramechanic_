@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string("identification");
             $table->string("phone");
             $table->string("address")->nullable();
-            $table->string("profile_picture");
+            $table->string("profile_picture")->nullable();
         });
     }
 
