@@ -22,7 +22,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        //
+        return view("brands.create");
     }
 
     /**
@@ -30,7 +30,12 @@ class BrandController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $brand = new Brand();
+        $brand->fill($request->all());
+
+        $brand->save();
+
+        return redirect()->route("brands.show", ["brand" => $brand]);
     }
 
     /**
@@ -38,7 +43,7 @@ class BrandController extends Controller
      */
     public function show(Brand $brand)
     {
-        //
+        return view("brands.show")->with(["brand" => $brand]);
     }
 
     /**
@@ -46,7 +51,7 @@ class BrandController extends Controller
      */
     public function edit(Brand $brand)
     {
-        //
+        return view("brands.edit")->with(["brand" => $brand]);
     }
 
     /**
@@ -54,7 +59,10 @@ class BrandController extends Controller
      */
     public function update(Request $request, Brand $brand)
     {
-        //
+        $brand->fill($request->all());
+        $brand->save();
+
+        return redirect()->route("brands.show", ["brand" => $brand]);
     }
 
     /**
@@ -62,6 +70,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        //
+        $brand->delete();
+        return redirect()->route("brands.index")->with(["result" => "OK"]);
     }
 }
