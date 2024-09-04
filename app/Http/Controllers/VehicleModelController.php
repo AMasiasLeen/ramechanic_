@@ -12,7 +12,9 @@ class VehicleModelController extends Controller
      */
     public function index()
     {
-        //
+        $vehicle_models = VehicleModel::all();
+
+        return view("vehicle_models.index")->with(["vehicle_models" => $vehicle_models]);
     }
 
     /**
@@ -20,7 +22,7 @@ class VehicleModelController extends Controller
      */
     public function create()
     {
-        //
+        return view("vehicle_models.create");
     }
 
     /**
@@ -28,38 +30,46 @@ class VehicleModelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vehicle_model = new VehicleModel();
+        $vehicle_model->fill($request->all());
+        $vehicle_model->save();
+
+        return redirect()->route("vehicle_models.show", ["vehicle_model" => $vehicle_model]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(VehicleModel $vehicleModel)
+    public function show(VehicleModel $vehicle_model)
     {
-        //
+        return view("vehicle_models.show")->with(["vehicle_model" => $vehicle_model]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(VehicleModel $vehicleModel)
+    public function edit(VehicleModel $vehicle_model)
     {
-        //
+        return view("vehicle_models.edit")->with(["vehicle_model" => $vehicle_model]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, VehicleModel $vehicleModel)
+    public function update(Request $request, VehicleModel $vehicle_model)
     {
-        //
+        $vehicle_model->fill($request->all());
+        $vehicle_model->save();
+
+        return redirect()->route("vehicle_models.show", ["vehicle_model" => $vehicle_model]);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(VehicleModel $vehicleModel)
+    public function destroy(VehicleModel $vehicle_model)
     {
-        //
+        $vehicle_model->delete();
+        return redirect()->route("vehicle_models.index")->with(["result" => "OK"]);
     }
 }
