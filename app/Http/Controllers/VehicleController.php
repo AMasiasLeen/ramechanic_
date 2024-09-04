@@ -22,7 +22,7 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        //
+        return view("vehicles.create");
     }
 
     /**
@@ -30,7 +30,11 @@ class VehicleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $vehicle = new Vehicle();
+        $vehicle->fill($request->all());
+        $vehicle->save();
+
+        return redirect()->route("vehicles.show", ["vehicle" => $vehicle]);
     }
 
     /**
@@ -38,7 +42,7 @@ class VehicleController extends Controller
      */
     public function show(Vehicle $vehicle)
     {
-        //
+        return view("vehicles.show")->with(["vehicle" => $vehicle]);
     }
 
     /**
@@ -46,7 +50,7 @@ class VehicleController extends Controller
      */
     public function edit(Vehicle $vehicle)
     {
-        //
+        return view("vehicles.edit")->with(["vehicle" => $vehicle]);
     }
 
     /**
@@ -54,7 +58,10 @@ class VehicleController extends Controller
      */
     public function update(Request $request, Vehicle $vehicle)
     {
-        //
+        $vehicle->fill($request->all());
+        $vehicle->save();
+
+        return redirect()->route("vehicles.show", ["vehicle" => $vehicle]);
     }
 
     /**
@@ -62,6 +69,8 @@ class VehicleController extends Controller
      */
     public function destroy(Vehicle $vehicle)
     {
-        //
+        $vehicle->delete();
+        return redirect()->route("vehicles.index")->with(["result" => "OK"]);
     }
 }
+
