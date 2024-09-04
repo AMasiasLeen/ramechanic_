@@ -34,7 +34,7 @@ class VehicleModelController extends Controller
         $vehicle_model->fill($request->all());
         $vehicle_model->save();
 
-        return redirect()->route("vehicle_models.show", ["vehicle_model" => $vehicle_model]);
+        return redirect()->route("vehicle-models.show", ["vehicle_model" => $vehicle_model]);
     }
 
     /**
@@ -61,7 +61,7 @@ class VehicleModelController extends Controller
         $vehicle_model->fill($request->all());
         $vehicle_model->save();
 
-        return redirect()->route("vehicle_models.show", ["vehicle_model" => $vehicle_model]);
+        return redirect()->route("vehicle-models.show", ["vehicle_model" => $vehicle_model]);
     }
 
     /**
@@ -70,6 +70,6 @@ class VehicleModelController extends Controller
     public function destroy(VehicleModel $vehicle_model)
     {
         $vehicle_model->delete();
-        return redirect()->route("vehicle_models.index")->with(["result" => "OK"]);
+        return redirect()->route("vehicle-models.index")->with(["result" => "OK"]);
     }
 }
