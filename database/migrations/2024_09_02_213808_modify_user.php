@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string("phone");
             $table->string("address")->nullable();
             $table->string("profile_picture")->nullable();
+            $table->foreignId("user_id")->constrained("users");
         });
     }
 
@@ -29,6 +30,7 @@ return new class extends Migration
             $table->dropColumn("phone");
             $table->dropColumn("address");
             $table->dropColumn("profile_picture");
+            $table->dropColumn("user_id");
         });
     }
 };
