@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BrandController extends Controller
 {
@@ -32,7 +33,6 @@ class BrandController extends Controller
     {
         $brand = new Brand();
         $brand->fill($request->all());
-
         $brand->save();
 
         return redirect()->route("brands.show", ["brand" => $brand]);
