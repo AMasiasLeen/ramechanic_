@@ -16,92 +16,90 @@
         <aside id="sidebar">
             <div class="d-flex">
                 <button class="toggle-btn" type="button">
-                    <i class="lni lni-grid-alt"></i>
+                    <i class="fa-solid fa-bars"></i></i>
                 </button>
                 <div class="sidebar-logo">
                     <a href="#">Ramechanic</a>
                 </div>
             </div>
             <ul class="sidebar-nav">
+                {{-- <li class="sidebar-item">
+                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
+                        data-bs-target="#user" aria-expanded="false" aria-controls="user">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Usuario</span>
+                    </a>
+                    <ul id="user" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                        <li class="sidebar-item">
+                            <a href="{{ route('vehicles.index') }}" class="sidebar-link"><i class="fa-solid fa-circle-user"></i></i>Ver Perfil</a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a href="{{ route('brands.index') }}" class="sidebar-link"><i class="fa-solid fa-users"></i></i>Usuarios</a>
+                        </li>
+                    </ul>
+                </li> --}}
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
-                        <i class="lni lni-user"></i>
-                        <span>Perfil</span>
+                        <i class="fa-solid fa-circle-user"></i>
+                        <span>Ver Perfil</span>
                     </a>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link">
-                        <i class="lni lni-agenda"></i>
-                        <span>Task</span>
+                        <i class="fa-solid fa-book"></i>
+                        <span>Antecedentes</span>
                     </a>
                 </li>
+                <li class="sidebar-item">
+                    <a href="#" class="sidebar-link">
+                        <i class="fa-solid fa-person-chalkboard"></i>
+                        <span>Instrucciones</span>
+                    </a>
+                </li>
+                @if(Auth::user()->hasRole("admin"))
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                        <i class="lni lni-protection"></i>
-                        <span>Auth</span>
+                    data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
+                    <i class="fa-regular fa-clipboard"></i>
+                    <span>Administración</span>
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Login</a>
+                            <a href="{{ route('vehicles.index') }}" class="sidebar-link"><i class="fa-solid fa-car"></i>Vehiculos</a>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Register</a>
+                            <a href="{{ route('brands.index') }}" class="sidebar-link"><i class="fa-solid fa-car-side"></i>Marcas</a>
                         </li>
-                    </ul>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                        data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
-                        <i class="lni lni-layout"></i>
-                        <span>Multi Level</span>
-                    </a>
-                    <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                                data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
-                                Two Links
-                            </a>
-                            <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
-                                </li>
-                                <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
+                            <a href="{{ route('vehicle-models.index') }}" class="sidebar-link"><i
+                                class="fa-solid fa-boxes-stacked"></i></i>Modelos</a>
+                            </li>
+                            <li class="sidebar-item">
+                                <a href="{{ route('vehicle-models.index') }}" class="sidebar-link"><i
+                                    class="fa-solid fa-boxes-stacked"></i></i>Usuarios</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-popup"></i>
-                        <span>Notification</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
-                        <i class="lni lni-cog"></i>
-                        <span>Setting</span>
-                    </a>
-                </li>
-            </ul>
-            <div class="sidebar-footer">
-                <a href="#" class="sidebar-link">
-                    <i class="lni lni-exit"></i>
-                    <span>Logout</span>
-                </a>
+                    @endif
+                    <div class="sidebar-footer">
+                        <a href="#" class="sidebar-link">
+                            <form action="{{ route('logout') }}" method="POST" >
+                                @csrf
+                                <button><i class="fa-solid fa-arrow-right-from-bracket"></i>Logout</button>
+                                
+                            </form>
+                        </a>
+                    </div>
+                </aside>
+        <div class="main p-3">
+            <div>
+                <h1>
+                    @yield('content')
+                </h1>
             </div>
-        </aside>
-    <div class="main p-3">
-        <div class="text-center">
-            <h1>
-                @yield('content')
-            </h1>
         </div>
     </div>
-</div>
-    @yield('content')
 
     @stack('js')
 
