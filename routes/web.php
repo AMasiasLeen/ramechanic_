@@ -3,6 +3,7 @@
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\VehicleModelController;
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::middleware(["auth", "admin"])->group(function () {
+Route::middleware(["auth", AdminMiddleware::class])->group(function () {
+    
     Route::resource("brands", BrandController::class);
     Route::resource("vehicle-models", VehicleModelController::class);
     Route::resource("vehicles", VehicleController::class);
