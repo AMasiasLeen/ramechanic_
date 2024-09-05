@@ -72,11 +72,10 @@
                         </li>
                         <li class="sidebar-item">
                             <a href="{{ route('vehicle-models.index') }}" class="sidebar-link"><i
-                                class="fa-solid fa-boxes-stacked"></i></i>Modelos</a>
+                                class="fa-solid fa-boxes-stacked"></i>Modelos</a>
                             </li>
                             <li class="sidebar-item">
-                                <a href="{{ route('vehicle-models.index') }}" class="sidebar-link"><i
-                                    class="fa-solid fa-boxes-stacked"></i></i>Usuarios</a>
+                                <a href="{{ route('users.index') }}" class="sidebar-link"><i class="fa-solid fa-users"></i>Usuarios</a>
                                 </li>
                             </ul>
                         </li>
