@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UsersTableSeeder extends Seeder
 {
@@ -14,14 +15,27 @@ class UsersTableSeeder extends Seeder
      */
     public function run(): void
     {
-        User::updateOrCreate(
+        $user = User::updateOrCreate(
             ["email" => "admin"],
             [
                 "name" => "Administrador",
                 "password" => Hash::make("admin"),
-                "identification"=>"999999999",
-                "phone"=>"0999999999"
+                "identification" => "999999999",
+                "phone" => "0999999999",
+                "user_id" => 1
             ]
         );
+        
+        $role = Role::updateOrCreate([
+            "name" => "admin"
+        ]);
+
+        Role::updateOrCreate([
+            "name" => "user"
+        ]);
+
+     
+
+        $user->assignRole($role);
     }
 }
