@@ -11,8 +11,18 @@ class BrandController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        if ($request->ajax()) {
+
+            $brands = Brand::where("name", "like", $request->term . "%")->get()->map(function (Brand $brand) {
+                return ["id" => $brand->id, "text" => $brand->name];
+            });
+
+            return response()->json(["results" => $brands], 200);
+        }
+
         $brands = Brand::all();
 
         return view("brands.index")->with(["brands" => $brands]);
