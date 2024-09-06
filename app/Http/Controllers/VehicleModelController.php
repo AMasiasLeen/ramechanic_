@@ -10,8 +10,17 @@ class VehicleModelController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        if ($request->ajax()) {
+
+            $vehicle_models = VehicleModel::where("name", "like", $request->term . "%")->get()->map(function (VehicleModel $vehicle_model) {
+                return ["id" => $vehicle_model->id, "text" => $vehicle_model->name];
+            });
+
+            return response()->json(["results" => $vehicle_models], 200);
+        }
         $vehicle_models = VehicleModel::all();
 
         return view("vehicle_models.index")->with(["vehicle_models" => $vehicle_models]);
