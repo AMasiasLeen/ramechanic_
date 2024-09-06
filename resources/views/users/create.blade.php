@@ -31,6 +31,14 @@
                     <label for="address" class="form-label">Dirección:</label>
                     <input name="address" type="text" class="form-control" id="address" required>
 
+                    <label for="rol" class="form-label">Dirección:</label>
+                    <select name="rol" class="form-control" id="role_id">uwu
+                        @foreach(Spatie\Permission\Models\Role::all() as $role)
+                            <option value="{{$role->id}}">{{$role->name}}</option>
+                        
+                        @endforeach 
+                    </select>
+
 
                 </div>
                 <button type="submit" class="btn btn-primary">GUARDAR</button>
@@ -38,3 +46,17 @@
         </div>
     </div>
 @endsection
+
+@push('js')
+    <script defer>
+        window.onload = () => {
+
+            $("#role_id").select2({
+                theme: "bootstrap-5",
+                width: "100%",
+                multiple:true,
+                allowClear:true
+            });
+        }
+</script>
+@endpush
