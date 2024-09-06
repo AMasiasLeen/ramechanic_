@@ -17,7 +17,7 @@
                     <input name="plate" type="text" class="form-control" id="plate" required>
 
                     <label for="owner_id" class="form-label">Propietario</label>
-                    <input name="owner_id" type="text" class="form-control" id="owner_id" required>
+                    <select name="owner_id" class="form-control" id="owner_id"></select>
 
                     {{-- SELECT 2 --}}
                     {{-- <label for="brand_id">Marca</label>
@@ -55,6 +55,22 @@
             //         dataType: 'json'
             //     },
             // });
+
+            $("#vehicle_model_id").select2({
+                theme: "bootstrap-5",
+                width: "100%",
+                ajax: {
+                    url: "{{ route('vehicle-models.index') }}",
+                    dataType: 'json',
+                    data: (params) => {
+                        const query = {
+                            brand_id: $("#brand_id").val(),
+                            term: params.term
+                        }
+                        return query
+                    }
+                },
+            });
 
             $("#vehicle_model_id").select2({
                 theme: "bootstrap-5",

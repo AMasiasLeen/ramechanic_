@@ -31,15 +31,14 @@
                     <label for="address" class="form-label">Dirección:</label>
                     <input name="address" type="text" class="form-control" id="address" required>
 
-                    <label for="rol" class="form-label">Dirección:</label>
-                    <select name="rol" class="form-control" id="role_id">uwu
-                        @foreach(Spatie\Permission\Models\Role::all() as $role)
-                            <option value="{{$role->id}}">{{$role->name}}</option>
+                    <label for="rol" class="form-label">Rol:</label>
+                    <select name="rol[]" class="form-control" id="role_id"> 
                         
+                        @foreach(Spatie\Permission\Models\Role::all() as $role)
+                            <option value="{{$role->name}}">{{$role->name}}</option>
                         @endforeach 
+
                     </select>
-
-
                 </div>
                 <button type="submit" class="btn btn-primary">GUARDAR</button>
             </form>
@@ -55,7 +54,8 @@
                 theme: "bootstrap-5",
                 width: "100%",
                 multiple:true,
-                allowClear:true
+                allowClear:true,
+                placeholder: "pone un rol"
             });
         }
 </script>

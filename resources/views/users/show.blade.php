@@ -21,6 +21,10 @@
         <h3>{{ $user->email }}</h3>
         <h4>Dirección</h4>
         <h3>{{ $user->address }}</h3>
+        <h4>Rol</h4>
+        @foreach($user->roles as $rol)
+        <span class="badge bg-success">{{$rol->name}}</span>
+        @endforeach
     </div>
     <div class="card-footer">
         <a class='btn btn-primary' href="{{ route('users.edit', ['user' => $user]) }}">Modificar</a>
