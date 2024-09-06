@@ -23,7 +23,7 @@ class VehicleModelController extends Controller
             }
 
             $vehicle_models = $query->where("name", "like", $request->term . "%")->get()->map(function (VehicleModel $vehicle_model) {
-                return ["id" => $vehicle_model->id, "text" => $vehicle_model->name];
+                return ["id" => $vehicle_model->id, "text" => $vehicle_model->name." - ".$vehicle_model->brand->name];
             });
 
             return response()->json(["results" => $vehicle_models], 200);
@@ -56,8 +56,11 @@ class VehicleModelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(VehicleModel $vehicle_model)
+    public function show(VehicleModel $vehicle_model, Request $request)
     {
+        if ($request -> ajax()) {
+            return response()->json([$vehicle_model], 200); 
+        }
         return view("vehicle_models.show")->with(["vehicle_model" => $vehicle_model]);
     }
 
