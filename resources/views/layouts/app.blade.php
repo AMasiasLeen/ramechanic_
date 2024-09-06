@@ -59,47 +59,28 @@
                 @if(Auth::user()->hasRole("admin"))
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
-                    data-bs-target="#auth" aria-expanded="false" aria-controls="auth">
-                    <i class="fa-regular fa-clipboard"></i>
-                    <span>Administración</span>
-                    </a>
-                    <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="{{ route('vehicles.index') }}" class="sidebar-link"><i class="fa-solid fa-car"></i>Vehiculos</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('brands.index') }}" class="sidebar-link"><i class="fa-solid fa-car-side"></i>Marcas</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="{{ route('vehicle-models.index') }}" class="sidebar-link"><i
-                                class="fa-solid fa-boxes-stacked"></i>Modelos</a>
-                            </li>
-                            <li class="sidebar-item">
-                                <a href="{{ route('users.index') }}" class="sidebar-link"><i class="fa-solid fa-users"></i>Usuarios</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    @endif
-
-                    <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed has-dropdown" data-bs-toggle="collapse"
                         data-bs-target="#multi" aria-expanded="false" aria-controls="multi">
-                        <i class="lni lni-layout"></i>
-                        <span>Multi Level</span>
+                        <i class="fa-regular fa-clipboard"></i>
+                        <span>Administración</span>
                     </a>
                     <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
                             <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                                data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
-                                Two Links
+                                data-bs-target="#records" aria-expanded="false" aria-controls="records">
+                                Registros
                             </a>
-                            <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
+                            <ul id="records" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
+                                    <a href="{{ route('brands.index') }}" class="sidebar-link"><i class="fa-solid fa-car-side"></i>Marcas</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
+                                    <a href="{{ route('vehicle-models.index') }}" class="sidebar-link"><i class="fa-solid fa-boxes-stacked"></i>Modelos</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="{{ route('vehicles.index') }}" class="sidebar-link"><i class="fa-solid fa-car"></i>Vehículos</a>
+                                </li>
+                                <li class="sidebar-item">
+                                    <a href="#" class="sidebar-link">Antecedentes</a>
                                 </li>
                             </ul>
                         </li>
@@ -107,19 +88,21 @@
                     <ul id="multi" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
                             <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse"
-                                data-bs-target="#multi-two" aria-expanded="false" aria-controls="multi-two">
-                                Two Links
+                                data-bs-target="#users" aria-expanded="false" aria-controls="users">
+                                Perfiles
                             </a>
-                            <ul id="multi-two" class="sidebar-dropdown list-unstyled collapse">
+                            <ul id="users" class="sidebar-dropdown list-unstyled collapse">
                                 <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 1</a>
+                                    <a href="{{ route('users.index') }}" class="sidebar-link"><i class="fa-solid fa-users"></i>Usuarios</a>
                                 </li>
                                 <li class="sidebar-item">
-                                    <a href="#" class="sidebar-link">Link 2</a>
+                                    <a href="{{ route('roles.index') }}" class="sidebar-link"><i class="fa-solid fa-user-shield"></i>Roles</a>
                                 </li>
                             </ul>
                         </li>
                     </ul>
+                </ul>
+                    @endif    
                 </li>
                     <div class="sidebar-footer">
                         <a href="#" class="sidebar-link">

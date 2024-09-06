@@ -12,7 +12,7 @@ class VehicleModel extends Model
 
     protected $guarded = [];
 
-    protected $with = ["create_uid"];
+    protected $with = ["create_uid","brand"];
 
     protected static function boot()
     {

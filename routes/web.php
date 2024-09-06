@@ -16,6 +16,12 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware(["auth"])->group(function(){
+    Route::get("users/{user}/profile",[UserController::class,"show_profile"]) -> name("users.profile");
+    Route::get("users/{user}/edit_profile",[UserController::class,"edit_profile"]) -> name("users.edit_profile");
+
+});
+
 
 Route::middleware(["auth", AdminMiddleware::class])->group(function () {
     Route::resource("users", UserController::class);

@@ -55,12 +55,22 @@ class UserController extends Controller
         return view("users.show")->with(["user" => $user]);
     }
 
+    public function show_profile(User $user)
+    {
+        return view("users.profile")->with(["user" => $user]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(User $user)
     {
         return view("users.edit")->with(["user" => $user]);
+    }
+
+    public function edit_profile(User $user)
+    {
+        return view("users.edit_profile")->with(["user" => $user]);
     }
 
     /**
