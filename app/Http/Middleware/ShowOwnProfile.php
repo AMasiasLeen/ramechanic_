@@ -15,12 +15,12 @@ class ShowOwnProfile
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next, User $user): Response
+    public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::id() == $user->id) {
+        if (Auth::id() == $request->route("user")) {
             return $next($request);
         }
 
-        return redirect()->route("users.profile", ["user" => $user]);
+        return redirect()->route("users.profile", ["user" => Auth::id()]);
     }
 }
