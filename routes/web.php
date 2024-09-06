@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RecordController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VehicleController;
@@ -32,4 +33,5 @@ Route::middleware(["auth", AdminMiddleware::class])->group(function () {
     Route::resource("brands", BrandController::class);
     Route::resource("vehicle-models", VehicleModelController::class);
     Route::resource("vehicles", VehicleController::class);
+    Route::resource("records", RecordController::class);
 });

@@ -16,7 +16,7 @@ class VehicleController extends Controller
         if ($request->ajax()) {
 
             $vehicles = Vehicle::where("plate", "like", $request->term . "%")->get()->map(function (Vehicle $vehicles) {
-                return ["id" => $vehicles->id, "text" => "Placa: " . $vehicles->name];
+                return ["id" => $vehicles->id, "text" => "Placa: " . $vehicles->plate];
             });
 
             return response()->json(["results" => $vehicles], 200);
