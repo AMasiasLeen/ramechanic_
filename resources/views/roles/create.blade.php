@@ -13,8 +13,8 @@
             <form action="{{ route('roles.store') }}" method="POST">
                 @csrf
                 <div class="mb-3">
-                    <label for="rol" class="form-label">Rol:</label>
-                    <input name="rol" type="text" class="form-control" id="rol" required>
+                    <label for="role" class="form-label">Rol:</label>
+                    <input name="name" type="text" class="form-control" id="role" required>
 
                 </div>
                 <button type="submit" class="btn btn-primary">GUARDAR</button>

@@ -23,10 +23,10 @@
                     <label for="brand_id">Marca</label>
                     <select name="brand_id" class="form-control" id="brand_id"></select>
                     {{-- <label for="brand_id" class="form-label">Marca</label>
-                        <input name="brand_id" type="text" class="form-control" id="brand_id" required> --}}
+                    <input name="brand_id" type="text" class="form-control" id="brand_id" required> --}}
 
-                    <label for="vehicle_model_id" class="form-label">Modelo</label>
-                    <input name="vehicle_model_id" type="text" class="form-control" id="vehicle_model_id" required>
+                    <label for="vehicle_model_id">Modelo</label>
+                    <select name="vehicle_model_id" class="form-control" id="vehicle_model_id"></select>
 
                     <label for="engine_serial" class="form-label">Número Serie del Motor</label>
                     <input name="engine_serial" type="text" class="form-control" id="engine_serial" required>
@@ -51,6 +51,14 @@
                 width: "100%",
                 ajax: {
                     url: "{{ route('brands.index') }}",
+                    dataType: 'json',
+                },
+            });
+            $("#vehicle_model_id").select2({
+                theme: "bootstrap-5",
+                width: "100%",
+                ajax: {
+                    url: "{{ route('vehicle-models.index') }}",
                     dataType: 'json',
                 },
             });

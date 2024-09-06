@@ -8,11 +8,11 @@
 
 <div class="card">
     <div class="card-header">
-        <h1>Usuario</h1>
+        <h1>Nombre Rol</h1>
     </div>
     <div class="card-body">
-        <h4>Identificación</h4>
-        <h3>{{ $role->identification }}</h3>
+        <h4></h4>
+        <h3>{{ $role->name }}</h3>
     </div>
     <div class="card-footer">
         <a class='btn btn-primary' href="{{ route('roles.edit', ['role' => $role]) }}">Modificar</a>

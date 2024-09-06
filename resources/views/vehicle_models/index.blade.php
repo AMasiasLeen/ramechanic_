@@ -13,6 +13,7 @@
                 <tr>
                     <th>ID</th>
                     <th>Modelos</th>
+                    <th>Marca</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -21,6 +22,7 @@
                     <tr>
                         <td>{{ $vehicle_model->id }}</td>
                         <td>{{ $vehicle_model->name }}</td>
+                        <td>{{ $vehicle_model->brand->name }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Acciones">
                                 <a class="btn btn-outline-warning btn-sm" href="{{ route('vehicle-models.edit', ['vehicle_model' => $vehicle_model]) }}">Editar</a>

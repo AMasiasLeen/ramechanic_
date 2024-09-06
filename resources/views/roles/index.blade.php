@@ -4,7 +4,7 @@
 
     <div class="d-flex justify-content-between mb-4">
         <h1>Listado de Roles</h1>
-        <a class="btn btn-success" href="{{ route('roles.create') }}">Agregar Nuevo Usuario</a>
+        <a class="btn btn-success" href="{{ route('roles.create') }}">Agregar Nuevo Rol</a>
     </div>
 
     <div class="table-responsive">

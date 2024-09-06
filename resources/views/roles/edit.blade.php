@@ -15,8 +15,8 @@
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
-                    <label for="identification" class="form-label">Identificación</label>
-                    <input name="identification" type="text" class="form-control" id="identification"  value="{{ $role->name }}" required>
+                    <label for="role" class="form-label">Rol</label>
+                    <input name="name" type="text" class="form-control" id="role"  value="{{ $role->name }}" required>
 
                 </div>
                 <button type="submit" class="btn btn-primary">ACTUALIZAR</button>
