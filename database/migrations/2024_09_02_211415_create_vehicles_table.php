@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string("engine_serial")->nullable();
             $table->string("serial_number")->nullable();
             $table->string("color")->nullable();
-            $table->foreignId("brand_id")->constrained("brands");
             $table->foreignId("vehicle_model_id")->constrained();
             $table->foreignId("owner_id")->constrained("users");
             $table->timestamps();
