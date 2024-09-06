@@ -13,7 +13,7 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
-    protected $guarded = [];
+    protected $guarded = ["rol"];
 
     protected $with = ["create_uid"];
 
