@@ -46,6 +46,7 @@
 @push('js')
     <script defer>
         window.onload = () => {
+
             $("#brand_id").select2({
                 theme: "bootstrap-5",
                 width: "100%",
@@ -54,14 +55,28 @@
                     dataType: 'json',
                 },
             });
+
             $("#vehicle_model_id").select2({
                 theme: "bootstrap-5",
                 width: "100%",
                 ajax: {
                     url: "{{ route('vehicle-models.index') }}",
                     dataType: 'json',
+                    data: (params) => {
+                        const query = {
+                            brand_id: $("#brand_id").val(),
+                            term: params.term
+                        }
+                        return query
+                    }
                 },
             });
+
+            $("#brand_id").on("change", function() {
+                $("#vehicle_model_id").val(null);
+                $("#vehicle_model_id").trigger("change")
+            })
+
         }
     </script>
 @endpush

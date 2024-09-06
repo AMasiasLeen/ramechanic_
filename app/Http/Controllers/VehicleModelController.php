@@ -15,7 +15,14 @@ class VehicleModelController extends Controller
 
         if ($request->ajax()) {
 
-            $vehicle_models = VehicleModel::where("name", "like", $request->term . "%")->get()->map(function (VehicleModel $vehicle_model) {
+
+            if ($request->has('brand_id') && $request->brand_id != null) {
+                $query = VehicleModel::where("brand_id", $request->brand_id);
+            } else {
+                $query = VehicleModel::query();
+            }
+
+            $vehicle_models = $query->where("name", "like", $request->term . "%")->get()->map(function (VehicleModel $vehicle_model) {
                 return ["id" => $vehicle_model->id, "text" => $vehicle_model->name];
             });
 
