@@ -24,7 +24,7 @@
                         required>
 
                     <label for="password" class="form-label">Contraseña:</label>
-                    <input name="password" type="text" class="form-control" id="password" placeholder="Deja en blanco si no quieres modificar">
+                    <input name="password" type="password" class="form-control" id="password" placeholder="Deja en blanco si no quieres modificar">
 
                     <label for="phone" class="form-label">Telefono:</label>
                     <input name="phone" type="text" class="form-control" id="phone" value="{{ $user->phone }}"

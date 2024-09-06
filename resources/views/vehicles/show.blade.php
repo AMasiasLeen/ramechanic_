@@ -15,13 +15,13 @@
         <h3>{{ $vehicle->plate }}</h3>
 
         <h4>Propietario</h4>
-        <h3>{{ $vehicle->owner_id }}</h3>
+        <h3>{{ $vehicle->owner->name }}</h3>
 
         <h4>Marca</h4>
-        <h3>{{ $vehicle->brand_id }}</h3>
+        <h3>{{ $vehicle->vehicle_model->brand->name }}</h3>
 
         <h4>Modelo</h4>
-        <h3>{{ $vehicle->vehicle_model_id }}</h3>
+        <h3>{{ $vehicle->vehicle_model->name }}</h3>
 
         <h4>Serie de Motor</h4>
         <h3>{{ $vehicle->engine_serial }}</h3>
