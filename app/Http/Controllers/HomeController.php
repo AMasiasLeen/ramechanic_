@@ -39,4 +39,8 @@ class HomeController extends Controller
         return view('home', compact('totalVehicles', 'totalModels', 'totalBrands', 'brandNames', 'vehiclesPerBrand', 'modelNames', 'vehiclesPerModel'));
     }
 
+    public function show_instructions()
+    {
+        return view("instructions");
+    }
 }
