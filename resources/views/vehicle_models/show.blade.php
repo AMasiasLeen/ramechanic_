@@ -8,11 +8,13 @@
 
 <div class="card">
     <div class="card-header">
-        <h1>Marca</h1>
+        <h1>Modelo de Vehículo</h1>
     </div>
     <div class="card-body">
-        <h4>Nombre</h4>
+        <h4>Modelo</h4>
         <h3>{{ $vehicle_model->name }}</h3>
+        <h4>Marca</h4>
+        <h3>{{ $vehicle_model->brand->name }}</h3>
     </div>
     <div class="card-footer">
         <a class='btn btn-primary' href="{{ route('vehicle-models.edit', ['vehicle_model' => $vehicle_model]) }}">Modificar</a>
