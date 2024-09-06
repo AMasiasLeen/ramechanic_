@@ -43,6 +43,7 @@ class UserController extends Controller
         $user = new User();
         $user->fill($request->all());
         $user->save();
+        $user->syncRoles($request->rol);
 
         return redirect()->route("users.show", ["user" => $user]);
     }
@@ -70,6 +71,7 @@ class UserController extends Controller
     {
         $user->fill($request->all());
         $user->save();
+        $user->syncRoles($request->rol);
 
         return redirect()->route("users.show", ["user" => $user]);
     }
