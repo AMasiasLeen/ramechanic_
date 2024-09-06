@@ -10,8 +10,18 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+
+        if ($request->ajax()) {
+
+            $users = User::where("name", "like", $request->term . "%")->get()->map(function (User $user) {
+                return ["id" => $user->id, "text" => $user->name];
+            });
+
+            return response()->json(["results" => $users], 200);
+        }
+
         $users = User::all();
 
         return view("users.index")->with(["users" => $users]);
