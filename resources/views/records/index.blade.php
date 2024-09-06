@@ -2,39 +2,63 @@
 
 @section('content')
 
-    <table class="table">
+    <div class="d-flex justify-content-between mb-4">
+        <h1>Listado de Modelos de Vehículos</h1>
+        <a class="btn btn-success" href="{{ route('records.create') }}">Agregar Nuevo Registro</a>
+    </div>
 
-        <thead class="table-dark">
-            <tr>
-                <th></th>
-                <th> Propietario </th>
-                <th> Placa </th>
-                <th> Marca </th>
-                <th> Modelo </th>
-                <th> Color </th>
-                <th> Número Serie </th>
-                <th> Número Motor </th>
-                <th> <button class="btn btn-success">Agregar Nuevo Vehiculo</button></th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach ($vehicles as $vehicle)
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-striped align-middle">
+            <thead class="table-dark">
                 <tr>
-                    <td>{{$vehicle->id}}</td>
-                    <td>{{$vehicle->owner_id}}</td>
-                    <td>{{$vehicle->plate}}</td>
-                    <td>{{$vehicle->brand_id}}</td>
-                    <td>{{$vehicle->vehicle_model_id}}</td>
-                    <td>{{$vehicle->color}}</td>
-                    <td>{{$vehicle->serial_number}}</td>
-                    <td>{{$vehicle->engine_serial}}</td>
-                    <td><button class="btn btn-outline-danger">eliminar</button> <button class="btn btn-outline-warning">editar</button> </td>
+                    <th>Vehiculo</th>
+                    <th>Modelos</th>
+                    <th>Marca</th>
+                    <th>Acciones</th>
                 </tr>
-            @endforeach
+            </thead>
+            <tbody>
+                @foreach ($vehicle_models as $vehicle_model)
+                    <tr>
+                        <td>{{ $vehicle_model->id }}</td>
+                        <td>{{ $vehicle_model->name }}</td>
+                        <td>{{ $vehicle_model->brand->name }}</td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Acciones">
+                                <a class="btn btn-outline-warning btn-sm" href="{{ route('vehicle-models.edit', ['vehicle_model' => $vehicle_model]) }}">Editar</a>
+                                
+                                <form id="formdel{{ $vehicle_model->id }}" action="{{ route('vehicle-models.destroy', ['vehicle_model' => $vehicle_model]) }}" method="POST" class="d-inline-block">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-outline-danger btn-sm btndel" type="button" data-id="{{ $vehicle_model->id }}">Eliminar</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
-
-        </tbody>
-
-    </table>
 @endsection
+
+@push('js')
+    <script defer>
+        window.onload = () => {
+            $('.btndel').click(function() {
+                    console.log(this)
+                    const model_id = $(this).data("id")
+                Swal.fire({
+                    title: "Esta seguro de eliminar",
+                    text: "Esta accion no se puede deshacer",
+                    icon: "warning",
+                    showCancelButton: true
+                }).then((result)=>{
+                    if(result.value){
+                        $('#formdel'+model_id).submit();
+                    }
+                })
+            })
+        }
+    </script>
+@endpush
