@@ -10,9 +10,21 @@ class RecordController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+
+        if ($request->ajax()) {
+
+            $records = Record::where("name", "like", $request->term . "%")->get()->map(function (Record $record) {
+                return ["id" => $record->id, "text" => $record->name];
+            });
+
+            return response()->json(["results" => $records], 200);
+        }
+
+        $records = Record::all();
+
+        return view("records.index")->with(["records" => $records]);
     }
 
     /**
@@ -20,7 +32,7 @@ class RecordController extends Controller
      */
     public function create()
     {
-        //
+        return view("records.create");
     }
 
     /**
@@ -28,7 +40,11 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $record = new Record();
+        $record->fill($request->all());
+        $record->save();
+
+        return redirect()->route("records.show", ["record" => $record]);
     }
 
     /**
@@ -36,7 +52,7 @@ class RecordController extends Controller
      */
     public function show(Record $record)
     {
-        //
+        return view("records.show")->with(["record" => $record]);
     }
 
     /**
@@ -44,7 +60,7 @@ class RecordController extends Controller
      */
     public function edit(Record $record)
     {
-        //
+        return view("records.edit")->with(["record" => $record]);
     }
 
     /**
@@ -52,7 +68,10 @@ class RecordController extends Controller
      */
     public function update(Request $request, Record $record)
     {
-        //
+        $record->fill($request->all());
+        $record->save();
+
+        return redirect()->route("records.show", ["record" => $record]);
     }
 
     /**
@@ -60,6 +79,7 @@ class RecordController extends Controller
      */
     public function destroy(Record $record)
     {
-        //
+        $record->delete();
+        return redirect()->route("records.index")->with(["result" => "OK"]);
     }
 }
