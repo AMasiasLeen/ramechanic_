@@ -30,4 +30,9 @@ class VehicleModel extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
 }
