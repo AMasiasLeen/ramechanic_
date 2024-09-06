@@ -17,7 +17,7 @@ class ShowOwnProfile
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::id() == $request->route("user")) {
+        if (Auth::id() == $request->route("user")->id) {
             return $next($request);
         }
 
