@@ -23,7 +23,13 @@ class BrandController extends Controller
             return response()->json(["results" => $brands], 200);
         }
 
-        $brands = Brand::all();
+        if ($request->has("filter_brand")) {
+            $query = Brand::where("name", "like", $request->filter_brand . "%");
+        } else {
+            $query = Brand::query();
+        }
+
+        $brands = $query->get();
 
         return view("brands.index")->with(["brands" => $brands]);
     }
