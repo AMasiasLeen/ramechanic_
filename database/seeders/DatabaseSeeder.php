@@ -16,8 +16,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(UsersTableSeeder::class);
+        $this->call(BrandsTableSeeder::class);
+        $this->call(VehicleModelsTableSeeder::class);
 
 
-        Vehicle::factory(VehiclesFactory::class)->make(1000);
+        Vehicle::factory()->count(1000)->make();
     }
 }
