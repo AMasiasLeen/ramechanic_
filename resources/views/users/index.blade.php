@@ -7,6 +7,8 @@
         <a class="btn btn-success" href="{{ route('users.create') }}">Agregar Nuevo Usuario</a>
     </div>
 
+    @include('users.filters')
+
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped align-middle">
             <thead class="table-dark">

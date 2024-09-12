@@ -22,7 +22,7 @@
                     <label for="password" class="form-label">Contraseña:</label>
                     <input name="password" type="text" class="form-control" id="password" required>
 
-                    <label for="phone" class="form-label">Telefono:</label>
+                    <label for="phone" class="form-label">Teléfono:</label>
                     <input name="phone" type="text" class="form-control" id="phone" required>
 
                     <label for="email" class="form-label">Correo:</label>
@@ -33,11 +33,9 @@
 
                     <label for="rol" class="form-label">Rol:</label>
                     <select name="rol[]" class="form-control" id="role_id"> 
-                        
                         @foreach(Spatie\Permission\Models\Role::all() as $role)
                             <option value="{{$role->name}}">{{$role->name}}</option>
-                        @endforeach 
-
+                        @endforeach
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary">GUARDAR</button>
@@ -45,6 +43,7 @@
         </div>
     </div>
 @endsection
+
 
 @push('js')
     <script defer>

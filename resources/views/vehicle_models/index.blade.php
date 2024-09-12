@@ -7,6 +7,8 @@
         <a class="btn btn-success" href="{{ route('vehicle-models.create') }}">Agregar Nuevo Modelo</a>
     </div>
 
+    @include('vehicle_models.filters')
+
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped align-middle">
             <thead class="table-dark">

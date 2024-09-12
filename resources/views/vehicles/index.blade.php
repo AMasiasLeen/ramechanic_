@@ -6,6 +6,8 @@
         <a class="btn btn-success" href="{{ route('vehicles.create') }}">Agregar Nuevo Vehículo</a>
     </div>
 
+    @include('vehicles.filters')
+
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped align-middle">
             <thead class="table-dark">
@@ -25,10 +27,10 @@
                 @foreach ($vehicles as $vehicle)
                     <tr>
                         <td>{{ $vehicle->id }}</td>
-                        <td>{{ $vehicle->owner_id }}</td>
+                        <td>{{ $vehicle->owner->name }}</td>
                         <td>{{ $vehicle->plate }}</td>
-                        <td>{{ $vehicle->brand_id }}</td>
-                        <td>{{ $vehicle->vehicle_model_id }}</td>
+                        <td>{{ $vehicle->vehicle_model->brand->name }}</td>
+                        <td>{{ $vehicle->vehicle_model->name }}</td>
                         <td>{{ $vehicle->color }}</td>
                         <td>{{ $vehicle->serial_number }}</td>
                         <td>{{ $vehicle->engine_serial }}</td>
