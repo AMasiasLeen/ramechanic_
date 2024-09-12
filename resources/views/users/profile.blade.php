@@ -12,7 +12,7 @@
                         <div class="row">
                             <div class="col-md-4 text-center">
                                 <!-- Imagen de perfil -->
-                                <img src="{{ asset('path_to_user_avatar_image') }}" class="img-fluid rounded-circle" alt="Imagen de perfil" style="max-width: 150px;">
+                                <img src="{{ asset($user->profile_picture) }}" class="img-fluid rounded-circle" alt="Imagen de perfil" style="max-width: 150px;">
                             </div>
                             <div class="col-md-8">
                                 <!-- Información del usuario -->

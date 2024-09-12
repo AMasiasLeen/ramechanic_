@@ -15,7 +15,7 @@
                             
                             <!-- Campo de correo electrónico -->
                             <div class="form-group mb-3">
-                                <label for="email" class="form-label">Correo electrónico soy gay</label>
+                                <label for="email" class="form-label">Correo electrónico</label>
                                 <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required autofocus placeholder="Ingresa tu correo">
                                 
                                 @error('email')
