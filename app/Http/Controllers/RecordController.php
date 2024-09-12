@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Record;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RecordController extends Controller
 {
@@ -81,10 +82,14 @@ class RecordController extends Controller
         return view("records.show")->with(["record" => $record]);
     }
 
-    public function show_user_record(Record $record)
+    public function show_user_record()
 {
+    $record = Record::whereHas("vehicle.owner",
+        function($query){
+            $query ->where("id", Auth::id());
+        })->get();
 
-    return view("records.user_records")->with(["record" => $record]);
+    return view("records.user_records")->with(["records" => $record]);
 }
 
     /**

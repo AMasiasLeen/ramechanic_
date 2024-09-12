@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $totalVehicles = VehicleModel::count();
+        $totalVehicles = Vehicle::count();
         $totalModels = VehicleModel::count();
         $totalBrands = Brand::count();
 
