@@ -18,8 +18,8 @@ class VehicleFactory extends Factory
     {
         return [
             "plate" => fake()->word() . fake()->randomNumber(4, true),
-            "engine_serial" => fake()->randomNumber(20, true),
-            "serial_number" => fake()->randomNumber(15, true),
+            "engine_serial" => fake()->randomNumber(9, true) . fake()->randomNumber(9, true),
+            "serial_number" => fake()->randomNumber(9, true) . fake()->randomNumber(6, true),
             "color" => fake()->word(),
             "vehicle_model_id" => fake()->numberBetween(1, 5),
             "owner_id" => fake()->numberBetween(1, 3),

@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
+
 use App\Models\Vehicle;
-use Database\Factories\VehiclesFactory;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -20,6 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(VehicleModelsTableSeeder::class);
 
 
-        Vehicle::factory()->count(1000)->make();
+        Vehicle::factory()->count(1000)->create();
     }
 }
