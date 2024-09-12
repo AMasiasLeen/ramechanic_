@@ -25,6 +25,16 @@ class UsersTableSeeder extends Seeder
                 "user_id" => 1
             ]
         );
+        
+        $role = Role::updateOrCreate([
+            "name" => "admin"
+        ]);
+
+        Role::updateOrCreate([
+            "name" => "user"
+        ]);
+
+        $user->assignRole($role);
 
         $user = User::updateOrCreate(
             ["email" => "admin2@admin.com"],
@@ -36,6 +46,16 @@ class UsersTableSeeder extends Seeder
                 "user_id" => 2
             ]
         );
+
+        $role = Role::updateOrCreate([
+            "name" => "admin"
+        ]);
+
+        Role::updateOrCreate([
+            "name" => "user"
+        ]);
+
+        $user->assignRole($role);
 
         $user = User::updateOrCreate(
             ["email" => "admin3@admin.com"],
