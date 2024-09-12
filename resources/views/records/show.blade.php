@@ -17,23 +17,23 @@
         <h4>Propietario</h4>
         <ul class="list-group">
             <li class="list-group-item">
-                {{-- <strong>Nombre: </strong>{{ $record->owner->name }} --}}
+                <strong>Nombre: </strong>{{ $record->vehicle->owner->name }}
             </li>
             <li class="list-group-item">
-                {{-- <strong>Teléfono: </strong>{{ $record->owner->phone }} --}}
+                <strong>Teléfono: </strong>{{ $record->vehicle->owner->phone }}
             </li>
             <li class="list-group-item">
-                {{-- <strong>Correo: </strong>{{ $record->owner->email }} --}}
+                <strong>Correo: </strong>{{ $record->vehicle->owner->email }}
             </li>
         </ul>
 
         <h4>Vehículo</h4>
         <ul class="list-group">
             <li class="list-group-item">
-                {{-- <strong>Marca: </strong>{{ $record->vehicle->brand->name }} --}}
+                <strong>Marca: </strong>{{ $record->vehicle->vehicle_model->brand->name }}
             </li>
             <li class="list-group-item">
-                {{-- <strong>Modelo: </strong>{{ $record->vehicle->model }} --}}
+                <strong>Modelo: </strong>{{ $record->vehicle->vehicle_model->name }}
             </li>
         </ul>
 

@@ -23,13 +23,13 @@
 
                     <ul id="owner-details" class="list-group mt-3">
                         <li class="list-group-item">
-                            <strong>Nombre: </strong><span id="sp-owner-name">{{ $record->owner->name ?? '' }}</span>
+                            <strong>Nombre: </strong><span id="sp-owner-name">{{ $record->vehicle->owner->name ?? '' }}</span>
                         </li>
                         <li class="list-group-item">
-                            <strong>Teléfono: </strong><span id="sp-owner-phone">{{ $record->owner->phone ?? '' }}</span>
+                            <strong>Teléfono: </strong><span id="sp-owner-phone">{{ $record->vehicle->owner->phone ?? '' }}</span>
                         </li>
                         <li class="list-group-item">
-                            <strong>Correo: </strong><span id="sp-owner-email">{{ $record->owner->email ?? '' }}</span>
+                            <strong>Correo: </strong><span id="sp-owner-email">{{ $record->vehicle->owner->email ?? '' }}</span>
                         </li>
                     </ul>
 
