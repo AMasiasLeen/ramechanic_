@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             "name" => "admin"
         ]);
 
-        Role::updateOrCreate([
+        $roleu = Role::updateOrCreate([
             "name" => "user"
         ]);
 
@@ -40,44 +40,26 @@ class UsersTableSeeder extends Seeder
             ["email" => "admin2@admin.com"],
             [
                 "name" => "erick",
-                "password" => Hash::make("user"),
+                "password" => Hash::make("admin"),
                 "identification" => "999999999",
                 "phone" => "0999999999",
                 "user_id" => 2
             ]
         );
 
-        $role = Role::updateOrCreate([
-            "name" => "admin"
-        ]);
-
-        Role::updateOrCreate([
-            "name" => "user"
-        ]);
-
-        $user->assignRole($role);
+        $user->assignRole($roleu);
 
         $user = User::updateOrCreate(
             ["email" => "admin3@admin.com"],
             [
                 "name" => "leo",
-                "password" => Hash::make("user"),
+                "password" => Hash::make("admin"),
                 "identification" => "999999999",
                 "phone" => "0999999999",
                 "user_id" => 3
             ]
         );
-        
-        $role = Role::updateOrCreate([
-            "name" => "admin"
-        ]);
 
-        Role::updateOrCreate([
-            "name" => "user"
-        ]);
-
-     
-
-        $user->assignRole($role);
+        $user->assignRole($roleu);
     }
 }

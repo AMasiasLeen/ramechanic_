@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-
+use App\Models\Record;
 use App\Models\Vehicle;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -20,5 +20,6 @@ class DatabaseSeeder extends Seeder
 
 
         Vehicle::factory()->count(500)->create();
+        Record::factory()->count(100)->create();
     }
 }
