@@ -81,6 +81,12 @@ class RecordController extends Controller
         return view("records.show")->with(["record" => $record]);
     }
 
+    public function show_user_record(Record $record)
+{
+
+    return view("records.user_records")->with(["record" => $record]);
+}
+
     /**
      * Show the form for editing the specified resource.
      */

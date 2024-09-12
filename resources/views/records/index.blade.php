@@ -63,3 +63,23 @@
     </div>
 
 @endsection
+
+@push('js')
+    <script defer>
+        window.onload = () => {
+            $('.btndel').click(function() {
+                const model_id = $(this).data("id");
+                Swal.fire({
+                    title: "¿Está seguro de eliminar?",
+                    text: "Esta acción no se puede deshacer",
+                    icon: "warning",
+                    showCancelButton: true
+                }).then((result) => {
+                    if (result.value) {
+                        $('#formdel' + model_id).submit();
+                    }
+                });
+            });
+        }
+    </script>
+@endpush

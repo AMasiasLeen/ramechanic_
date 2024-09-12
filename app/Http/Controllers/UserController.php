@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -64,22 +65,28 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $user = new User();
-        $user->fill($request->all());
+{
+    $user = new User();
+    $user->fill($request->all());
 
-        // Verificar si el campo de imagen está vacío y asignar una imagen predeterminada
+   
+    if ($request->hasFile('profile_picture')) {
+        $path = $request->file('profile_picture')->store('public/profile_pictures');
+        $user->profile_picture = str_replace('public/', '', $path);  
+    } else {
+       
         $user->profile_picture = 'images/userImg.png';
-
-        if ($request->password != null) {
-            $user->password = Hash::make($request->password);
-        }
-
-        $user->save();
-        $user->syncRoles($request->rol);
-
-        return redirect()->route("users.show", ["user" => $user]);
     }
+
+    if ($request->password != null) {
+        $user->password = Hash::make($request->password);
+    }
+
+    $user->save();
+    $user->syncRoles($request->rol);
+
+    return redirect()->route("users.show", ["user" => $user]);
+}
 
     /**
      * Display the specified resource.
@@ -115,21 +122,43 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, User $user)
-    {
-        $user->fill($request->all());
-        if ($request->password != null) {
-            $user->password = Hash::make($request->password);
+{
+    // Validar los datos del formulario
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        'phone' => 'nullable|string|max:20',
+        'address' => 'nullable|string|max:255',
+        'password' => 'nullable|string|confirmed|min:8',
+        'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar la imagen
+    ]);
+
+    // Llenar los datos del usuario
+    $user->fill($request->except(['profile_picture', 'password', 'password_confirmation']));
+
+    // Si se sube una nueva imagen
+    if ($request->hasFile('profile_picture')) {
+        // Elimina la imagen antigua si existe y no es la predeterminada
+        if ($user->profile_picture && $user->profile_picture != 'images/userImg.png') {
+            Storage::delete('public/' . $user->profile_picture);
         }
 
-        
-
-        $user->save();
-        if ($request->has("rol")){
-            $user->syncRoles($request->rol);
-        }
-
-        return redirect()->route("users.show", ["user" => $user]);
+        // Guardar la nueva imagen
+        $path = $request->file('profile_picture')->store('public/profile_pictures');
+        $user->profile_picture = str_replace('public/', '', $path);
     }
+
+    // Actualizar la contraseña si se proporciona
+    if ($request->password) {
+        $user->password = Hash::make($request->password);
+    }
+
+    // Guardar los cambios
+    $user->save();
+
+    return redirect()->route('users.profile', ['user' => $user])->with('success', 'Perfil actualizado exitosamente.');
+}
+
 
     /**
      * Remove the specified resource from storage.
