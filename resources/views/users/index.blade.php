@@ -1,7 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-
     <div class="d-flex justify-content-between mb-4">
         <h1>Listado de Usuarios</h1>
         <a class="btn btn-success" href="{{ route('users.create') }}">Agregar Nuevo Usuario</a>
@@ -31,12 +30,17 @@
                         <td>{{ $user->address }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Acciones">
-                                <a class="btn btn-outline-warning btn-sm" href="{{ route('users.edit', ['user' => $user]) }}"><i class="fa-solid fa-user-secret"></i>Editar</a>
-                                
-                                <form id="formdel{{ $user->id }}" action="{{ route('users.destroy', ['user' => $user]) }}" method="POST" class="d-inline-block">
+                                <a class="btn btn-outline-warning btn-sm"
+                                    href="{{ route('users.edit', ['user' => $user]) }}"><i
+                                        class="fa-solid fa-user-secret"></i>Editar</a>
+
+                                <form id="formdel{{ $user->id }}"
+                                    action="{{ route('users.destroy', ['user' => $user]) }}" method="POST"
+                                    class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-outline-danger btn-sm btndel" type="button" data-id="{{ $user->id }}">Eliminar</button>
+                                    <button class="btn btn-outline-danger btn-sm btndel" type="button"
+                                        data-id="{{ $user->id }}">Eliminar</button>
                                 </form>
                             </div>
                         </td>
@@ -45,23 +49,25 @@
             </tbody>
         </table>
     </div>
-
+    <div class="d-flex justify-content-center mt-4">
+        {{ $users->links('pagination::bootstrap-4') }}
+    </div>
 @endsection
 
 @push('js')
     <script defer>
         window.onload = () => {
             $('.btndel').click(function() {
-                    console.log(this)
-                    const model_id = $(this).data("id")
+                console.log(this)
+                const model_id = $(this).data("id")
                 Swal.fire({
                     title: "Esta seguro de eliminar",
                     text: "Esta accion no se puede deshacer",
                     icon: "warning",
                     showCancelButton: true
-                }).then((result)=>{
-                    if(result.value){
-                        $('#formdel'+model_id).submit();
+                }).then((result) => {
+                    if (result.value) {
+                        $('#formdel' + model_id).submit();
                     }
                 })
             })

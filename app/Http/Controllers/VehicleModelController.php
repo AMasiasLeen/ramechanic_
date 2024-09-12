@@ -41,7 +41,7 @@ class VehicleModelController extends Controller
             });
         } 
 
-        $vehicle_models = $query->get();
+        $vehicle_models = $query->paginate(15);
 
         return view("vehicle_models.index")->with(["vehicle_models" => $vehicle_models]);
     }

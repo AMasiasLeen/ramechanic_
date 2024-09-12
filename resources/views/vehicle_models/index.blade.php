@@ -41,6 +41,9 @@
             </tbody>
         </table>
     </div>
+    <div class="d-flex justify-content-center mt-4">
+        {{ $vehicle_models->links('pagination::bootstrap-4') }}
+    </div>
 
 @endsection
 

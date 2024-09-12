@@ -42,6 +42,9 @@
             </tbody>
         </table>
     </div>
+    <div class="d-flex justify-content-center mt-4">
+        {{ $brands->links('pagination::bootstrap-4') }}
+    </div>
 @endsection
 
 @push('js')

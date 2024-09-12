@@ -29,7 +29,7 @@ class BrandController extends Controller
             $query = Brand::query();
         }
 
-        $brands = $query->get();
+        $brands = $query->paginate(15);
 
         return view("brands.index")->with(["brands" => $brands]);
     }

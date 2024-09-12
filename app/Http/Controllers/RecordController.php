@@ -46,7 +46,7 @@ class RecordController extends Controller
             });
         }
         
-        $records = $query->get();
+        $records = $query->paginate(15);
         // dd($request->filter_vehicle);
 
 

@@ -36,13 +36,16 @@
                         <td>{{ $vehicle->engine_serial }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Acciones">
-                                <a class="btn btn-outline-warning btn-sm" href="{{ route('vehicles.edit', ['vehicle' => $vehicle]) }}">Editar</a> 
-                                <form id="formdel{{ $vehicle->id }}" action="{{ route('vehicles.destroy', ['vehicle' => $vehicle]) }}" method="POST" class="d-inline-block">
+                                <a class="btn btn-outline-warning btn-sm"
+                                    href="{{ route('vehicles.edit', ['vehicle' => $vehicle]) }}">Editar</a>
+                                <form id="formdel{{ $vehicle->id }}"
+                                    action="{{ route('vehicles.destroy', ['vehicle' => $vehicle]) }}" method="POST"
+                                    class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-outline-danger btn-sm btndel" type="button" data-id="{{ $vehicle->id }}">Eliminar</button>
+                                    <button class="btn btn-outline-danger btn-sm btndel" type="button"
+                                        data-id="{{ $vehicle->id }}">Eliminar</button>
                                 </form>
-
                             </div>
                         </td>
                     </tr>
@@ -50,7 +53,11 @@
             </tbody>
         </table>
     </div>
+    <div class="d-flex justify-content-center mt-4">
+        {{ $vehicles->links('pagination::bootstrap-4') }}
+    </div>
 @endsection
+
 
 @push('js')
     <script defer>
