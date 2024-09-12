@@ -17,13 +17,37 @@ class UserController extends Controller
         if ($request->ajax()) {
 
             $users = User::where("name", "like", $request->term . "%")->get()->map(function (User $user) {
-                return ["id" => $user->id, "text" => $user->name];
+                return ["id" => $user->id, "text" => "Identificación: " . $user->identification];
             });
 
             return response()->json(["results" => $users], 200);
         }
 
-        $users = User::all();
+        $query = User::query();
+
+    
+    if ($request->has("filter_name")) {
+        $query->where("name", "like", $request->filter_name . "%");
+    }
+
+    if ($request->has("filter_identification")) {
+        $query->where("identification", "like", $request->filter_identification . "%");
+    }
+
+    if ($request->has("filter_phone")) {
+        $query->where("phone", "like", $request->filter_phone . "%");
+    }
+
+    if ($request->has("filter_email")) {
+        $query->where("email", "like", $request->filter_email . "%");
+    }
+
+    if ($request->has("filter_address")) {
+        $query->where("address", "like", $request->filter_address . "%");
+    }
+
+    
+    $users = $query->get();
 
         return view("users.index")->with(["users" => $users]);
     }
@@ -44,6 +68,9 @@ class UserController extends Controller
         $user = new User();
         $user->fill($request->all());
 
+        // Verificar si el campo de imagen está vacío y asignar una imagen predeterminada
+        $user->profile_picture = 'images/userImg.png';
+
         if ($request->password != null) {
             $user->password = Hash::make($request->password);
         }
@@ -51,15 +78,18 @@ class UserController extends Controller
         $user->save();
         $user->syncRoles($request->rol);
 
-
         return redirect()->route("users.show", ["user" => $user]);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(User $user, Request $request)
     {
+        if ($request->ajax()) {
+            return response()->json($user, 200);
+        }
+
         return view("users.show")->with(["user" => $user]);
     }
 
@@ -91,8 +121,12 @@ class UserController extends Controller
             $user->password = Hash::make($request->password);
         }
 
+        
+
         $user->save();
-        $user->syncRoles($request->rol);
+        if ($request->has("rol")){
+            $user->syncRoles($request->rol);
+        }
 
         return redirect()->route("users.show", ["user" => $user]);
     }

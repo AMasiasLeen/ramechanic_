@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date("date_in");
             $table->foreignId("vehicle_id")->constrained("vehicles");
-            $table->foreignId("short_description");
+            $table->string("short_description");
             $table->text("long_description");
             $table->string("main_image");
             $table->text("images")->nullable();

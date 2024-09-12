@@ -13,7 +13,7 @@ class Vehicle extends Model
 
     protected $guarded = [];
 
-    protected $with = ["create_uid"];
+    protected $with = ["create_uid", "vehicle_model"];
 
     protected static function boot()
     {
@@ -35,6 +35,11 @@ class Vehicle extends Model
     function vehicle_model()
     {
         return $this->belongsTo(VehicleModel::class);
+    }
+
+    function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
     }
 
     function owner()

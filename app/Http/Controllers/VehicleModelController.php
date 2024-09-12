@@ -23,12 +23,25 @@ class VehicleModelController extends Controller
             }
 
             $vehicle_models = $query->where("name", "like", $request->term . "%")->get()->map(function (VehicleModel $vehicle_model) {
-                return ["id" => $vehicle_model->id, "text" => $vehicle_model->name." - ".$vehicle_model->brand->name];
+                return ["id" => $vehicle_model->id, "text" => $vehicle_model->name . " - " . $vehicle_model->brand->name];
             });
 
             return response()->json(["results" => $vehicle_models], 200);
         }
-        $vehicle_models = VehicleModel::all();
+
+        if ($request->has("filter_vehicle_model")) {
+            $query = VehicleModel::where("name", "like", $request->filter_vehicle_model . "%");
+        } else {
+            $query = VehicleModel::query();
+        }
+
+        if ($request->has("filter_brand")) {
+            $query = $query->whereHas("brand",function($q) use ($request){
+                $q->where("name", "like",  $request->filter_brand . "%");
+            });
+        } 
+
+        $vehicle_models = $query->get();
 
         return view("vehicle_models.index")->with(["vehicle_models" => $vehicle_models]);
     }
@@ -58,8 +71,8 @@ class VehicleModelController extends Controller
      */
     public function show(VehicleModel $vehicle_model, Request $request)
     {
-        if ($request -> ajax()) {
-            return response()->json([$vehicle_model], 200); 
+        if ($request->ajax()) {
+            return response()->json([$vehicle_model], 200);
         }
         return view("vehicle_models.show")->with(["vehicle_model" => $vehicle_model]);
     }

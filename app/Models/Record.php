@@ -10,9 +10,9 @@ class Record extends Model
 {
     use HasFactory;
 
-    protected $guarded = [];
+    protected $guarded = ["owner_id"];
 
-    protected $with = ["create_uid"];
+    protected $with = ["create_uid","vehicle"];
 
     protected static function boot()
     {

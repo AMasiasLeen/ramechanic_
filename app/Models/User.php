@@ -15,7 +15,7 @@ class User extends Authenticatable
 
     protected $guarded = ["rol", "password"];
 
-    protected $with = ["create_uid"];
+    protected $with = ["create_uid", "vehicle"];
 
     protected function casts(): array
     {
@@ -40,5 +40,10 @@ class User extends Authenticatable
     function create_uid()
     {
         return $this->belongsTo(User::class);
+    }
+
+    function vehicle()
+    {
+        return $this->hasMany(Vehicle::class);
     }
 }

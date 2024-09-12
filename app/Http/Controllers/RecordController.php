@@ -22,7 +22,33 @@ class RecordController extends Controller
             return response()->json(["results" => $records], 200);
         }
 
-        $records = Record::all();
+        $query = Record::query();
+
+
+        if ($request->has("filter_date")
+            && $request->filter_date != null) {
+            $query->whereDate("date_in", $request->filter_date);
+        }
+
+        if ($request->has("filter_description")) {
+            $query->where("short_description", "like", $request->filter_description . "%");
+        }
+
+        if ($request->has("filter_owner")) {
+            $query->whereHas("vehicle.owner", function ($q) use ($request) {
+                $q->where("name", "like", "%" . $request->filter_owner . "%");
+            });
+        }
+
+        if ($request->has("filter_vehicle")) {
+            $query->whereHas("vehicle", function ($q) use ($request) {
+                $q->where("plate", "like", "%" . $request->filter_vehicle . "%");
+            });
+        }
+        
+        $records = $query->get();
+        // dd($request->filter_vehicle);
+
 
         return view("records.index")->with(["records" => $records]);
     }

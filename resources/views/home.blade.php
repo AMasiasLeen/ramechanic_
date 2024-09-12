@@ -73,27 +73,27 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     // Gráfico de Vehículos por Marca
-    const vehiclesByBrandCtx = document.getElementById('vehiclesByBrandChart').getContext('2d');
-    const vehiclesByBrandChart = new Chart(vehiclesByBrandCtx, {
-        type: 'bar',
-        data: {
-            labels: {!! json_encode($brandNames) !!},
-            datasets: [{
-                label: 'Cantidad de Vehículos',
-                data: {!! json_encode($vehiclesPerBrand) !!},
-                backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+    // const vehiclesByBrandCtx = document.getElementById('vehiclesByBrandChart').getContext('2d');
+    // const vehiclesByBrandChart = new Chart(vehiclesByBrandCtx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: {!! json_encode($brandNames) !!},
+    //         datasets: [{
+    //             label: 'Cantidad de Vehículos',
+    //             ,
+    //             backgroundColor: 'rgba(54, 162, 235, 0.6)',
+    //             borderColor: 'rgba(54, 162, 235, 1)',
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         scales: {
+    //             y: {
+    //                 beginAtZero: true
+    //             }
+    //         }
+    //     }
+    // });
 
     // Gráfico de Vehículos por Modelo
     const vehiclesByModelCtx = document.getElementById('vehiclesByModelChart').getContext('2d');
