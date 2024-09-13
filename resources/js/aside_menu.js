@@ -1,11 +1,10 @@
 
-const hamBurger = document.querySelector(".toggle-btn");
-
 const status = statusSidebar();
 
-hamBurger.addEventListener("click", function () {
-  document.querySelector("#sidebar").classList.toggle("expand");
-  localStorage.setItem("sidebarStatus", !status);
+const toggler = document.querySelector(".toggler-btn");
+
+toggler.addEventListener("click", function () {
+  document.querySelector("#sidebar").classList.toggle("collapsed");
 });
 
 function statusSidebar() {
