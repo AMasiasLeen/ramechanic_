@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Brand;
+use App\Models\Record;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        
     }
 
     /**
@@ -42,5 +43,11 @@ class HomeController extends Controller
     public function show_instructions()
     {
         return view("instructions");
+    }
+
+    public function landing_page()
+    {
+        $records = Record::paginate(15);
+        return view('landing_page')->with(["records"=>$records]);
     }
 }
