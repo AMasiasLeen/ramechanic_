@@ -7,6 +7,7 @@ use App\Models\Record;
 use App\Models\Vehicle;
 use App\Models\VehicleModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -15,10 +16,7 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        
-    }
+    public function __construct() {}
 
     /**
      * Show the application dashboard.
@@ -32,7 +30,7 @@ class HomeController extends Controller
         $totalBrands = Brand::count();
 
         $brandNames = Brand::pluck('name');
-        $vehiclesPerBrand = [];//Vehicle::selectRaw('brand_id, count(*) as total')->groupBy('brand_id')->pluck('total');
+        $vehiclesPerBrand = []; //Vehicle::selectRaw('brand_id, count(*) as total')->groupBy('brand_id')->pluck('total');
 
         $modelNames = VehicleModel::pluck('name');
         $vehiclesPerModel = Vehicle::selectRaw('vehicle_model_id, count(*) as total')->groupBy('vehicle_model_id')->pluck('total');
@@ -41,13 +39,26 @@ class HomeController extends Controller
     }
 
     public function show_instructions()
-    {
-        return view("instructions");
-    }
+{
+    // Extrae los vehículos y registros del usuario autenticado
+    $vehicles = Vehicle::whereHas('owner', function($query) {
+        $query->where('id', Auth::id());
+    })->get();
+
+    $records = Record::whereHas('vehicle.owner', function($query) {
+        $query->where('id', Auth::id());
+    })->get();
+
+    // Retorna la vista con las variables vehicles y records
+    return view('instructions')->with([
+        'vehicles' => $vehicles,
+        'records' => $records
+    ]);
+}
 
     public function landing_page()
     {
         $records = Record::paginate(15);
-        return view('landing_page')->with(["records"=>$records]);
+        return view('landing_page')->with(["records" => $records]);
     }
 }
