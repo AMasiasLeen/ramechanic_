@@ -24,7 +24,8 @@
                         required>
 
                     <label for="password" class="form-label">Contraseña:</label>
-                    <input name="password" type="password" class="form-control" id="password" placeholder="Deja en blanco si no quieres modificar">
+                    <input name="password" type="password" class="form-control" id="password"
+                        placeholder="Deja en blanco si no quieres modificar">
 
                     <label for="phone" class="form-label">Telefono:</label>
                     <input name="phone" type="text" class="form-control" id="phone" value="{{ $user->phone }}"
@@ -48,7 +49,15 @@
 
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">ACTUALIZAR</button>
+        </div>
+        <div class="card-footer">
+            <button class='btn btn-primary' type="submit">Modificar</button>
+            </form>
+            <button id="btndel" class="btn btn-danger">Eliminar</button>
+            <form id="formdel" action="{{ route('users.destroy', ['user' => $user]) }}" method="POST"
+                style="display:inline;">
+                @csrf
+                @method('DELETE')
             </form>
         </div>
     </div>

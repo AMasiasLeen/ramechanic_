@@ -62,7 +62,7 @@ class VehicleController extends Controller
         }
     
         
-        $vehicles = $query->paginate(13);
+        $vehicles = $query->paginate(15);
     
         return view("vehicles.index")->with(["vehicles" => $vehicles]);
     }

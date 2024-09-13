@@ -25,7 +25,7 @@
                     {{-- <label for="brand_id" class="form-label">Marca</label>
                     <input name="brand_id" type="text" class="form-control" id="brand_id" required> --}}
 
-                    <label for="vehicle_model_id">Modelo Vehículo</label>
+                    <label for="vehicle_model_id">Modelo y Marca del Vehículo</label>
                     <select name="vehicle_model_id" class="form-control" id="vehicle_model_id"></select>
 
                     <label for="engine_serial" class="form-label">Número Serie del Motor</label>

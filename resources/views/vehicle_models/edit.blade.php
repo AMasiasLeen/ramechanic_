@@ -11,45 +11,60 @@
             <h1>Editar Modelo</h1>
         </div>
         <div class="card-body">
-            <form action="{{ route('vehicle-models.update', ['vehicle_model'=>$vehicle_model]) }}" method="POST">
+            <form action="{{ route('vehicle-models.update', ['vehicle_model' => $vehicle_model]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">
+
+                    <label for="brand_id">Marca</label>
+                    <select name="brand_id" class="form-control" id="brand_id"></select>
+
                     <label for="name" class="form-label">Nombre del Modelo de Vehículo</label>
-                    <input name="name" type="text" class="form-control" id="name" value="{{ $vehicle_model->name }}" required>
+                    <input name="name" type="text" class="form-control" id="name"
+                        value="{{ $vehicle_model->name }}" required>
                 </div>
-                <button type="submit" class="btn btn-primary">ACTUALIZAR</button>
-            </form>
-            <form id="formdel{{$vehicle_model->id}}" action="{{ route('vehicle-models.destroy', ['vehicle_model'=>$vehicle_model]) }}" method="POST">
+        </div>
+        <div class="card-footer">
+            <button class='btn btn-primary' type="submit">Modificar</button>
+        </form>
+            <button id="btndel" class="btn btn-danger">Eliminar</button>
+            <form id="formdel" action="{{ route('vehicle-models.destroy', ['vehicle_model' => $vehicle_model]) }}"
+                method="POST" style="display:inline;">
                 @csrf
                 @method('DELETE')
-                <button type="button" class="btn btn-danger btndel" data-id="{{$vehicle_model->id}}">ELIMINAR</button>
             </form>
         </div>
     </div>
-
 @endsection
 
 @push('js')
-<script defer>
-    window.onload = () => {
-        $('.btndel').click(function() {
-            const model_id = $(this).data("id");
-            Swal.fire({
-                title: "¿Está seguro de eliminar?",
-                text: "Esta acción no se puede deshacer.",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: '#d33',
-                cancelButtonColor: '#3085d6',
-                confirmButtonText: 'Sí, eliminar',
-                cancelButtonText: 'Cancelar'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $('#formdel' + model_id).submit();
-                }
+    <script defer>
+        window.onload = () => {
+            $('.btndel').click(function() {
+                const model_id = $(this).data("id");
+                Swal.fire({
+                    title: "¿Está seguro de eliminar?",
+                    text: "Esta acción no se puede deshacer.",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $('#formdel' + model_id).submit();
+                    }
+                });
             });
-        });
-    }
-</script>
+
+            $("#brand_id").select2({
+                theme: "bootstrap-5",
+                width: "100%",
+                ajax: {
+                    url: "{{ route('brands.index') }}"
+                }
+            })
+        }
+    </script>
 @endpush

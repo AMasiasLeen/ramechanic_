@@ -27,10 +27,10 @@
                         </option>
                     </select>
 
-                    <label for="vehicle_model_id" class="form-label">Modelo</label>
+                    <label for="vehicle_model_id" class="form-label">Modelo y Marca del Vehículo</label>
                     <select name="vehicle_model_id" class="form-control" id="vehicle_model_id">
                         <option value="{{ $vehicle->vehicle_model->id }}">
-                            {{ $vehicle->vehicle_model->name }} - {{$vehicle->vehicle_model->brand->name}}
+                            {{ $vehicle->vehicle_model->name }} - {{ $vehicle->vehicle_model->brand->name }}
                         </option>
                     </select>
 
@@ -46,7 +46,15 @@
                     <input name="color" type="text" class="form-control" id="color" value="{{ $vehicle->color }}"
                         required>
                 </div>
-                <button type="submit" class="btn btn-primary">ACTUALIZAR</button>
+        </div>
+        <div class="card-footer">
+            <button class='btn btn-primary' type="submit">Modificar</button>
+            </form>
+            <button id="btndel" class="btn btn-danger">Eliminar</button>
+            <form id="formdel" action="{{ route('vehicles.destroy', ['vehicle' => $vehicle]) }}" method="POST"
+                style="display:inline;">
+                @csrf
+                @method('DELETE')
             </form>
         </div>
     </div>
