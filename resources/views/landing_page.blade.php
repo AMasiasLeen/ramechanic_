@@ -45,8 +45,14 @@
                             <ul class="dropdown-menu" aria-labelledby="userDropdown">
                                 <li><a class="dropdown-item"
                                         href="{{ route('users.edit_profile', ['user' => Auth::user()]) }}">Perfil</a></li>
-                                <li><a class="dropdown-item" href="{{ route('records.user_records') }}">Antecedentes</a>
-                                </li>
+                                @if (Auth::user()->hasRole('user'))
+                                    <li><a class="dropdown-item" href="{{ route('records.user_records') }}">Antecedentes</a>
+                                    </li>
+                                @endif
+                                @if (Auth::user()->hasRole('admin'))
+                                    <li><a class="dropdown-item" href="{{ route('home') }}">DashBoard</a>
+                                    </li>
+                                @endif
                                 <li>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -65,39 +71,33 @@
 
         <hr class="text-secondary">
 
-        <!-- Hero -->
+        <!-- Hero Section -->
         <section class="py-5">
             <div class="container px-5">
                 <div class="row align-items-center">
                     <div class="col-lg-8 col-xl-7 col-xxl-6">
-                        <div class="text-center my-5">
-                            <h2 class="text-white fw-bold mb-2">Lorem ipsum dolor</h2>
-                            <h2 class="text-primary fw-bold mb-2">sit amet amet consectetur</h2>
+                        <div class="my-5">
+                            <h1 class="text-white fw-bold mb-4">Gestor de Registros de Antecedentes Mecánicos</h1>
                             <p class="lead text-secondary mb-4">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ut maximus nisi.
-                                Suspendisse porttitor nibh lacus, sed pretium erat.
+                                Bienvenido a nuestro sistema de gestión de antecedentes mecánicos. Aquí podrás llevar un
+                                control completo de los registros de vehículos, sus reparaciones, mantenimientos y mucho
+                                más.
                             </p>
-                            <div class="d-grid gap-2 d-sm-flex justify-content-center mb-5">
-                                <button type="button"
-                                    class="btn btn-primary btn-lg text-white text-uppercase px-4 me-sm-3 rounded-0">
-                                    Learn More
-                                    <span class="material-icons-outlined ms-2">help_outline</span>
-                                </button>
-                                <button type="button" id="demo"
-                                    class="btn btn-outline-primary btn-lg text-uppercase px-4 me-sm-3 rounded-0">
-                                    View Demo
-                                    <span class="material-icons-outlined ms-2">play_circle</span>
-                                </button>
-                            </div>
+                            <p class="text-secondary mb-4">
+                                Facilita el acceso rápido a la información clave de cada vehículo, con la posibilidad de
+                                gestionar, visualizar y actualizar los antecedentes de cada automóvil registrado en el
+                                sistema.
+                            </p>
                         </div>
                     </div>
-                    <div class="col-xl-5 col-xxl-6 justify-content-center">
-                        <img class="img-fluid rounded-2 my-5" src="images/hero.jpg" alt="Hero Image">
+                    <div class="col-xl-5 col-xxl-6 d-flex justify-content-center">
+                        <img class="img-fluid rounded-2" src="{{ Storage::url('images/landing.jpg') }}"
+                            alt="Gestor de Antecedentes Mecánicos">
                     </div>
                 </div>
             </div>
         </section>
-        <!-- End Hero -->
+        <!-- End Hero Section -->
 
         <hr class="text-secondary">
 
