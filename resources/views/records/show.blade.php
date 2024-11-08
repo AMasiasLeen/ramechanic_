@@ -44,17 +44,33 @@
         <p>{{ $record->long_description }}</p>
 
         <h4>Imagen Portada</h4>
-        <img src="{{ $record->main_image }}" alt="Imagen principal" class="img-fluid">
+        <img src="{{ Storage::url('records/' . $record->main_image) }}" alt="Imagen principal" class="img-fluid">
 
         <h4>Resto de imágenes</h4>
-        <div class="row">
-            @foreach(explode(',', $record->images) as $image)
-                <div class="col-3">
-                    <img src="{{ $image }}" alt="Imagen secundaria" class="img-fluid">
-                </div>
-            @endforeach
+        <!-- Carrusel de imágenes -->
+        @if($record->images)
+        <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                @foreach(json_decode($record->images) as $index => $image)
+                    <div class="carousel-item @if($index === 0) active @endif">
+                        <img src="{{ Storage::url('records/' . $image) }}" class="d-block w-100" alt="Imagen adicional {{ $index + 1 }}">
+                    </div>
+                @endforeach
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselImages" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Anterior</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselImages" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Siguiente</span>
+            </button>
         </div>
+        @else
+        <p>No hay imágenes adicionales disponibles.</p>
+        @endif
     </div>
+
     <div class="card-footer">
         <a class='btn btn-primary' href="{{ route('records.edit', ['record' => $record]) }}">Modificar</a>
         <button id="btndel" class="btn btn-danger">Eliminar</button>
@@ -65,6 +81,8 @@
     </div>
 </div>
 @endsection
+
+
 
 @push('js')
     <script defer>

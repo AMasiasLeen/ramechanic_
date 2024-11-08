@@ -11,9 +11,33 @@
 
 
 @import 'aside_menu';
+@import 'login';
 
 
 @import 'select2/dist/css/select2.css';
 @import "select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css";
 
-@import 'home'
+@import 'home';
+
+
+.image-container {
+    display: flex;
+    justify-content: center;
+
+    .main-image {
+        max-width: 10px; // Tamaño adecuado para la imagen de portada
+        height: auto;
+    }
+}
+
+.carousel {
+    .carousel-inner {
+        .carousel-item {
+            img {
+                max-width: 200px; // Control del tamaño de las imágenes adicionales
+                height: auto;
+                margin: 0 auto; // Centrar las imágenes
+            }
+        }
+    }
+}

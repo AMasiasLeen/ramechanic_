@@ -10,10 +10,9 @@
             <h1>Agregar Registro</h1>
         </div>
         <div class="card-body">
-            <form action="{{ route('records.store') }}" method="POST">
+            <form action="{{ route('records.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-
                     <label for="date_in" class="form-label mt-3">Fecha de Registro</label>
                     <input name="date_in" type="date" class="form-control" id="date_in" required>
 
@@ -21,51 +20,47 @@
                     <select name="owner_id" class="form-control" id="owner_id"></select>
 
                     <ul id="owner-details" class="list-group mt-3">
-
                         <li class="list-group-item">
                             <strong>Nombre: </strong><span id="sp-owner-name"></span>
                         </li>
                         <li class="list-group-item">
-                            <strong>Telefono: </strong><span id="sp-owner-phone"></span>
+                            <strong>Teléfono: </strong><span id="sp-owner-phone"></span>
                         </li>
                         <li class="list-group-item">
                             <strong>Correo: </strong><span id="sp-owner-email"></span>
                         </li>
-
                     </ul>
+
                     <label for="vehicle_id" class="form-label mt-3">Vehículo</label>
                     <select name="vehicle_id" class="form-control" id="vehicle_id"></select>
 
                     <ul id="vehicle-details" class="list-group mt-3">
-
                         <li class="list-group-item">
                             <strong>Marca: </strong><span id="sp-vehicle-brand"></span>
                         </li>
                         <li class="list-group-item">
                             <strong>Modelo: </strong><span id="sp-vehicle-model"></span>
                         </li>
-
                     </ul>
 
-
-                    <label for="short_description" class="form-label mt-3">Descrición Corta</label>
+                    <label for="short_description" class="form-label mt-3">Descripción Corta</label>
                     <input name="short_description" type="text" class="form-control" id="short_description" required>
 
                     <label for="long_description" class="form-label mt-3">Descripción Larga</label>
                     <input name="long_description" type="text" class="form-control" id="long_description" required>
 
-                    <label for="main_image" class="form-label mt-3">Imagen Portada</label>
-                    <input name="main_image" type="text" class="form-control" id="main_image" required>
+                    <label for="main_image" class="form-label mt-3">Imagen de Portada</label>
+                    <input name="main_image" type="file" class="form-control" id="main_image" accept="image/*" required>
 
-                    <label for="images" class="form-label mt-3">Resto de imagenes</label>
-                    <input name="images" type="text" class="form-control" id="images" required>
-
+                    <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
+                    <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple required>
                 </div>
                 <button type="submit" class="btn btn-primary">GUARDAR</button>
             </form>
         </div>
     </div>
 @endsection
+
 
 @push('js')
     <script defer>

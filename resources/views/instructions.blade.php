@@ -21,7 +21,7 @@
                         <ul class="list-group">
                             @foreach($vehicles as $vehicle)
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    {{ $vehicle->vehicle_model->brand->name }} - {{ $vehicle->model }}
+                                    {{ $vehicle->vehicle_model->brand->name }} - {{ $vehicle->vehicle_model->name }}
                                     <a href="{{ route('vehicles.show', $vehicle->id) }}" class="btn btn-outline-primary btn-sm">Ver Detalles</a>
                                 </li>
                             @endforeach

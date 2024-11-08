@@ -19,12 +19,6 @@
                     <label for="owner_id" class="form-label">Propietario</label>
                     <select name="owner_id" class="form-control" id="owner_id"></select>
 
-                    {{-- SELECT 2 --}}
-                    {{-- <label for="brand_id">Marca</label>
-                    <select name="brand_id" class="form-control" id="brand_id"></select> --}}
-                    {{-- <label for="brand_id" class="form-label">Marca</label>
-                    <input name="brand_id" type="text" class="form-control" id="brand_id" required> --}}
-
                     <label for="vehicle_model_id">Modelo y Marca del Vehículo</label>
                     <select name="vehicle_model_id" class="form-control" id="vehicle_model_id"></select>
 
