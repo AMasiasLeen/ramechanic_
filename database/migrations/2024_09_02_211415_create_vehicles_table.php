@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string("color")->nullable();
             $table->foreignId("vehicle_model_id")->constrained();
             $table->foreignId("owner_id")->constrained("users");
+            $table->string("main_image")->nullable();
             $table->timestamps();
             $table->foreignId("user_id")->constrained("users");
         });

@@ -10,7 +10,7 @@
             <h1>Agregar Vehículo</h1>
         </div>
         <div class="card-body">
-            <form action="{{ route('vehicles.store') }}" method="POST">
+            <form action="{{ route('vehicles.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
                     <label for="plate" class="form-label">Placa del Vehículo</label>
@@ -30,6 +30,10 @@
 
                     <label for="color" class="form-label">Color</label>
                     <input name="color" type="text" class="form-control" id="color" required>
+
+                    <label for="main_image" class="form-label mt-3">Imagen de Portada</label>
+                    <input name="main_image" type="file" class="form-control" accept="image/*" required>
+
                 </div>
                 <button type="submit" class="btn btn-primary">GUARDAR</button>
             </form>

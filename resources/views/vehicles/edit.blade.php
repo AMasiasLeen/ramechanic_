@@ -11,7 +11,7 @@
             <h1>Editar Vehículo</h1>
         </div>
         <div class="card-body">
-            <form action="{{ route('vehicles.update', ['vehicle' => $vehicle]) }}" method="POST">
+            <form action="{{ route('vehicles.update', ['vehicle' => $vehicle]) }}" method="POST"  enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -45,6 +45,11 @@
                     <label for="color" class="form-label">Color</label>
                     <input name="color" type="text" class="form-control" id="color" value="{{ $vehicle->color }}"
                         required>
+
+                        
+                    <label for="main_image" class="form-label mt-3">Imagen de Portada</label>
+                    <input name="main_image" type="file" class="form-control" accept="image/*" required>
+
                 </div>
         </div>
         <div class="card-footer">
