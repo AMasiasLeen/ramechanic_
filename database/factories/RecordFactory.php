@@ -21,8 +21,8 @@ class RecordFactory extends Factory
             "vehicle_id" => fake()->numberBetween(1, 500),
             "short_description" => fake()->word(),
             "long_description" => fake()->word(),
-            "main_image" => fake()->word(),
-            "images" => fake()->word(),
+            "main_image" => fake()->imageUrl(800,600,"cars"),
+            "images" => fake()->imageUrl(800,600,"cars"),
             "user_id" => 1
         ];
     }
