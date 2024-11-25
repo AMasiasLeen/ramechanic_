@@ -99,7 +99,7 @@
             </nav>
             <main class="p-3">
                 <div class="container-fluid">
-                    <div class="mb-3 text-center">
+                    <div class="mb-3">
                         @yield('content')
                     </div>
                 </div>
