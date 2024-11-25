@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
-    <title>Document</title>
+    <title>Inicio</title>
 
 </head>
 
@@ -104,6 +104,31 @@
         <main>
             <!-- Antecedentes Section -->
             <section class="container px-4 py-5">
+                <form action="{{ route('landing_page') }}" method="GET">
+                    <div class="row">
+                        <div class="col-12 col-sm-2">
+                            <div class="form-group">
+                                <label for="" class="text-white">Desde:</label>
+                                <input type="date" class="form-control" name="start_date"
+                                    value="{{ request('start_date') }}">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-2">
+                            <div class="form-group">
+                                <label for="" class="text-white">Hasta:</label>
+                                <input type="date" class="form-control" name="end_date"
+                                    value="{{ request('end_date') }}">
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-2 my-auto">
+                            <div class="form-group mt-3">
+                                <button class="btn btn-primary">Buscar</button>
+                                <input type="submit" name="reset" value="Todo" class="btn btn-primary">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
                 <h2 class="text-center text-white fw-bold pb-2">Antecedentes</h2>
 
                 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
@@ -134,8 +159,8 @@
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="recordModalLabel{{ $record->id }}">Detalles del
                                             Antecedente</h5>
-                                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
+                                        <button type="button" class="btn-close btn-close-white"
+                                            data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
                                         <p><strong>Propietario:</strong> {{ $record->vehicle->owner->name }}</p>

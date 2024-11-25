@@ -39,26 +39,38 @@ class HomeController extends Controller
     }
 
     public function show_instructions()
-{
-    // Extrae los vehículos y registros del usuario autenticado
-    $vehicles = Vehicle::whereHas('owner', function($query) {
-        $query->where('id', Auth::id());
-    })->get();
-
-    $records = Record::whereHas('vehicle.owner', function($query) {
-        $query->where('id', Auth::id());
-    })->get();
-
-    // Retorna la vista con las variables vehicles y records
-    return view('instructions')->with([
-        'vehicles' => $vehicles,
-        'records' => $records
-    ]);
-}
-
-    public function landing_page()
     {
-        $records = Record::paginate(15);
+        // Extrae los vehículos y registros del usuario autenticado
+        $vehicles = Vehicle::whereHas('owner', function ($query) {
+            $query->where('id', Auth::id());
+        })->get();
+
+        $records = Record::whereHas('vehicle.owner', function ($query) {
+            $query->where('id', Auth::id());
+        })->get();
+
+        // Retorna la vista con las variables vehicles y records
+        return view('instructions')->with([
+            'vehicles' => $vehicles,
+            'records' => $records
+        ]);
+    }
+
+    public function landing_page(Request $request)
+    {
+        $records = Record::query();
+
+        if ($request->has("reset")) {
+            $records = $records->paginate(15);
+            return redirect()->route("landing_page");
+        }
+
+        if ($request->has("start_date") && $request->start_date != "" &&  $request->has("end_date") && $request->end_date != "") {
+            $records->whereBetween("date_in", [$request->start_date, $request->end_date]);
+        }
+
+        $records = $records->paginate(15)->appends($request->query());
+
         return view('landing_page')->with(["records" => $records]);
     }
 }
