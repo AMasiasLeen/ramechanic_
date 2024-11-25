@@ -136,11 +136,15 @@
                         <div class="col">
                             <div class="card h-100 bg-dark text-white shadow-sm">
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $record->vehicle->vehicle_model->brand->name }} -
+                                    <h5 class="card-title text-center">{{ $record->vehicle->vehicle_model->brand->name }} -
                                         {{ $record->vehicle->vehicle_model->name }}</h5>
+                                        <div class="text-center">
+                                            <img class="" src="{{Storage::url('vehicles/'.$record->vehicle->main_image)}}" alt="Imagen del Vehiculo">
+                                        </div>
                                     <p class="card-text"><strong>Propietario:</strong>
                                         {{ $record->vehicle->owner->name }}</p>
                                     <p class="card-text"><strong>Placa:</strong> {{ $record->vehicle->plate }}</p>
+                                    <p class="card-text"><strong>Fecha Ingreso:</strong> {{ $record->date_in }}</p>
                                     <p class="card-text"><strong>Descripción Corta:</strong>
                                         {{ $record->short_description }}</p>
                                     <button type="button" class="btn btn-outline-light" data-bs-toggle="modal"
