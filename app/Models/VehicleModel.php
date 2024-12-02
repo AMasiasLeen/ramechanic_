@@ -12,7 +12,7 @@ class VehicleModel extends Model
 
     protected $guarded = [];
 
-    protected $with = ["create_uid","brand"];
+    protected $with = ["create_uid", "brand"];
 
     protected static function boot()
     {
@@ -34,5 +34,10 @@ class VehicleModel extends Model
     function brand()
     {
         return $this->belongsTo(Brand::class);
+    }
+
+    public function vehicles()
+    {
+        return $this->hasMany(Vehicle::class);
     }
 }

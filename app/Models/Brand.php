@@ -30,4 +30,8 @@ class Brand extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    function vehicles(){
+        return $this->hasManyThrough(Vehicle::class, VehicleModel::class);
+    }
 }

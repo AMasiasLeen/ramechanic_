@@ -30,7 +30,7 @@ class HomeController extends Controller
         $totalBrands = Brand::count();
 
         $brandNames = Brand::pluck('name');
-        $vehiclesPerBrand = []; //Vehicle::selectRaw('brand_id, count(*) as total')->groupBy('brand_id')->pluck('total');
+        $vehiclesPerBrand = Brand::withCount(['vehicles'])->pluck('vehicles_count');
 
         $modelNames = VehicleModel::pluck('name');
         $vehiclesPerModel = Vehicle::selectRaw('vehicle_model_id, count(*) as total')->groupBy('vehicle_model_id')->pluck('total');

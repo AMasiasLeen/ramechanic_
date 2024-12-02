@@ -49,8 +49,8 @@
                     <label for="long_description" class="form-label mt-3">Descripción Larga</label>
                     <input name="long_description" type="text" class="form-control" id="long_description" required>
 
-                    <label for="main_image" class="form-label mt-3">Imagen de Portada</label>
-                    <input name="main_image" type="file" class="form-control" id="main_image" accept="image/*" required>
+                    {{-- <label for="main_image" class="form-label mt-3">Imagen de Portada</label>
+                    <input name="main_image" type="file" class="form-control" id="main_image" accept="image/*" required> --}}
 
                     <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
                     <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple required>
