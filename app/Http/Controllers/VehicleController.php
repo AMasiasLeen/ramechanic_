@@ -20,6 +20,9 @@ class VehicleController extends Controller
                 $query = Vehicle::query();
             }
 
+            if ($request->has('owner_id')) {
+                $query = $query->where("owner_id", $request->owner_id);
+            }
 
             $vehicles = $query->where("plate", "like", $request->term . "%")->get()->map(function (Vehicle $vehicles) {
                 return ["id" => $vehicles->id, "text" => "Placa: " . $vehicles->plate];
