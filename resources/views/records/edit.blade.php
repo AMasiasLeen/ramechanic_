@@ -11,7 +11,7 @@
             <h1>Editar Antecedente</h1>
         </div>
         <div class="card-body">
-            <form action="{{ route('records.update', ['record' => $record]) }}" method="POST">
+            <form action="{{ route('records.update', ['record' => $record]) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="mb-3">

@@ -129,7 +129,7 @@ class RecordController extends Controller
     public function update(Request $request, Record $record)
     {
 
-        $record->fill($request->except(['main_image', 'images'])); // Evita las imágenes para manejarlas por separado
+        $record->fill($request->except(['images'])); // Evita las imágenes para manejarlas por separado
     
         // Subida de la imagen de portada
         if ($request->hasFile('main_image')) {
