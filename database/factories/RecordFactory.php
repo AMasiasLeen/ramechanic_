@@ -22,7 +22,7 @@ class RecordFactory extends Factory
             "short_description" => fake()->word(),
             "long_description" => fake()->word(),
             "main_image" => fake()->imageUrl(800,600,"cars"),
-            "images" => fake()->imageUrl(800,600,"cars"),
+            // "images" => [fake()->imageUrl(800,600,"cars")],
             "user_id" => 1
         ];
     }

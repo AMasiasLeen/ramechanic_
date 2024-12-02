@@ -69,30 +69,30 @@ class RecordController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $record = new Record();
-    $record->fill($request->except(['main_image', 'images'])); // Evita las imágenes para manejarlas por separado
+    {
+        $record = new Record();
+        $record->fill($request->except(['main_image', 'images'])); // Evita las imágenes para manejarlas por separado
 
-    // Subida de la imagen de portada
-    if ($request->hasFile('main_image')) {
-        $mainImagePath = $request->file('main_image')->store('public/records');
-        $record->main_image = basename($mainImagePath);
-    }
-
-    // Subida de imágenes adicionales
-    if ($request->hasFile('images')) {
-        $imagePaths = [];
-        foreach ($request->file('images') as $image) {
-            $imagePath = $image->store('public/records');
-            $imagePaths[] = basename($imagePath);
+        // Subida de la imagen de portada
+        if ($request->hasFile('main_image')) {
+            $mainImagePath = $request->file('main_image')->store('public/records');
+            $record->main_image = basename($mainImagePath);
         }
-        $record->images = json_encode($imagePaths); // Guarda las rutas de las imágenes como un JSON
+
+        // Subida de imágenes adicionales
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $imagePath = $image->store('public/records');
+                $imagePaths[] = basename($imagePath);
+            }
+            $record->images = json_encode($imagePaths); // Guarda las rutas de las imágenes como un JSON
+        }
+
+        $record->save();
+
+        return redirect()->route("records.show", ["record" => $record]);
     }
-
-    $record->save();
-
-    return redirect()->route("records.show", ["record" => $record]);
-}
 
 
     /**
@@ -128,9 +128,26 @@ class RecordController extends Controller
      */
     public function update(Request $request, Record $record)
     {
-        $record->fill($request->all());
-        $record->save();
 
+        $record->fill($request->except(['main_image', 'images'])); // Evita las imágenes para manejarlas por separado
+    
+        // Subida de la imagen de portada
+        if ($request->hasFile('main_image')) {
+            $mainImagePath = $request->file('main_image')->store('public/records');
+            $record->main_image = basename($mainImagePath);
+        }
+    
+        // Subida de imágenes adicionales
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $imagePath = $image->store('public/records');
+                $imagePaths[] = basename($imagePath);
+            }
+            $record->images = json_encode($imagePaths); // Guarda las rutas de las imágenes como un JSON
+        }
+    
+        $record->save();
         return redirect()->route("records.show", ["record" => $record]);
     }
 

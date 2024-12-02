@@ -136,14 +136,14 @@
                         <div class="col">
                             <div class="card h-100 bg-dark text-white shadow-sm">
                                 <div class="card-body">
-                                    <h5 class="card-title text-center">{{ $record->vehicle->vehicle_model->brand->name }} -
+                                    <h5 class="card-title text-center">
+                                        {{ $record->vehicle->vehicle_model->brand->name }} -
                                         {{ $record->vehicle->vehicle_model->name }}</h5>
-                                        <div class="text-center">
-                                            <img class="" src="{{Storage::url('vehicles/'.$record->vehicle->main_image)}}" alt="Imagen del Vehiculo">
-                                        </div>
-                                    <p class="card-text"><strong>Propietario:</strong>
-                                        {{ $record->vehicle->owner->name }}</p>
-                                    <p class="card-text"><strong>Placa:</strong> {{ $record->vehicle->plate }}</p>
+                                    <div class="text-center">
+                                        <img class=""
+                                            src="{{ Storage::url('vehicles/' . $record->vehicle->main_image) }}"
+                                            alt="Imagen del Vehiculo">
+                                    </div>
                                     <p class="card-text"><strong>Fecha Ingreso:</strong> {{ $record->date_in }}</p>
                                     <p class="card-text"><strong>Descripción Corta:</strong>
                                         {{ $record->short_description }}</p>
@@ -167,13 +167,42 @@
                                             data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <p><strong>Propietario:</strong> {{ $record->vehicle->owner->name }}</p>
+
                                         <p><strong>Vehículo:</strong>
                                             {{ $record->vehicle->vehicle_model->brand->name }} -
                                             {{ $record->vehicle->vehicle_model->name }}</p>
-                                        <p><strong>Placa:</strong> {{ $record->vehicle->plate }}</p>
                                         <p><strong>Fecha de Registro:</strong> {{ $record->date_in }}</p>
                                         <p><strong>Descripción Completa:</strong> {{ $record->long_description }}</p>
+                                        @if ($record->images != null)
+                                            <div id="carousel{{ $record->id }}" class="carousel slide"
+                                                data-bs-ride="carousel">
+                                                <div class="carousel-inner">
+
+                                                    @foreach (json_decode($record->images) as $index => $image)
+                                                        <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                                            <img src="{{ Storage::url('records/' . $image) }}"
+                                                                class="d-block w-100 img-thumbnail"
+                                                                alt="Imagen {{ $index + 1 }}">
+                                                        </div>
+                                                    @endforeach
+
+                                                </div>
+                                                <button class="carousel-control-prev" type="button"
+                                                    data-bs-target="#carousel{{ $record->id }}"
+                                                    data-bs-slide="prev">
+                                                    <span class="carousel-control-prev-icon"
+                                                        aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button"
+                                                    data-bs-target="#carousel{{ $record->id }}"
+                                                    data-bs-slide="next">
+                                                    <span class="carousel-control-next-icon"
+                                                        aria-hidden="true"></span>
+                                                    <span class="visually-hidden">Next</span>
+                                                </button>
+                                            </div>
+                                        @endif
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"

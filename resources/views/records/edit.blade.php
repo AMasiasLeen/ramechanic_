@@ -65,10 +65,9 @@
                     <input name="main_image" type="text" class="form-control" id="main_image"
                         value="{{ $record->main_image }}" required>
 
-                    <label for="images" class="form-label mt-3">Resto de imágenes</label>
-                    <input name="images" type="text" class="form-control" id="images" value="{{ $record->images }}"
-                        required>
-
+                    <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
+                    <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple required>
+                
                 </div>
         </div>
         <div class="card-footer">
