@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId("vehicle_id")->constrained("vehicles");
             $table->string("short_description");
             $table->text("long_description");
-            $table->string("main_image");
+            // $table->string("main_image");
             $table->text("images")->nullable();
             $table->timestamps();
             $table->foreignId("user_id")->constrained("users");
