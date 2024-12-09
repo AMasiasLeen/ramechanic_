@@ -43,11 +43,11 @@ class HomeController extends Controller
         // Extrae los vehículos y registros del usuario autenticado
         $vehicles = Vehicle::whereHas('owner', function ($query) {
             $query->where('id', Auth::id());
-        })->get();
+        })->paginate(10,['*'], 'vehiclesPage');
 
         $records = Record::whereHas('vehicle.owner', function ($query) {
             $query->where('id', Auth::id());
-        })->get();
+        })->paginate(10,['*'], 'recordsPage');
 
         // Retorna la vista con las variables vehicles y records
         return view('instructions')->with([
