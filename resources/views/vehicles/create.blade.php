@@ -32,7 +32,7 @@
                     <input name="color" type="text" class="form-control" id="color" required>
 
                     <label for="main_image" class="form-label mt-3">Imagen de Portada</label>
-                    <input name="main_image" type="file" class="form-control" accept="image/*" required>
+                    <input name="main_image" type="file" class="form-control" accept="image/*">
 
                 </div>
                 <button type="submit" class="btn btn-primary">GUARDAR</button>
