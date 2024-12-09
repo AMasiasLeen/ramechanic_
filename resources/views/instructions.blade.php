@@ -22,8 +22,8 @@
                                 @foreach ($vehicles as $vehicle)
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         {{ $vehicle->vehicle_model->brand->name }} - {{ $vehicle->vehicle_model->name }}
-                                        <a href="{{ route('vehicles.show', $vehicle->id) }}"
-                                            class="btn btn-outline-primary btn-sm">Ver Detalles</a>
+
+
                                     </li>
                                 @endforeach
                                 {{ $vehicles->appends(['recordsPage' => $records->currentPage(), 'vehiclesPage' => $vehicles->currentPage()])->links('pagination::bootstrap-4') }}
@@ -48,8 +48,68 @@
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         {{ $record->vehicle->vehicle_model->brand->name }} -
                                         {{ $record->short_description }}
-                                        <a href="{{ route('records.show', $record->id) }}"
-                                            class="btn btn-outline-primary btn-sm">Ver Detalles</a>
+                                        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
+                                            data-bs-target="#recordModal{{ $record->id }}">
+                                            Ver detalles
+                                        </button>
+                                        <div class="modal fade" id="recordModal{{ $record->id }}" tabindex="-1"
+                                            aria-labelledby="recordModalLabel{{ $record->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content bg-dark text-white">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="recordModalLabel{{ $record->id }}">
+                                                            Detalles del
+                                                            Antecedente</h5>
+                                                        <button type="button" class="btn-close btn-close-white"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+
+                                                        <p><strong>Vehículo:</strong>
+                                                            {{ $record->vehicle->vehicle_model->brand->name }} -
+                                                            {{ $record->vehicle->vehicle_model->name }}</p>
+                                                        <p><strong>Fecha de Registro:</strong> {{ $record->date_in }}</p>
+                                                        <p><strong>Descripción Completa:</strong>
+                                                            {{ $record->long_description }}</p>
+                                                        @if ($record->images != null)
+                                                            <div id="carousel{{ $record->id }}" class="carousel slide"
+                                                                data-bs-ride="carousel">
+                                                                <div class="carousel-inner">
+
+                                                                    @foreach (json_decode($record->images) as $index => $image)
+                                                                        <div
+                                                                            class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                                                            <img src="{{ Storage::url('records/' . $image) }}"
+                                                                                class="d-block w-100 img-thumbnail"
+                                                                                alt="Imagen {{ $index + 1 }}">
+                                                                        </div>
+                                                                    @endforeach
+
+                                                                </div>
+                                                                <button class="carousel-control-prev" type="button"
+                                                                    data-bs-target="#carousel{{ $record->id }}"
+                                                                    data-bs-slide="prev">
+                                                                    <span class="carousel-control-prev-icon"
+                                                                        aria-hidden="true"></span>
+                                                                    <span class="visually-hidden">Previous</span>
+                                                                </button>
+                                                                <button class="carousel-control-next" type="button"
+                                                                    data-bs-target="#carousel{{ $record->id }}"
+                                                                    data-bs-slide="next">
+                                                                    <span class="carousel-control-next-icon"
+                                                                        aria-hidden="true"></span>
+                                                                    <span class="visually-hidden">Next</span>
+                                                                </button>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Cerrar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </li>
                                 @endforeach
 
