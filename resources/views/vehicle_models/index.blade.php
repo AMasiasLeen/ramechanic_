@@ -4,7 +4,7 @@
 
     <div class="d-flex justify-content-between mb-4">
         <h1>Listado de Modelos de Vehículos</h1>
-        <a class="btn btn-success" href="{{ route('vehicle-models.create') }}">Agregar Nuevo Modelo</a>
+        <a class="btn btn-success" href="{{ route('vehicle-models.create') }}">Agregar Nuevo</a>
     </div>
 
     @include('vehicle_models.filters')

@@ -4,7 +4,7 @@
 
     <div class="d-flex justify-content-between mb-4">
         <h1>Listado de Antecedentes</h1>
-        <a class="btn btn-success" href="{{ route('records.create') }}">Agregar Nuevo Antecedente</a>
+        <a class="btn btn-success" href="{{ route('records.create') }}">Agregar Nuevo</a>
     </div>
 
     @include("records.filters")

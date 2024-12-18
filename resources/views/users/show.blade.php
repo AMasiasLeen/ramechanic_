@@ -3,7 +3,7 @@
 @section('content')
 <div class="d-flex justify-content-between mb-3">
     <a class="btn btn-secondary" href="{{ route('users.index') }}">Regresar</a>
-    <a class="btn btn-success" href="{{ route('users.create') }}">Añadir otro Usuario</a>
+    <a class="btn btn-success" href="{{ route('users.create') }}">Agregar Nuevo</a>
 </div>
 
 <div class="card">

@@ -7,7 +7,7 @@
 
     <div class="card">
         <div class="card-header">
-            <h1>Agregar Usuario</h1>
+            <h1>Agregar Nuevo</h1>
         </div>
         <div class="card-body">
             <form action="{{ route('users.store') }}" method="POST">

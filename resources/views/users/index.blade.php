@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-between mb-4">
         <h1>Listado de Usuarios</h1>
-        <a class="btn btn-success" href="{{ route('users.create') }}">Agregar Nuevo Usuario</a>
+        <a class="btn btn-success" href="{{ route('users.create') }}">Agregar Nuevo</a>
     </div>
 
     @include('users.filters')
