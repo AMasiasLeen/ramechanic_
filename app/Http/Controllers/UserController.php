@@ -66,6 +66,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
 {
+    $request->validate([
+        'name' => 'required|string|max:10',
+        //'email' => 'required|string|email|max:15|unique:users,email,' . $user->id,
+        'phone' => 'nullable|numeric',
+        'address' => 'nullable|string|max:255',
+        'password' => 'nullable|string|min:8',
+        'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar la imagen
+    ]);
+    
     $user = new User();
     $user->fill($request->all());
 
@@ -125,9 +134,9 @@ class UserController extends Controller
 {
     // Validar los datos del formulario
     $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
-        'phone' => 'nullable|string|max:20',
+        'name' => 'required|string|max:10',
+        'email' => 'required|string|email|max:15|unique:users,email,' . $user->id,
+        'phone' => 'nullable|string|max:10',
         'address' => 'nullable|string|max:255',
         'password' => 'nullable|string|confirmed|min:8',
         'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar la imagen
