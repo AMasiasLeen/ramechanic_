@@ -32,7 +32,7 @@
                     @enderror
             
                     <label for="phone" class="form-label">Teléfono:</label>
-                    <input name="phone" type="text" class="form-control" id="phone" value="{{ old('phone') }}" pattern="\d{7,15}" title="Debe contener entre 7 y 15 dígitos numéricos." placeholder="Ingrese número de telefono">
+                    <input name="phone" type="text" class="form-control" id="phone" value="{{ old('phone') }}" pattern="\d{7,15}" title="Debe contener entre 7 y 15 dígitos numéricos." placeholder="Ingrese número de teléfono">
                     @error('phone')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
