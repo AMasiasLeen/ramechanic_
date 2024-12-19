@@ -67,12 +67,13 @@ class UserController extends Controller
     public function store(Request $request)
 {
     $request->validate([
-        'name' => 'required|string|max:10',
-        //'email' => 'required|string|email|max:15|unique:users,email,' . $user->id,
-        'phone' => 'nullable|numeric',
+        'identification' => 'required|numeric|digits:10|unique:users,identification',
+        'name' => 'required|string|regex:/^[a-zA-Z\s]+$/|max:50',
+        'email' => 'required|email|max:255|unique:users,email',
+        'phone' => 'nullable|numeric|digits_between:7,15',
         'address' => 'nullable|string|max:255',
-        'password' => 'nullable|string|min:8',
-        'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar la imagen
+        'password' => 'required|string|min:8',
+        'rol' => 'required|array',
     ]);
     
     $user = new User();

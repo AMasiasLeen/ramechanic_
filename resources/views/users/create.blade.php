@@ -14,45 +14,45 @@
                 @csrf
                 <div class="mb-3">
                     <label for="identification" class="form-label">Identificación:</label>
-                    <input name="identification" type="text" class="form-control" id="identification" value="{{old('identification')}}" required>
+                    <input name="identification" type="text" class="form-control" id="identification" value="{{ old('identification') }}" required maxlength="10" pattern="\d{10}" placeholder="Ingrese C.I/RUC">
                     @error('identification')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-
+            
                     <label for="name" class="form-label">Nombre:</label>
-                    <input name="name" type="text" class="form-control" id="name" value="{{old('name')}}" required >
+                    <input name="name" type="text" class="form-control" id="name" value="{{ old('name') }}" required pattern="[a-zA-Z\s]+" title="Solo letras y espacios." placeholder="Ingrese nombre del usuario">
                     @error('name')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-
+            
                     <label for="password" class="form-label">Contraseña:</label>
-                    <input name="password" type="text" class="form-control" id="password" value="{{old('password')}}" required>
+                    <input name="password" type="password" class="form-control" id="password" value="{{ old('password') }}" required minlength="8" placeholder="entre 8 y 20 caracteres">
                     @error('password')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-
+            
                     <label for="phone" class="form-label">Teléfono:</label>
-                    <input name="phone" type="text" class="form-control" id="phone" value="{{old('phone')}}" required>
+                    <input name="phone" type="text" class="form-control" id="phone" value="{{ old('phone') }}" pattern="\d{7,15}" title="Debe contener entre 7 y 15 dígitos numéricos." placeholder="Ingrese número de telefono">
                     @error('phone')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-
+            
                     <label for="email" class="form-label">Correo:</label>
-                    <input name="email" type="text" class="form-control" id="email" value="{{old('email')}}" required>
+                    <input name="email" type="email" class="form-control" id="email" value="{{ old('email') }}" required placeholder="Ingrese correo electrónico">
                     @error('email')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-
+            
                     <label for="address" class="form-label">Dirección:</label>
-                    <input name="address" type="text" class="form-control" id="address" value="{{old('address')}}"required>
-                    @error('addres')
+                    <input name="address" type="text" class="form-control" id="address" value="{{ old('address') }}" maxlength="70" placeholder="Ingrese dirección (opcional)">
+                    @error('address')
                     <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
-
+            
                     <label for="rol" class="form-label">Rol:</label>
                     <select name="rol[]" class="form-control" id="role_id" required>
                         @foreach(Spatie\Permission\Models\Role::all() as $role)
-                            <option value="{{$role->name}}">{{$role->name}}</option>
+                            <option value="{{ $role->name }}">{{ $role->name }}</option>
                         @endforeach
                     </select>
                 </div>
