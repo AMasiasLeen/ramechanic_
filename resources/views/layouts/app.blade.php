@@ -42,7 +42,7 @@
                         </a>
                     </li>
                 @endif
-                @if (Auth::user()->hasRole('admin'))
+                @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('mecanico'))
                     <li class="sidebar-header">
                         Formularios
                     </li>
