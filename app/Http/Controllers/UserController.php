@@ -27,29 +27,29 @@ class UserController extends Controller
 
         $query = User::query();
 
-    
-    if ($request->has("filter_name")) {
-        $query->where("name", "like", $request->filter_name . "%");
-    }
 
-    if ($request->has("filter_identification")) {
-        $query->where("identification", "like", $request->filter_identification . "%");
-    }
+        if ($request->has("filter_name") && $request->filter_name!= "") {
+            $query = $query->where("name", "like", $request->filter_name . "%");
+        }
 
-    if ($request->has("filter_phone")) {
-        $query->where("phone", "like", $request->filter_phone . "%");
-    }
+        if ($request->has("filter_identification") && $request->filter_identification != "") {
+            $query = $query->where("identification", "like", $request->filter_identification . "%");
+        }
 
-    if ($request->has("filter_email")) {
-        $query->where("email", "like", $request->filter_email . "%");
-    }
+        if ($request->has("filter_phone") && $request->filter_phone  != "") {
+            $query = $query->where("phone", "like", $request->filter_phone . "%");
+        }
 
-    if ($request->has("filter_address")) {
-        $query->where("address", "like", $request->filter_address . "%");
-    }
+        if ($request->has("filter_email") && $request->filter_email != "") {
+            $query = $query->where("email", "like", $request->filter_email . "%");
+        }
 
-    
-    $users = $query->paginate(15);
+        if ($request->has("filter_address") && $request->filter_address != "") {
+            $query = $query->where("address", "like", $request->filter_address . "%");
+        }
+
+
+        $users = $query->paginate(15);
 
         return view("users.index")->with(["users" => $users]);
     }
@@ -66,57 +66,58 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'identification' => 'required|numeric|digits:10|unique:users,identification',
-        'name' => 'required|string|regex:/^[a-zA-Z\s]+$/|max:50',
-        'email' => 'required|email|max:255|unique:users,email',
-        'phone' => 'nullable|numeric|digits_between:7,15',
-        'address' => 'nullable|string|max:255',
-        'password' => 'required|string|min:8',
-        'rol' => 'required|array',
-    ],
-    [
-        'identification.required' => 'La identificación es obligatoria.',
-        'identification.numeric' => 'La identificación debe ser un número.',
-        'identification.digits' => 'La identificación debe tener exactamente 10 dígitos.',
-        'identification.unique' => 'El identificador ya existe.',
-        'name.required' => 'El nombre es obligatorio.',
-        'name.regex' => 'El nombre solo debe contener letras y espacios.',
-        'name.max' => 'El nombre no debe exceder los 50 caracteres.',
-        'email.required' => 'El correo electrónico es obligatorio.',
-        'email.email' => 'El correo debe ser un formato válido.',
-        'email.unique' => 'El correo electrónico ya está registrado.',
-        'phone.numeric' => 'El teléfono debe ser un número.',
-        'phone.digits_between' => 'El teléfono debe tener entre 7 y 15 dígitos.',
-        'address.max' => 'La dirección no debe exceder los 255 caracteres.',
-        'password.required' => 'La contraseña es obligatoria.',
-        'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-        'rol.required' => 'Debe seleccionar al menos un rol.',
-    ]
-);
-    
-    $user = new User();
-    $user->fill($request->all());
+    {
+        $request->validate(
+            [
+                'identification' => 'required|numeric|digits:10|unique:users,identification',
+                'name' => 'required|string|regex:/^[a-zA-Z\s]+$/|max:50',
+                'email' => 'required|email|max:255|unique:users,email',
+                'phone' => 'nullable|numeric|digits_between:7,15',
+                'address' => 'nullable|string|max:255',
+                'password' => 'required|string|min:8',
+                'rol' => 'required|array',
+            ],
+            [
+                'identification.required' => 'La identificación es obligatoria.',
+                'identification.numeric' => 'La identificación debe ser un número.',
+                'identification.digits' => 'La identificación debe tener exactamente 10 dígitos.',
+                'identification.unique' => 'El identificador ya existe.',
+                'name.required' => 'El nombre es obligatorio.',
+                'name.regex' => 'El nombre solo debe contener letras y espacios.',
+                'name.max' => 'El nombre no debe exceder los 50 caracteres.',
+                'email.required' => 'El correo electrónico es obligatorio.',
+                'email.email' => 'El correo debe ser un formato válido.',
+                'email.unique' => 'El correo electrónico ya está registrado.',
+                'phone.numeric' => 'El teléfono debe ser un número.',
+                'phone.digits_between' => 'El teléfono debe tener entre 7 y 15 dígitos.',
+                'address.max' => 'La dirección no debe exceder los 255 caracteres.',
+                'password.required' => 'La contraseña es obligatoria.',
+                'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+                'rol.required' => 'Debe seleccionar al menos un rol.',
+            ]
+        );
 
-   
-    if ($request->hasFile('profile_picture')) {
-        $path = $request->file('profile_picture')->store('public/profile_pictures');
-        $user->profile_picture = str_replace('public/', '', $path);  
-    } else {
-       
-        $user->profile_picture = 'images/userImg.png';
+        $user = new User();
+        $user->fill($request->all());
+
+
+        if ($request->hasFile('profile_picture')) {
+            $path = $request->file('profile_picture')->store('public/profile_pictures');
+            $user->profile_picture = str_replace('public/', '', $path);
+        } else {
+
+            $user->profile_picture = 'images/userImg.png';
+        }
+
+        if ($request->password != null) {
+            $user->password = Hash::make($request->password);
+        }
+
+        $user->save();
+        $user->syncRoles($request->rol);
+
+        return redirect()->route("users.show", ["user" => $user]);
     }
-
-    if ($request->password != null) {
-        $user->password = Hash::make($request->password);
-    }
-
-    $user->save();
-    $user->syncRoles($request->rol);
-
-    return redirect()->route("users.show", ["user" => $user]);
-}
 
     /**
      * Display the specified resource.
@@ -140,7 +141,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        
+
         return view("users.edit")->with(["user" => $user]);
     }
 
@@ -153,7 +154,7 @@ class UserController extends Controller
      * Update the specified resource in storage.
      */
 
-        public function update(Request $request, User $user)
+    public function update(Request $request, User $user)
     {
         // Validar los datos del formulario
         $request->validate([
@@ -164,36 +165,33 @@ class UserController extends Controller
             'password' => 'nullable|string|confirmed|min:8',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validar la imagen
         ]);
-    
+
         // Llenar los datos del usuario
         $user->fill($request->except(['profile_picture', 'password', 'password_confirmation']));
-    
+
         // Si se sube una nueva imagen
         if ($request->hasFile('profile_picture')) {
             // Elimina la imagen antigua si existe y no es la predeterminada
             if ($user->profile_picture && $user->profile_picture != 'images/userImg.png') {
                 Storage::delete('public/' . $user->profile_picture);
             }
-    
+
             // Guardar la nueva imagen
             $path = $request->file('profile_picture')->store('public/profile_pictures');
             $user->profile_picture = str_replace('public/', '', $path);
         }
-    
+
         // Actualizar la contraseña si se proporciona
         if ($request->password) {
             $user->password = Hash::make($request->password);
         }
-    
+
         // Guardar los cambios
         $user->save();
-    
+
         // Redirigir según el rol del usuario autenticado
-       
-            return redirect()->route('users.show', ['user' => $user->id])->with('success', 'Usuario actualizado correctamente.');
-        
-    
-        
+
+        return redirect()->route('users.show', ['user' => $user->id])->with('success', 'Usuario actualizado correctamente.');
     }
 
 
