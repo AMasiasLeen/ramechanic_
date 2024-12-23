@@ -103,14 +103,30 @@ class RecordController extends Controller
         return view("records.show")->with(["record" => $record]);
     }
 
-    public function show_user_record()
+    public function show_user_record(Request $request)
     {
-        $record = Record::whereHas(
+
+        $query = Record::query();
+
+        if ($request->has('vehicle_id') && $request->vehicle_id != "") {
+            $query = $query->where('vehicle_id', '=', $request->vehicle_id);
+        }
+
+        if ($request->has('desde') && $request->desde != "") {
+            $query = $query->where('date_in', '>=', $request->desde);
+        }
+
+        if ($request->has('hasta') && $request->hasta != "") {
+            $query = $query->where('date_in', '<=', $request->hasta);
+        }
+
+        $record = $query->whereHas(
             "vehicle.owner",
             function ($query) {
                 $query->where("id", Auth::id());
             }
-        )->get();
+        )
+            ->get();
 
         return view("records.user_records")->with(["records" => $record]);
     }
@@ -130,13 +146,13 @@ class RecordController extends Controller
     {
 
         $record->fill($request->except(['images'])); // Evita las imágenes para manejarlas por separado
-    
+
         // Subida de la imagen de portada
         if ($request->hasFile('main_image')) {
             $mainImagePath = $request->file('main_image')->store('public/records');
             $record->main_image = basename($mainImagePath);
         }
-    
+
         // Subida de imágenes adicionales
         if ($request->hasFile('images')) {
             $imagePaths = [];
@@ -146,7 +162,7 @@ class RecordController extends Controller
             }
             $record->images = json_encode($imagePaths); // Guarda las rutas de las imágenes como un JSON
         }
-    
+
         $record->save();
         return redirect()->route("records.show", ["record" => $record]);
     }

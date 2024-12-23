@@ -21,7 +21,7 @@ Route::middleware(["auth"])->group(function(){
     Route::get("users/{user}/edit_profile",[UserController::class,"edit_profile"]) -> name("users.edit_profile")-> middleware(ShowOwnProfile::class);
     Route::get('/instructions', [HomeController::class, 'show_instructions'])->name('instructions');
     Route::get("records/user-records",[RecordController::class,"show_user_record"]) -> name("records.user_records");
-    
+    Route::get('/vehicles/records',[HomeController::class,'vehicles'])->name('vehicles_records');
 });
 
 Route::get('/', [HomeController::class, 'landing_page'])->name('landing_page');
