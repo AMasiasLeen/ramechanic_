@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-between mb-3">
         <a class="btn btn-secondary" href="{{ route('vehicle-models.index') }}">Regresar</a>
-        <a class="btn btn-success" href="{{ route('vehicle-models.create') }}">Agregar Nuevo</a>
+        {{-- <a class="btn btn-success" href="{{ route('vehicle-models.create') }}">Agregar Nuevo</a> --}}
     </div>
 
     <div class="card">
@@ -17,7 +17,8 @@
                 <div class="mb-3">
 
                     <label for="brand_id">Marca</label>
-                    <select name="brand_id" class="form-control" id="brand_id"></select>
+                    <select name="brand_id" class="form-control" id="brand_id" ></select>
+                    
 
                     <label for="name" class="form-label">Nombre del Modelo de Vehículo</label>
                     <input name="name" type="text" class="form-control" id="name"
@@ -25,9 +26,9 @@
                 </div>
         </div>
         <div class="card-footer">
-            <button class='btn btn-primary' type="submit">Modificar</button>
+            <button class='btn btn-primary' type="submit">Guardar</button>
         </form>
-            <button id="btndel" class="btn btn-danger">Eliminar</button>
+            {{-- <button id="btndel" class="btn btn-danger">Eliminar</button> --}}
             <form id="formdel" action="{{ route('vehicle-models.destroy', ['vehicle_model' => $vehicle_model]) }}"
                 method="POST" style="display:inline;">
                 @csrf
@@ -63,7 +64,8 @@
                 width: "100%",
                 ajax: {
                     url: "{{ route('brands.index') }}"
-                }
+                },
+                placeholder: "{{ $vehicle_model->brand->name }}",
             })
         }
     </script>

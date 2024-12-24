@@ -76,7 +76,7 @@
 
         <div class="card-footer">
             <a class='btn btn-primary' href="{{ route('records.edit', ['record' => $record]) }}">Modificar</a>
-            <button id="btndel" class="btn btn-danger">Eliminar</button>
+            {{-- <button id="btndel" class="btn btn-danger">Eliminar</button> --}}
             <form id="formdel" action="{{ route('records.destroy', ['record' => $record]) }}" method="POST"
                 style="display:inline;">
                 @csrf

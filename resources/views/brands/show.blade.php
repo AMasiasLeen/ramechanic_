@@ -15,8 +15,8 @@
         <h3>{{ $brand->name }}</h3>
     </div>
     <div class="card-footer">
-        <a class='btn btn-primary' href="{{ route('brands.edit', ['brand' => $brand]) }}">Modificar</a>
-        <button id="btndel" class="btn btn-danger">Eliminar</button>
+        <a class='btn btn-primary' href="{{ route('brands.edit', ['brand' => $brand]) }}">Guardar</a>
+        {{-- <button id="btndel" class="btn btn-danger">Eliminar</button> --}}
         <form id="formdel" action="{{ route('brands.destroy', ['brand'=>$brand]) }}" method="POST" style="display:inline;">
             @csrf
             @method("DELETE") 

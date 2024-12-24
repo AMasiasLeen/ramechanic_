@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-between mb-3">
         <a class="btn btn-secondary" href="{{ route('vehicles.index') }}">Regresar</a>
-        <a class="btn btn-success" href="{{ route('vehicles.create') }}">Agregar Nuevo</a>
+        {{-- <a class="btn btn-success" href="{{ route('vehicles.create') }}">Agregar Nuevo</a> --}}
     </div>
 
     <div class="card">
@@ -53,9 +53,9 @@
                 </div>
         </div>
         <div class="card-footer">
-            <button class='btn btn-primary' type="submit">Modificar</button>
+            <button class='btn btn-primary' type="submit">Guardar</button>
             </form>
-            <button id="btndel" class="btn btn-danger">Eliminar</button>
+            {{-- <button id="btndel" class="btn btn-danger">Eliminar</button> --}}
             <form id="formdel" action="{{ route('vehicles.destroy', ['vehicle' => $vehicle]) }}" method="POST"
                 style="display:inline;">
                 @csrf

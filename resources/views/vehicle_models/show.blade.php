@@ -18,7 +18,7 @@
     </div>
     <div class="card-footer">
         <a class='btn btn-primary' href="{{ route('vehicle-models.edit', ['vehicle_model' => $vehicle_model]) }}">Modificar</a>
-        <button id="btndel" class="btn btn-danger">Eliminar</button>
+        {{-- <button id="btndel" class="btn btn-danger">Eliminar</button> --}}
         <form id="formdel" action="{{ route('vehicle-models.destroy', ['vehicle_model'=>$vehicle_model]) }}" method="POST" style="display:inline;">
             @csrf
             @method("DELETE") 

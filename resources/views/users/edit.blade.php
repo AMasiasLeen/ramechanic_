@@ -3,7 +3,7 @@
 @section('content')
     <div class="d-flex justify-content-between mb-3">
         <a class="btn btn-secondary" href="{{ route('users.index') }}">Regresar</a>
-        <a class="btn btn-success" href="{{ route('users.create') }}">Agregar Nuevo</a>
+        {{-- <a class="btn btn-success" href="{{ route('users.create') }}">Agregar Nuevo</a> --}}
     </div>
 
     <div class="card">
@@ -64,7 +64,7 @@
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
                 </div>
-                <button class="btn btn-primary" type="submit">Modificar</button>
+                <button class="btn btn-primary" type="submit">Guardar</button>
             </form>
             
         </div>
