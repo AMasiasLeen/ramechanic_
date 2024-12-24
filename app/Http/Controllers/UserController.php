@@ -66,58 +66,111 @@ class UserController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $request->validate(
-            [
-                'identification' => 'required|numeric|digits:10|unique:users,identification',
-                'name' => 'required|string|regex:/^[a-zA-Z\s]+$/|max:50',
-                'email' => 'required|email|max:255|unique:users,email',
-                'phone' => 'nullable|numeric|digits_between:7,15',
-                'address' => 'nullable|string|max:255',
-                'password' => 'required|string|min:8',
-                'rol' => 'required|array',
+{
+    // Validar el formulario incluyendo la lógica para cédula y RUC
+    $request->validate(
+        [
+            'identification' => [
+                'required',
+                'numeric',
+                function ($attribute, $value, $fail) {
+                    if (!$this->validarCedulaRuc($value)) {
+                        $fail('La identificación proporcionada no es válida (cédula o RUC de Ecuador).');
+                    }
+                },
+                'unique:users,identification',
             ],
-            [
-                'identification.required' => 'La identificación es obligatoria.',
-                'identification.numeric' => 'La identificación debe ser un número.',
-                'identification.digits' => 'La identificación debe tener exactamente 10 dígitos.',
-                'identification.unique' => 'El identificador ya existe.',
-                'name.required' => 'El nombre es obligatorio.',
-                'name.regex' => 'El nombre solo debe contener letras y espacios.',
-                'name.max' => 'El nombre no debe exceder los 50 caracteres.',
-                'email.required' => 'El correo electrónico es obligatorio.',
-                'email.email' => 'El correo debe ser un formato válido.',
-                'email.unique' => 'El correo electrónico ya está registrado.',
-                'phone.numeric' => 'El teléfono debe ser un número.',
-                'phone.digits_between' => 'El teléfono debe tener entre 7 y 15 dígitos.',
-                'address.max' => 'La dirección no debe exceder los 255 caracteres.',
-                'password.required' => 'La contraseña es obligatoria.',
-                'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
-                'rol.required' => 'Debe seleccionar al menos un rol.',
-            ]
-        );
+            'name' => 'required|string|regex:/^[a-zA-Z\s]+$/|max:50',
+            'email' => 'required|email|max:255|unique:users,email',
+            'phone' => 'nullable|numeric|digits_between:7,15',
+            'address' => 'nullable|string|max:255',
+            'password' => 'required|string|min:8',
+            'rol' => 'required|array',
+        ],
+        [
+            'identification.required' => 'La identificación es obligatoria.',
+            'identification.numeric' => 'La identificación debe ser un número.',
+            'identification.unique' => 'El identificador ya existe.',
+            'name.required' => 'El nombre es obligatorio.',
+            'name.regex' => 'El nombre solo debe contener letras y espacios.',
+            'name.max' => 'El nombre no debe exceder los 50 caracteres.',
+            'email.required' => 'El correo electrónico es obligatorio.',
+            'email.email' => 'El correo debe ser un formato válido.',
+            'email.unique' => 'El correo electrónico ya está registrado.',
+            'phone.numeric' => 'El teléfono debe ser un número.',
+            'phone.digits_between' => 'El teléfono debe tener entre 7 y 15 dígitos.',
+            'address.max' => 'La dirección no debe exceder los 255 caracteres.',
+            'password.required' => 'La contraseña es obligatoria.',
+            'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+            'rol.required' => 'Debe seleccionar al menos un rol.',
+        ]
+    );
 
-        $user = new User();
-        $user->fill($request->all());
+    $user = new User();
+    $user->fill($request->all());
 
-
-        if ($request->hasFile('profile_picture')) {
-            $path = $request->file('profile_picture')->store('public/profile_pictures');
-            $user->profile_picture = str_replace('public/', '', $path);
-        } else {
-
-            $user->profile_picture = 'images/userImg.png';
-        }
-
-        if ($request->password != null) {
-            $user->password = Hash::make($request->password);
-        }
-
-        $user->save();
-        $user->syncRoles($request->rol);
-
-        return redirect()->route("users.show", ["user" => $user]);
+    if ($request->hasFile('profile_picture')) {
+        $path = $request->file('profile_picture')->store('public/profile_pictures');
+        $user->profile_picture = str_replace('public/', '', $path);
+    } else {
+        $user->profile_picture = 'images/userImg.png';
     }
+
+    if ($request->password != null) {
+        $user->password = Hash::make($request->password);
+    }
+
+    $user->save();
+    $user->syncRoles($request->rol);
+
+    return redirect()->route("users.show", ["user" => $user]);
+}
+
+private function validarCedulaRuc($identificacion)
+{
+    // Validar longitud
+    if (!in_array(strlen($identificacion), [10, 13])) {
+        return false;
+    }
+
+    // Validar cédula (10 dígitos)
+    if (strlen($identificacion) == 10) {
+        $region = (int)substr($identificacion, 0, 2);
+        if ($region < 1 || $region > 24) {
+            return false;
+        }
+
+        $digitoVerificador = (int)$identificacion[9];
+        $coeficientes = [2, 1, 2, 1, 2, 1, 2, 1, 2];
+        $suma = 0;
+
+        for ($i = 0; $i < 9; $i++) {
+            $producto = (int)$identificacion[$i] * $coeficientes[$i];
+            $suma += ($producto >= 10) ? $producto - 9 : $producto;
+        }
+
+        $modulo = $suma % 10;
+        $resultado = ($modulo == 0) ? 0 : 10 - $modulo;
+
+        return $resultado === $digitoVerificador;
+    }
+
+    // Validar RUC (13 dígitos)
+    if (strlen($identificacion) == 13) {
+        $numeroBase = substr($identificacion, 0, 10);
+        $sufijo = substr($identificacion, 10, 3);
+
+        // Validar que los primeros 10 dígitos sean una cédula válida
+        if (!$this->validarCedulaRuc($numeroBase)) {
+            return false;
+        }
+
+        // Validar que el sufijo sea '001'
+        return strlen($sufijo) === 3;
+    }
+
+    return false;
+}
 
     /**
      * Display the specified resource.
@@ -188,6 +241,7 @@ class UserController extends Controller
 
         // Guardar los cambios
         $user->save();
+        $user->syncRoles($request->rol);
 
         // Redirigir según el rol del usuario autenticado
 
