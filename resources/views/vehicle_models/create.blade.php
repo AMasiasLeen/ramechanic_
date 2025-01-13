@@ -12,15 +12,22 @@
         <div class="card-body">
             <form id="vehicleModelForm" action="{{ route('vehicle-models.store') }}" method="POST">
                 @csrf
-                <div class="mb-3">
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <label for="brand_id">Marca</label>
+                        <select name="brand_id" class="form-control" id="brand_id" required></select>
+                    
+                    </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <label for="name" class="form-label">Nombre del Modelo de Vehículo:</label>
+                        <input name="name" type="text" class="form-control" id="name" required>
 
-                    <label for="brand_id">Marca</label>
-                    <select name="brand_id" class="form-control" id="brand_id" required></select>
-
-                    <label for="name" class="form-label">Nombre del Modelo de Vehículo:</label>
-                    <input name="name" type="text" class="form-control" id="name" required>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="submitBtn">GUARDAR</button>
+                <div class="card-body">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">GUARDAR</button>
+                </div>
             </form>
         </div>
     </div>

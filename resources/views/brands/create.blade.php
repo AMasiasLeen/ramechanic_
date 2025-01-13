@@ -12,14 +12,20 @@
         <div class="card-body">
             <form id="brandForm" action="{{ route('brands.store') }}" method="POST">
                 @csrf
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nombre de la Marca</label>
-                    <input name="name" type="text" class="form-control" id="name" required>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <label for="name" class="form-label">Nombre de la Marca</label>
+                        <input name="name" type="text" class="form-control" id="name" required>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="submitBtn">GUARDAR</button>
+
+                <div class="card-body">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">GUARDAR</button>
+                </div>
             </form>
         </div>
     </div>
+
 @endsection
 
 @push('js')

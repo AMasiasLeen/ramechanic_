@@ -17,7 +17,7 @@
                     <th>Telefono</th>
                     <th>Correo</th>
                     <th>Dirección</th>
-                    <th></th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,8 +31,7 @@
                         <td>
                             <div class="btn-group" role="group" aria-label="Acciones">
                                 <a class="btn btn-outline-warning btn-sm"
-                                    href="{{ route('users.edit', ['user' => $user]) }}"><i
-                                        class="fa-solid fa-user-secret"></i>Editar</a>
+                                    href="{{ route('users.edit', ['user' => $user]) }}">Editar</a>
 
                                 <form id="formdel{{ $user->id }}"
                                     action="{{ route('users.destroy', ['user' => $user]) }}" method="POST"

@@ -12,37 +12,58 @@
         <div class="card-body">
             <form id="recordForm" action="{{ route('records.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="mb-3">
+                <div class="row">
+                    <div class="col-12 col-md-6">
                     <label for="date_in" class="form-label mt-3">Fecha de Registro</label>
                     <input name="date_in" type="date" class="form-control" id="date_in" required>
-
-                    <label for="owner_id" class="form-label mt-3">Propietario</label>
-                    <select name="owner_id" class="form-control" id="owner_id" required></select>
-
-                    <ul id="owner-details" class="list-group mt-3">
-                        <li class="list-group-item"><strong>Nombre: </strong><span id="sp-owner-name"></span></li>
-                        <li class="list-group-item"><strong>Teléfono: </strong><span id="sp-owner-phone"></span></li>
-                        <li class="list-group-item"><strong>Correo: </strong><span id="sp-owner-email"></span></li>
-                    </ul>
-
-                    <label for="vehicle_id" class="form-label mt-3">Vehículo</label>
-                    <select name="vehicle_id" class="form-control" id="vehicle_id" required></select>
-
-                    <ul id="vehicle-details" class="list-group mt-3">
-                        <li class="list-group-item"><strong>Marca: </strong><span id="sp-vehicle-brand"></span></li>
-                        <li class="list-group-item"><strong>Modelo: </strong><span id="sp-vehicle-model"></span></li>
-                    </ul>
-
-                    <label for="short_description" class="form-label mt-3">Descripción Corta</label>
-                    <input name="short_description" type="text" class="form-control" id="short_description" required>
-
-                    <label for="long_description" class="form-label mt-3">Descripción Larga</label>
-                    <input name="long_description" type="text" class="form-control" id="long_description" required>
-
-                    <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
-                    <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple required>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-primary" id="submitBtn">GUARDAR</button>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+
+                        <label for="owner_id" class="form-label mt-3">Propietario</label>
+                        <select name="owner_id" class="form-control" id="owner_id" required></select>
+
+                        <ul id="owner-details" class="list-group mt-3">
+                            <li class="list-group-item"><strong>Nombre: </strong><span id="sp-owner-name"></span></li>
+                            <li class="list-group-item"><strong>Teléfono: </strong><span id="sp-owner-phone"></span></li>
+                            <li class="list-group-item"><strong>Correo: </strong><span id="sp-owner-email"></span></li>
+                        </ul>
+                    
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="vehicle_id" class="form-label mt-3">Vehículo</label>
+                        <select name="vehicle_id" class="form-control" id="vehicle_id" required></select>
+
+                        <ul id="vehicle-details" class="list-group mt-3">
+                            <li class="list-group-item"><strong>Marca: </strong><span id="sp-vehicle-brand"></span></li>
+                            <li class="list-group-item"><strong>Modelo: </strong><span id="sp-vehicle-model"></span></li>
+                        </ul>
+                    </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                    
+                        <label for="short_description" class="form-label mt-3">Descripción Corta</label>
+                        <input name="short_description" type="text" class="form-control" id="short_description" required>
+                        
+                    </div>
+                    <div class="col-12 col-md-6">
+                        
+                        <label for="long_description" class="form-label mt-3">Descripción Larga</label>
+                        <input name="long_description" type="text" class="form-control" id="long_description" required>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
+                        <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple required>
+
+                    </div>
+                </div>
+                <div class="card-body">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">GUARDAR</button>
+                </div>
             </form>
         </div>
     </div>
