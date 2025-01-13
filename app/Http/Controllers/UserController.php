@@ -241,7 +241,8 @@ private function validarCedulaRuc($identificacion)
 
         // Guardar los cambios
         $user->save();
-        $user->syncRoles($request->rol);
+        
+        if ($request->has("rol")){$user->syncRoles($request->rol);}
 
         // Redirigir según el rol del usuario autenticado
 
