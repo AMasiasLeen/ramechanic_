@@ -77,3 +77,71 @@
         </div>
     </div>
 @endsection
+
+
+
+
+{{-- @extends('layouts.auth') --}}
+
+{{-- @section('content')
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="row shadow-lg rounded" style="width: 800px; background-color: #f8f9fa;">
+            <!-- Sección del logo y descripción -->
+            <div class="col-md-5 bg-light d-flex flex-column justify-content-center align-items-center text-center p-4">
+                <img src="/path/to/matemagico-logo.png" alt="MateMágico Logo" class="img-fluid mb-3" style="max-height: 150px;">
+                <h2 class="text-primary">MateMágico</h2>
+            </div>
+
+            <!-- Sección del formulario de login -->
+            <div class="col-md-7 p-4">
+                <h3 class="text-center mb-4">Iniciar Sesión</h3>
+
+                <form action="{{ route('login') }}" method="POST">
+                    @csrf
+
+                    <div class="form-group mb-3">
+                        <label for="email" class="form-label">Correo Electrónico</label>
+                        <input type="email" name="email" id="email" class="form-control @error('email') is-invalid @enderror" value="{{ old('email') }}" required autofocus placeholder="Ingresa tu correo">
+
+                        @error('email')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" name="password" id="password" class="form-control @error('password') is-invalid @enderror" required placeholder="Ingresa tu contraseña">
+
+                        @error('password')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                        <label class="form-check-label" for="remember">
+                            Recordarme
+                        </label>
+                    </div>
+
+                    <div class="d-grid mb-3">
+                        <button class="btn btn-primary btn-block" type="submit">Iniciar Sesión</button>
+                    </div>
+
+                    @if (Route::has('password.request'))
+                        <div class="text-center">
+                            <a class="btn btn-link" href="{{ route('password.request') }}">
+                                ¿Olvidaste tu contraseña?
+                            </a>
+                        </div>
+                    @endif
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection --}}
+
