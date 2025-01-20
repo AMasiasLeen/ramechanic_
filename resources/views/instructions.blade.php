@@ -7,118 +7,162 @@
             <p class="text-secondary">Aquí puedes gestionar y visualizar tus vehículos y sus registros de antecedentes.</p>
         </div>
 
-        <div class="row">
-            <!-- Sección de Vehículos -->
-            <div class="col-lg-6">
-                <div class="card mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Tus Vehículos</h4>
-                    </div>
+        <div class="row mb-4">
+            <!-- Estadísticas rápidas -->
+            <div class="col-lg-4">
+                <div class="card border-primary">
                     <div class="card-body">
-                        @if ($vehicles->isEmpty())
-                            <p class="text-secondary">Aún no tienes vehículos registrados.</p>
-                        @else
-                            <ul class="list-group">
-                                @foreach ($vehicles as $vehicle)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        {{ $vehicle->vehicle_model->brand->name }} - {{ $vehicle->vehicle_model->name }}
-
-
-                                    </li>
-                                @endforeach
-                                {{ $vehicles->appends(['recordsPage' => $records->currentPage(), 'vehiclesPage' => $vehicles->currentPage()])->links('pagination::bootstrap-4') }}
-                            </ul>
-                        @endif
+                        <h5 class="card-title">Antecedente más reciente</h5>
+                        
+                            <p class="card-text"></p>
+                            <p class="text-muted">Fecha: </p>
+                        
+                            <p class="text-secondary">No hay antecedentes registrados.</p>
+                        
                     </div>
                 </div>
             </div>
 
-            <!-- Sección de Registros de Antecedentes -->
-            <div class="col-lg-6">
-                <div class="card mb-4">
+            <div class="col-lg-4">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Último vehículo en recibir un antecedente</h5>
+                        
+                            <p class="card-text"></p>
+                            <p class="text-muted">Fecha: </p>
+                        
+                            <p class="text-secondary">No hay vehículos con antecedentes registrados.</p>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Total de registros</h5>
+                        <p class="display-4 text-center">{{ $records->count() }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <!-- Calendario de antecedentes -->
+            <div class="col-12">
+                <div class="card">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Tus Registros de Antecedentes</h4>
+                        <h4 class="mb-0">Calendario de Antecedentes</h4>
                     </div>
                     <div class="card-body">
-                        @if ($records->isEmpty())
-                            <p class="text-secondary">Aún no tienes registros de antecedentes.</p>
-                        @else
-                            <ul class="list-group">
-                                @foreach ($records as $record)
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        {{ $record->vehicle->vehicle_model->brand->name }} -
-                                        {{ $record->short_description }}
-                                        <button type="button" class="btn btn-outline-primary btn-sm" data-bs-toggle="modal"
-                                            data-bs-target="#recordModal{{ $record->id }}">
-                                            Ver detalles
-                                        </button>
-                                        <div class="modal fade" id="recordModal{{ $record->id }}" tabindex="-1"
-                                            aria-labelledby="recordModalLabel{{ $record->id }}" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content bg-dark text-white">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="recordModalLabel{{ $record->id }}">
-                                                            Detalles del
-                                                            Antecedente</h5>
-                                                        <button type="button" class="btn-close btn-close-white"
-                                                            data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-
-                                                        <p><strong>Vehículo:</strong>
-                                                            {{ $record->vehicle->vehicle_model->brand->name }} -
-                                                            {{ $record->vehicle->vehicle_model->name }}</p>
-                                                        <p><strong>Fecha de Registro:</strong> {{ $record->date_in }}</p>
-                                                        <p><strong>Descripción Completa:</strong>
-                                                            {{ $record->long_description }}</p>
-                                                        @if ($record->images != null)
-                                                            <div id="carousel{{ $record->id }}" class="carousel slide"
-                                                                data-bs-ride="carousel">
-                                                                <div class="carousel-inner">
-
-                                                                    @foreach (json_decode($record->images) as $index => $image)
-                                                                        <div
-                                                                            class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                                                            <img src="{{ Storage::url('records/' . $image) }}"
-                                                                                class="d-block w-100 img-thumbnail"
-                                                                                alt="Imagen {{ $index + 1 }}">
-                                                                        </div>
-                                                                    @endforeach
-
-                                                                </div>
-                                                                <button class="carousel-control-prev" type="button"
-                                                                    data-bs-target="#carousel{{ $record->id }}"
-                                                                    data-bs-slide="prev">
-                                                                    <span class="carousel-control-prev-icon"
-                                                                        aria-hidden="true"></span>
-                                                                    <span class="visually-hidden">Previous</span>
-                                                                </button>
-                                                                <button class="carousel-control-next" type="button"
-                                                                    data-bs-target="#carousel{{ $record->id }}"
-                                                                    data-bs-slide="next">
-                                                                    <span class="carousel-control-next-icon"
-                                                                        aria-hidden="true"></span>
-                                                                    <span class="visually-hidden">Next</span>
-                                                                </button>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Cerrar</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                @endforeach
-
-                            </ul>
-                            {{ $records->appends(['recordsPage' => $records->currentPage(), 'vehiclesPage' => $vehicles->currentPage()])->links('pagination::bootstrap-4') }}
-                        @endif
+                        
+                            <p class="text-secondary">No hay actividades registradas.</p>
+                        
+                            <div class="calendar-grid">
+                                
+                                    <div class="calendar-cell" title=" registros">
+                                        <div class="cell" style="background-color: rgba(0, 123, 255, {{ min( 5, 1) }});"></div>
+                                    </div>
+                            </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 @endsection
+
+@push('styles')
+    <style>
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+        }
+
+        .calendar-cell {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+        }
+
+        .cell {
+            width: 100%;
+            height: 100%;
+            border-radius: 3px;
+        }
+    </style>
+@endpush
+
+
+
+
+
+    <!-- <div class="container py-5">
+        <div class="text-center mb-4">
+            <h1 class="fw-bold">Bienvenido al Dashboard</h1>
+            <p class="text-secondary">Aquí puedes gestionar y visualizar tus vehículos y sus registros de antecedentes.</p>
+        </div>
+
+        <div class="row mb-4"> 
+             Estadísticas rápidas
+            <div class="col-lg-4">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Antecedente más reciente</h5>
+                        @if ($latestRecord)
+                            <p class="card-text">{{ $latestRecord->short_description }}</p>
+                            <p class="text-muted">Fecha: {{ $latestRecord->date_in }}</p>
+                        @else
+                            <p class="text-secondary">No hay antecedentes registrados.</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Último vehículo en recibir un antecedente</h5>
+                        @if ($latestVehicle)
+                            <p class="card-text">{{ $latestVehicle->vehicle_model->brand->name }} -
+                                {{ $latestVehicle->vehicle_model->name }}</p>
+                            <p class="text-muted">Fecha: {{ $latestVehicle->records->last()->date_in }}</p>
+                        @else
+                            <p class="text-secondary">No hay vehículos con antecedentes registrados.</p>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="card border-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">Total de registros</h5>
+                        <p class="display-4 text-center">{{ $records->count() }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            Calendario de antecedentes 
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Calendario de Antecedentes</h4>
+                    </div>
+                    <div class="card-body">
+                        @if ($recordActivity->isEmpty())
+                            <p class="text-secondary">No hay actividades registradas.</p>
+                        @else
+                            <div class="calendar-grid">
+                                @foreach ($recordActivity as $date => $count)
+                                    <div class="calendar-cell" title="{{ $date }}: {{ $count }} registros">
+                                        <div class="cell" style="background-color: rgba(0, 123, 255, {{ min($count / 5, 1) }});"></div>
+                                    </div>
+                                @endforeach
+                            </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div> -->
