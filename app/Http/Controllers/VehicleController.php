@@ -150,4 +150,11 @@ class VehicleController extends Controller
         $vehicle->delete();
         return redirect()->route("vehicles.index")->with(["result" => "OK"]);
     }
+
+
+    public function user_vehicles(Vehicle $vehicle)
+    {
+        
+        return view("vehicles.user_vehicles");
+    }
 }
