@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Record;
 use App\Models\Vehicle;
+use App\Models\User;
 use App\Models\VehicleModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,7 @@ class HomeController extends Controller
         $totalVehicles = Vehicle::count();
         $totalModels = VehicleModel::count();
         $totalBrands = Brand::count();
+        $totalUsers = User::count();
 
         $brandNames = Brand::pluck('name');
         $vehiclesPerBrand = Brand::withCount(['vehicles'])->pluck('vehicles_count');
@@ -35,7 +37,7 @@ class HomeController extends Controller
         $modelNames = VehicleModel::pluck('name');
         $vehiclesPerModel = Vehicle::selectRaw('vehicle_model_id, count(*) as total')->groupBy('vehicle_model_id')->pluck('total');
 
-        return view('home', compact('totalVehicles', 'totalModels', 'totalBrands', 'brandNames', 'vehiclesPerBrand', 'modelNames', 'vehiclesPerModel'));
+        return view('home', compact('totalVehicles', 'totalModels', 'totalBrands', 'totalUsers', 'brandNames', 'vehiclesPerBrand', 'modelNames', 'vehiclesPerModel'));
     }
 
     public function show_instructions()
