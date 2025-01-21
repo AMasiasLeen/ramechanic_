@@ -18,7 +18,7 @@ class UserController extends Controller
 
         if ($request->ajax()) {
 
-            $users = User::where("name", "like", $request->term . "%")->get()->map(function (User $user) {
+            $users = User::where("name", "like", $request->term . "%")->orWhere("identification", "like", $request->term . "%")->get()->map(function (User $user) {
                 return ["id" => $user->id, "text" => "Identificación: " . $user->identification];
             });
 
