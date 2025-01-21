@@ -33,11 +33,11 @@ class HomeController extends Controller
 
         $brandNames = Brand::pluck('name');
         $vehiclesPerBrand = Brand::withCount(['vehicles'])->pluck('vehicles_count');
-
+        $bb = Brand::withCount(['vehicles'])->orderBy('vehicles_count', 'desc')->get();
         $modelNames = VehicleModel::pluck('name');
         $vehiclesPerModel = Vehicle::selectRaw('vehicle_model_id, count(*) as total')->groupBy('vehicle_model_id')->pluck('total');
 
-        return view('home', compact('totalVehicles', 'totalModels', 'totalBrands', 'totalUsers', 'brandNames', 'vehiclesPerBrand', 'modelNames', 'vehiclesPerModel'));
+        return view('home', compact('bb', 'totalVehicles', 'totalModels', 'totalBrands', 'totalUsers', 'brandNames', 'vehiclesPerBrand', 'modelNames', 'vehiclesPerModel'));
     }
 
     public function show_instructions()
