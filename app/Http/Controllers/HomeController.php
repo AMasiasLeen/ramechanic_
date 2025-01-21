@@ -47,14 +47,19 @@ class HomeController extends Controller
             $query->where('id', Auth::id());
         })->paginate(10, ['*'], 'vehiclesPage');
 
-        $records = Record::whereHas('vehicle.owner', function ($query) {
+        // $records = Record::whereHas('vehicle.owner', function ($query) {
+        //     $query->where('id', Auth::id());
+        // })->paginate(10, ['*'], 'recordsPage');
+
+        $record = Record::whereHas('vehicle.owner', function($query){
             $query->where('id', Auth::id());
-        })->paginate(10, ['*'], 'recordsPage');
+        })->get();
+
 
         // Retorna la vista con las variables vehicles y records
         return view('instructions')->with([
             'vehicles' => $vehicles,
-            'records' => $records
+            'records' => $record
         ]);
     }
 

@@ -41,12 +41,12 @@
                             <span>Antecedentes</span>
                         </a>
                     </li>
-                    <li class="sidebar-item">
-                        <a href="{{ route('records.user_records') }}" class="sidebar-link">
+                    {{-- <li class="sidebar-item">
+                        <a href="{{ route('vehicles.user_vehicles') }}" class="sidebar-link">
                             <i class="fa-solid fa-book-open"></i>
                             <span>Vehiculos</span>
                         </a>
-                    </li>
+                    </li> --}}
                 @endif
                 @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('mecanico'))
                     <li class="sidebar-header">

@@ -20,7 +20,7 @@
             </div>
             <div class="col-12 col-sm-2">
                 <div class="form-group">
-                    <label for="">Hasta:</label>
+                    <label for="">Vehiculo:</label>
                     <select name="vehicle_id" class="form-control" id="vehicle_id"></select>
                 </div>
             </div>
