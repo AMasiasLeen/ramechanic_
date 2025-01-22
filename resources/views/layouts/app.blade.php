@@ -35,6 +35,9 @@
                     </a>
                 </li>
                 @if (Auth::user()->hasRole('user'))
+                <li class="sidebar-header">
+                        Registros
+                    </li>
                     <li class="sidebar-item">
                         <a href="{{ route('records.user_records') }}" class="sidebar-link">
                             <i class="fa-solid fa-book-open"></i>
@@ -83,6 +86,9 @@
                         </a>
                     </li>
                 @endif
+                <li class="sidebar-header">
+                        
+                    </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
