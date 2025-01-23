@@ -33,7 +33,7 @@
             <h3>{{ $vehicle->color }}</h3>
 
             <h4>Imagen</h4>
-            <img id="main_image" src="{{ Storage::url('vehicles/' . $vehicle->main_image) }}" alt="Imágen del Vehículo">
+            <img id="main_image" src="{{ $vehicle->main_image ? Storage::url('vehicles/' . $vehicle->main_image) : asset('assets/default_car.jpg') }}" alt="Imágen del Vehículo">
 
         </div>
         <div class="card-footer">

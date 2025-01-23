@@ -91,7 +91,7 @@
                         </div>
                     </div>
                     <div class="col-xl-5 col-xxl-6 d-flex justify-content-center">
-                        <img class="img-fluid rounded-2" src="{{ Storage::url('images/landing.jpg') }}"
+                        <img class="img-fluid rounded-2" src="{{ asset('assets/taller.jpg') }}"
                             alt="Gestor de Antecedentes Mecánicos">
                     </div>
                 </div>

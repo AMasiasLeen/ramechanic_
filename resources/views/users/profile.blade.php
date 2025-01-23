@@ -15,7 +15,7 @@
                             <!-- Imagen de perfil -->
                             <div class="col-md-4 text-center mb-4 mb-md-0">
                                 <div class="position-relative">
-                                    <img src="{{ $user->profile_picture ? Storage::url($user->profile_picture) : asset('images/default_user.png') }}" 
+                                    <img src="{{ $user->profile_picture ? Storage::url($user->profile_picture) : asset('profile_pictures/userimg.png') }}" 
                                         class="img-fluid rounded-circle shadow" 
                                         alt="Imagen de perfil" 
                                         style="max-width: 200px;">

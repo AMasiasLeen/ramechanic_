@@ -52,6 +52,9 @@
                 </div>
             </div>
         @endforeach
+        <div class="d-flex justify-content-center mt-4">
+            {{ $records->appends(request()->query())->links('pagination::bootstrap-4') }}
+        </div>
     </div>
     <input type="text" hidden id="user_id" value="{{ Auth::user()->id }}">
 @endsection

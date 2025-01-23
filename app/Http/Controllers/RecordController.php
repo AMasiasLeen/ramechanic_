@@ -126,7 +126,7 @@ class RecordController extends Controller
                 $query->where("id", Auth::id());
             }
         )
-            ->get();
+            ->paginate(6);
 
         return view("records.user_records")->with(["records" => $record]);
     }

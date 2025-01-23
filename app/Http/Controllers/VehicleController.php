@@ -92,10 +92,6 @@ class VehicleController extends Controller
         if ($request->hasFile('main_image')) {
             $mainImagePath = $request->file('main_image')->store('public/vehicles');
             $vehicle->main_image = basename($mainImagePath);
-        } else {
-
-            $vehicle->main_image = 'default_car.jpg';
-
         }
 
 
