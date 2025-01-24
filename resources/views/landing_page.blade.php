@@ -19,21 +19,15 @@
                 class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-3 pb-2">
                 <a class="col-md-3 d-flex align-items-center mb-2 mb-md-0 h4 text-white text-decoration-none text-uppercase"
                     href="/">
-                    <span class="fa-solid fa-wrench"> ra</span>
-                    mechanic
+                    <span class="fa-solid fa-wrench"> </span>
+                    SOLOCHEVY
                 </a>
 
                 <div class="col-md-3 text-end">
                     @guest
                         <!-- Show 'Iniciar Sesión' dropdown for guests -->
                         <div class="dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle" type="button" id="loginDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                Iniciar Sesión
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="loginDropdown">
-                                <li><a class="dropdown-item" href="{{ route('login') }}">Login</a></li>
-                            </ul>
+                            <a href="{{ route('login') }}" class="btn btn-outline-light">Iniciar Sesión</a>
                         </div>
                     @else
                         <!-- Show user name and dropdown options for authenticated users -->

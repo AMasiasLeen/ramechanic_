@@ -18,7 +18,7 @@ class RecordFactory extends Factory
     {
         return [
             "date_in" => fake()->date(),
-            "vehicle_id" => fake()->numberBetween(1, 500),
+            "vehicle_id" => fake()->numberBetween(1, 200),
             "short_description" => fake()->word(),
             "long_description" => fake()->word(),
             // "main_image" => fake()->imageUrl(800,600,"cars"),

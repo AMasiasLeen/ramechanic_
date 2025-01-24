@@ -16,6 +16,9 @@
                     <div class="col-12 col-md-6">
                     <label for="date_in" class="form-label mt-3">Fecha de Registro</label>
                     <input name="date_in" type="date" class="form-control" id="date_in" required>
+                    @error('date_in')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
                     </div>
                 </div>
                 <div class="row">

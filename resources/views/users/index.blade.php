@@ -12,9 +12,10 @@
         <table class="table table-bordered table-hover table-striped align-middle">
             <thead class="table-dark">
                 <tr>
+                    <th>Rol</th>
                     <th>Nombre</th>
                     <th>Identificación</th>
-                    <th>Telefono</th>
+                    <th>Teléfono</th>
                     <th>Correo</th>
                     <th>Dirección</th>
                     <th>Acciones</th>
@@ -23,6 +24,11 @@
             <tbody>
                 @foreach ($users as $user)
                     <tr>
+                        <td>
+                            @foreach($user->roles as $rol)
+                                <span>{{$rol->name}}</span>
+                            @endforeach
+                        </td>
                         <td>{{ $user->name }}</td>
                         <td>{{ $user->identification }}</td>
                         <td>{{ $user->phone }}</td>

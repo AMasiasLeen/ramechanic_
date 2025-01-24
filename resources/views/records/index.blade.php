@@ -13,11 +13,12 @@
         <table class="table table-bordered table-hover table-striped align-middle">
             <thead class="table-dark">
                 <tr>
+                    <th>ID</th>
                     <th>Propietario</th>
                     <th>Vehículo</th>
                     <th>Marca</th>
                     <th>Modelo</th>
-                    <th>Descripción Corta</th>
+                    <th>Detalle</th>
                     <th>Fecha de Registro</th>
                     <th>Acciones</th>
                 </tr>
@@ -25,6 +26,7 @@
             <tbody>
                 @foreach ($records as $record)
                     <tr>
+                        <td>{{ $record->id }}</td>
                         
                         <td>{{ $record->vehicle->owner->name }}</td>
 
