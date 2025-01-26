@@ -42,3 +42,16 @@ a {
   width: $size;
   height: $size;
 }
+
+footer {
+  background-color: $dark;
+  color: $secondary;
+  h5 {
+    color: white;
+    font-weight: bold;
+  }
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+}
