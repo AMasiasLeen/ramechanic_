@@ -205,7 +205,7 @@
         <div class="row">
             <div class="col-md-6 text-center text-md-start">
                 <h5 class="text-white">Dirección del Taller</h5>
-                <p>Calle 123, Ciudad, País</p>
+                <p>PRX2+ Calle Manuel Rivadeneira, y, Santo Domingo, Ecuador</p>
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <h5 class="text-white">Contacto</h5>
@@ -215,7 +215,7 @@
         </div>
         <hr class="bg-secondary">
         <div class="text-center">
-            <p>Copy &copy; 2025 Solo Chevy - Todos los derechos reservados.</p>
+            <p>Copy &copy; Solo Chevy - Todos los derechos reservados.</p>
         </div>
     </div>
 </footer>
