@@ -11,44 +11,43 @@
             <h1>Detalles del Antecedente</h1>
         </div>
         <div class="card-body">
-            <h4>Fecha de Registro</h4>
-            <p>{{ $record->date_in }}</p>
-
-            <h4>Propietario</h4>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <strong>Nombre: </strong>{{ $record->vehicle->owner->name }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Teléfono: </strong>{{ $record->vehicle->owner->phone }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Correo: </strong>{{ $record->vehicle->owner->email }}
-                </li>
-            </ul>
-
-            <h4>Vehículo</h4>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <strong>Marca: </strong>{{ $record->vehicle->vehicle_model->brand->name }}
-                </li>
-                <li class="list-group-item">
-                    <strong>Modelo: </strong>{{ $record->vehicle->vehicle_model->name }}
-                </li>
-            </ul>
-
-            <h4>Descripción Corta</h4>
-            <p>{{ $record->short_description }}</p>
-
-            <h4>Descripción Larga</h4>
-            <p>{{ $record->long_description }}</p>
-
-            {{-- <h4>Imagen Portada</h4>
-        <img src="{{ Storage::url('records/' . $record->main_image) }}" alt="Imagen principal" class="img-fluid"> --}}
-
-            <h4>Resto de imágenes</h4>
-            <!-- Carrusel de imágenes -->
-            @if ($record->images)
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h4>Fecha de Registro</h4>
+                    <p>{{ $record->date_in }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h4>Propietario</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Nombre: </strong>{{ $record->vehicle->owner->name }}</li>
+                        <li class="list-group-item"><strong>Teléfono: </strong>{{ $record->vehicle->owner->phone }}</li>
+                        <li class="list-group-item"><strong>Correo: </strong>{{ $record->vehicle->owner->email }}</li>
+                    </ul>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4>Vehículo</h4>
+                    <ul class="list-group">
+                        <li class="list-group-item"><strong>Marca: </strong>{{ $record->vehicle->vehicle_model->brand->name }}</li>
+                        <li class="list-group-item"><strong>Modelo: </strong>{{ $record->vehicle->vehicle_model->name }}</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h4>Detalle</h4>
+                    <p>{{ $record->short_description }}</p>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4>Descripción</h4>
+                    <p>{{ $record->long_description }}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h4>Imágenes de Proceso</h4>
+                    @if ($record->images)
                 <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @foreach (json_decode($record->images) as $index => $image)
@@ -73,14 +72,16 @@
                 <p>No hay imágenes adicionales disponibles.</p>
             @endif
         </div>
+            </div>
+        </div>
 
         <div class="card-footer">
             <a class='btn btn-primary' href="{{ route('records.edit', ['record' => $record]) }}">Modificar</a>
-            {{-- <button id="btndel" class="btn btn-danger">Eliminar</button> --}}
             <form id="formdel" action="{{ route('records.destroy', ['record' => $record]) }}" method="POST"
                 style="display:inline;">
                 @csrf
                 @method('DELETE')
+                <!-- <button type="submit" class="btn btn-danger">Eliminar</button> -->
             </form>
         </div>
     </div>

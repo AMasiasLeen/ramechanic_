@@ -90,15 +90,18 @@
             const form = document.getElementById('vehicleForm');
             const submitBtn = document.getElementById('submitBtn');
 
-            submitBtn.addEventListener('click', function (event) {
-                event.preventDefault(); // Evita el envío inmediato
+            submitBtn.addEventListener('click', function(event) {
+                event.preventDefault();
 
+                // Validar campos requeridos en el cliente
                 let isValid = true;
 
-                // Validar campos de texto y select
                 form.querySelectorAll('[required]').forEach(input => {
                     if (!input.value.trim()) {
+                        input.classList.add('is-invalid');
                         isValid = false;
+                    } else {
+                        input.classList.remove('is-invalid');
                     }
                 });
 
@@ -116,82 +119,3 @@
         }
     </script>
 @endpush
-{{-- 
-@push('js')
-    <script defer>
-        window.onload = () => {
-
-
-
-            $("#owner_id").select2({
-                theme: "bootstrap-5",
-                width: "100%",
-                ajax: {
-                    url: "{{ route('users.index') }}",
-                },
-            });
-
-
-            $("#vehicle_model_id").select2({
-                theme: "bootstrap-5",
-                width: "100%",
-                ajax: {
-                    url: "{{ route('vehicle-models.index') }}",
-                    dataType: 'json',
-                    data: (params) => {
-                        const query = {
-                            brand_id: $("#brand_id").val(),
-                            term: params.term
-                        }
-                        return query
-                    }
-                },
-            });
-
-
-
-        }
-    </script>
-@endpush --}}
-
-
-
-{{-- // $("#brand_id").select2({
-    //     theme: "bootstrap-5",
-    //     width: "100%",
-    //     ajax: {
-    //         url: "{{ route('brands.index') }}",
-    //         dataType: 'json'
-    //     },
-    // }); --}}
-
-
-
-
-
-{{-- // $("#brand_id").on("change", function() {
-    //     $("#vehicle_model_id").val(null);
-    //     $("#vehicle_model_id").trigger("change")
-    // })
-
-    // $("#vehicle_model_id").on("change", function() {
-    //     axios.get("{{ url('vehicle-models') }}/" + $("#vehicle_model_id").val(), {
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         }
-    //     }).then(({
-    //         data
-    //     }) => {
-    //         console.log(data)   
-
-    //         if ($('#brand_id').find("option[value='" + data.id + "']").length) {
-    //             $('#brand_id').val(data[0].brand.id.toString()).trigger('change');
-    //         } else {
-    //             // Create a DOM Option and pre-select by default
-    //             var newOption = new Option(data[0].brand.name, data[0].brand.id, true, true);
-    //             // Append it to the select
-    //             $('#brand_id').append(newOption).trigger('change');
-    //         }
-    //     })
-
-    // }) --}}

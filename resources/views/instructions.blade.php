@@ -21,7 +21,7 @@
                                 <i class="fa fa-calendar-check"></i> Fecha: <strong>{{ $last->date_in }}</strong>
                             </p>
                             <p class="text-secondary">
-                                <i class="fa fa-file-text"></i> Descripción: <strong>{{ $last->short_description }}</strong>
+                                <i class="fa fa-file-text"></i> Detalle: <strong>{{ $last->short_description }}</strong>
                             </p>
                         @else
                             <p class="text-muted">No hay antecedentes registrados aún.</p>

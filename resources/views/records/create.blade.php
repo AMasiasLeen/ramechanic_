@@ -46,13 +46,13 @@
                 <div class="row">
                     <div class="col-12 col-md-6">
                     
-                        <label for="short_description" class="form-label mt-3">Descripción Corta</label>
+                        <label for="short_description" class="form-label mt-3">Detalle</label>
                         <input name="short_description" type="text" class="form-control" id="short_description" required>
                         
                     </div>
                     <div class="col-12 col-md-6">
                         
-                        <label for="long_description" class="form-label mt-3">Descripción Larga</label>
+                        <label for="long_description" class="form-label mt-3">Descripción</label>
                         <input name="long_description" type="text" class="form-control" id="long_description" required>
                         
                     </div>
@@ -60,7 +60,7 @@
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
-                        <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple required>
+                        <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple >
 
                     </div>
                 </div>
@@ -122,14 +122,18 @@
                     .catch(() => Swal.fire("Error", "No se pudo cargar la información del vehículo.", "error"));
             });
 
-            // Validación del formulario
-            submitBtn.addEventListener('click', function (event) {
+            submitBtn.addEventListener('click', function(event) {
                 event.preventDefault();
 
+                // Validar campos requeridos en el cliente
                 let isValid = true;
+
                 form.querySelectorAll('[required]').forEach(input => {
                     if (!input.value.trim()) {
+                        input.classList.add('is-invalid');
                         isValid = false;
+                    } else {
+                        input.classList.remove('is-invalid');
                     }
                 });
 
@@ -144,122 +148,9 @@
                     form.submit();
                 }
             });
-        };
+        }
+
     </script>
 @endpush
 
 
-
-{{-- @push('js')
-    <script defer>
-        window.onload = () => {
-
-
-            $("#owner_id").on("change", function() {
-                axios.get("{{ url('users') }}/" + $("#owner_id").val(), {
-                    headers: {
-                        "Content-Type": "application/json"
-
-                    }
-
-                }).then(res => {
-                    console.log(res)
-                })
-
-            });
-
-            $("#owner_id").select2({
-                theme: "bootstrap-5",
-                width: "100%",
-                ajax: {
-                    url: "{{ route('users.index') }}",
-                    dataType: 'json',
-                    data: (params) => {
-                        const query = {
-                            term: params.term
-                        }
-                        return query;
-                    }
-                },
-            });
-
-            $("#owner_id").on("change", function() {
-                const ownerId = $("#owner_id").val();
-
-                $("#vehicle_id").select2({
-                theme: "bootstrap-5",
-                width: "100%",
-                ajax: {
-                    url: "{{ route('vehicles.index') }}",
-                    dataType: 'json',
-                    data: (params) => {
-                        const query = {
-                            owner_id: $("#owner_id").val(),
-                            term: params.term
-                        }
-                        return query
-                    }
-                },
-            });
-
-   
-                axios.get("{{ url('users') }}/" + ownerId, {
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).then(res => {
-                    const owner = res.data;
-                  
-                    if (owner) {
-                        $("#sp-owner-name").text(owner.name);       
-                        $("#sp-owner-phone").text(owner.phone);     
-                        $("#sp-owner-email").text(owner.email);
-                            
-                    } else {
-                        console.warn("No se encontraron datos para el propietario seleccionado");
-                    }
-                }).catch(err => {
-                    console.error("Error obteniendo los datos del propietario:", err);
-                });
-            });
-
-
-            $("#vehicle_id").on("change", function() {
-                axios.get("{{ url('vehicles') }}/" + $("#vehicle_id").val(), {
-                    headers: {
-                        "Content-Type": "application/json"
-
-                    }
-
-                }).then(res => {
-                    console.log(res)
-                })
-
-            });
-
-            $("#vehicle_id").on("change", function() {
-                const vehicleId = $("#vehicle_id").val();
-
-
-                axios.get("{{ url('vehicles') }}/" + vehicleId, {
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                }).then(res => {
-                    const vehicle = res.data;
-
-                    if (vehicle.vehicle_model && vehicle.vehicle_model.brand) {
-
-                        $("#sp-vehicle-brand").text(vehicle.vehicle_model.brand.name); // Marca
-                        $("#sp-vehicle-model").text(vehicle.vehicle_model.name); // Modelo
-                    } else {
-                        console.warn("El vehículo no tiene modelo o marca asignado");
-                    }
-                }).catch(err => {
-                    console.error("Error obteniendo los datos del vehículo:", err);
-                });
-            });
-
-        };
-    </script>
-@endpush --}}

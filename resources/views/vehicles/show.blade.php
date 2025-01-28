@@ -8,45 +8,67 @@
 
     <div class="card">
         <div class="card-header">
-            <h1>Vehículo</h1>
+            <h1>Detalles del Vehículo</h1>
         </div>
         <div class="card-body">
-            <h4>Placa</h4>
-            <h3>{{ $vehicle->plate }}</h3>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h4>Placa del Vehículo</h4>
+                    <h3>{{ $vehicle->plate }}</h3>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4>Propietario</h4>
+                    <h3>{{ $vehicle->owner->name }}</h3>
+                </div>
+            </div>
 
-            <h4>Propietario</h4>
-            <h3>{{ $vehicle->owner->name }}</h3>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h4>Marca</h4>
+                    <h3>{{ $vehicle->vehicle_model->brand->name }}</h3>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4>Modelo</h4>
+                    <h3>{{ $vehicle->vehicle_model->name }}</h3>
+                </div>
+            </div>
 
-            <h4>Marca</h4>
-            <h3>{{ $vehicle->vehicle_model->brand->name }}</h3>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h4>Serie del Motor</h4>
+                    <h3>{{ $vehicle->engine_serial }}</h3>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4>Número de Serie</h4>
+                    <h3>{{ $vehicle->serial_number }}</h3>
+                </div>
+            </div>
 
-            <h4>Modelo</h4>
-            <h3>{{ $vehicle->vehicle_model->name }}</h3>
-
-            <h4>Serie de Motor</h4>
-            <h3>{{ $vehicle->engine_serial }}</h3>
-
-            <h4>Número de Serie</h4>
-            <h3>{{ $vehicle->serial_number }}</h3>
-
-            <h4>Color</h4>
-            <h3>{{ $vehicle->color }}</h3>
-
-            <h4>Imagen</h4>
-            <img id="main_image" src="{{ $vehicle->main_image ? Storage::url('vehicles/' . $vehicle->main_image) : asset('assets/default_car.jpg') }}" alt="Imágen del Vehículo">
-
+            <div class="row">
+                <div class="col-12 col-md-6">
+                    <h4>Color</h4>
+                    <h3>{{ $vehicle->color }}</h3>
+                </div>
+                <div class="col-12 col-md-6">
+                    <h4>Imagen</h4>
+                    <img id="main_image" class="img-fluid mt-2 rounded" 
+                         src="{{ $vehicle->main_image ? Storage::url('vehicles/' . $vehicle->main_image) : asset('assets/default_car.jpg') }}" 
+                         alt="Imagen del Vehículo">
+                </div>
+            </div>
         </div>
-        <div class="card-footer">
+        <div class="card-footer d-flex justify-content-between">
             <a class='btn btn-primary' href="{{ route('vehicles.edit', ['vehicle' => $vehicle]) }}">Modificar</a>
-            {{-- <button id="btndel" class="btn btn-danger">Eliminar</button> --}}
             <form id="formdel" action="{{ route('vehicles.destroy', ['vehicle' => $vehicle]) }}" method="POST"
-                style="display:inline;">
+                  style="display:inline;">
                 @csrf
                 @method('DELETE')
+                <!-- <button class="btn btn-danger" type="submit">Eliminar</button> -->
             </form>
         </div>
     </div>
 @endsection
+
 
 @push('js')
     <script defer>
