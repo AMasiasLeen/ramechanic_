@@ -15,52 +15,48 @@
 
         <!-- Navbar -->
         <div class="container">
-            <header
-                class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between pt-3 pb-2">
-                <a class="col-md-3 d-flex align-items-center mb-2 mb-md-0 h4 text-white text-decoration-none text-uppercase"
-                    href="/">
-                    <span class="fa-solid fa-wrench"> </span>
-                    SOLOCHEVY
-                </a>
+        <header class="d-flex flex-wrap align-items-center justify-content-between pt-3 pb-2">
+    <!-- Logo -->
+    <div class="col-auto">
+        <a class="h4 text-white text-decoration-none text-uppercase d-flex align-items-center"
+            href="/">
+            <span class="fa-solid fa-wrench me-2"></span> SOLOCHEVY
+        </a>
+    </div>
 
-                <div class="col-md-3 text-end">
-                    @guest
-                        <!-- Show 'Iniciar Sesión' dropdown for guests -->
-                        <div class="dropdown">
-                            <a href="{{ route('login') }}" class="btn btn-outline-light">Iniciar Sesión</a>
-                        </div>
-                    @else
-                        <!-- Show user name and dropdown options for authenticated users -->
-                        <div class="dropdown">
-                            <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                {{ Auth::user()->name }}
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
-                                <li><a class="dropdown-item"
-                                        href="{{ route('users.edit_profile', ['user' => Auth::user()]) }}">Perfil</a></li>
-                                @if (Auth::user()->hasRole('user'))
-                                    <li><a class="dropdown-item" href="{{ route('records.user_records') }}">Antecedentes</a>
-                                    </li>
-                                @endif
-                                @if (Auth::user()->hasRole('admin'))
-                                    <li><a class="dropdown-item" href="{{ route('home') }}">DashBoard</a>
-                                    </li>
-                                @endif
-                                <li>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        Cerrar Sesión
-                                    </a>
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </li>
-                            </ul>
-                        </div>
-                    @endguest
-                </div>
-            </header>
+    <!-- Dropdown -->
+    <div class="col-auto">
+        @guest
+            <a href="{{ route('login') }}" class="btn btn-outline-light">Iniciar Sesión</a>
+        @else
+            <div class="dropdown">
+                <button class="btn btn-outline-light dropdown-toggle" type="button" id="userDropdown"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    {{ Auth::user()->name }}
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                    <li><a class="dropdown-item"
+                            href="{{ route('users.profile', ['user' => Auth::user()]) }}">Perfil</a></li>
+                    @if (Auth::user()->hasRole('user'))
+                        <li><a class="dropdown-item" href="{{ route('records.user_records') }}">Antecedentes</a></li>
+                    @endif
+                    @if (Auth::user()->hasRole('admin'))
+                        <li><a class="dropdown-item" href="{{ route('home') }}">DashBoard</a></li>
+                    @endif
+                    <li>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            Cerrar Sesión
+                        </a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        @endguest
+    </div>
+</header>
         </div>
 
         <hr class="border-secondary">
@@ -134,8 +130,8 @@
                                     src="{{ $record->vehicle->main_image ? Storage::url('vehicles/' . $record->vehicle->main_image) : asset('assets/default_car.jpg') }}"
                                     alt="Imagen del Vehículo">
                             </div>
+                            <p class="card-text"><strong>Detalle:</strong> {{ $record->short_description }}</p>
                             <p class="card-text"><strong>Fecha Ingreso:</strong> {{ $record->date_in }}</p>
-                            <p class="card-text"><strong>Descripción Corta:</strong> {{ $record->short_description }}</p>
                             <button type="button" class="btn btn-outline-light w-100 mt-2" data-bs-toggle="modal"
                                 data-bs-target="#recordModal{{ $record->id }}">
                                 Ver más
@@ -157,7 +153,7 @@
                                 <p><strong>Vehículo:</strong>
                                     {{ $record->vehicle->vehicle_model->brand->name }} - {{ $record->vehicle->vehicle_model->name }}</p>
                                 <p><strong>Fecha de Registro:</strong> {{ $record->date_in }}</p>
-                                <p><strong>Descripción Completa:</strong> {{ $record->long_description }}</p>
+                                <p><strong>Descripción:</strong> {{ $record->long_description }}</p>
                                 @if ($record->images)
                                     <div id="carousel{{ $record->id }}" class="carousel slide" data-bs-ride="carousel">
                                         <div class="carousel-inner">
@@ -205,7 +201,15 @@
         <div class="row">
             <div class="col-md-6 text-center text-md-start">
                 <h5 class="text-white">Dirección del Taller</h5>
-                <p>PRX2+ Calle Manuel Rivadeneira, y, Santo Domingo, Ecuador</p>
+                <!-- Enlace con la URL de Google Maps -->
+                <a 
+                    href="https://maps.app.goo.gl/8EeDWYP77xss6mHL8" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="text-secondary text-decoration-none"
+                >
+                    PRX2+ Calle Manuel Rivadeneira, y, Santo Domingo, Ecuador
+                </a>
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <h5 class="text-white">Contacto</h5>
