@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Support\Facades\Auth;
 
-class VehicleModel extends Model
+class VehicleModel extends Model implements Recordable
 {
     use HasFactory;
+    use \Altek\Accountant\Recordable;
 
     protected $guarded = [];
 

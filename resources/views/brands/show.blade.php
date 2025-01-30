@@ -23,6 +23,24 @@
         </form>
     </div>
 </div>
+<!-- <div>
+    <table>
+        <tbody>
+            @foreach($brand->ledgers as $brandhistory)
+            <tr>
+                <td>
+                    {{$brandhistory->event}}
+
+                </td>
+                <td>
+                    {{$brandhistory->user}}
+                </td>
+            </tr>
+
+            @endforeach
+        </tbody>
+    </table>
+</div> -->
 @endsection
 
 @push('js')

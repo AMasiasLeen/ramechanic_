@@ -4,8 +4,90 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e5bf1a75168ca680552eb156d125a225",
+    "content-hash": "bb3bc42a8e81fd1d3f36ed0e18b4bc15",
     "packages": [
+        {
+            "name": "altek/accountant",
+            "version": "v4.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://gitlab.com/altek/accountant.git",
+                "reference": "ab7a02fff0945ebca8e83b3c343a1b3f7014ee58"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://gitlab.com/api/v4/projects/altek%2Faccountant/repository/archive.zip?sha=ab7a02fff0945ebca8e83b3c343a1b3f7014ee58",
+                "reference": "ab7a02fff0945ebca8e83b3c343a1b3f7014ee58",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "illuminate/console": "^10.0|^11.0",
+                "illuminate/database": "^10.0|^11.0",
+                "illuminate/filesystem": "^10.0|^11.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "altek/eventually": "^3.0",
+                "ext-pdo": "*",
+                "orchestra/testbench": "^8.0|^9.0",
+                "roave/security-advisories": "dev-latest"
+            },
+            "suggest": {
+                "altek/eventually": "Required for keeping track of BelongsToMany and MorphToMany relations.",
+                "laravelista/lumen-vendor-publish": "Required to publish the package config file in Lumen."
+            },
+            "type": "package",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Altek\\Accountant\\AccountantServiceProvider"
+                    ]
+                },
+                "branch-alias": {
+                    "dev-master": "4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Altek\\Accountant\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Quetzy Garcia",
+                    "email": "quetzyg@altek.org"
+                }
+            ],
+            "description": "The auditing & accountability package for Laravel's Eloquent ORM.",
+            "homepage": "https://altek.gitlab.io/accountant/",
+            "keywords": [
+                "Accountability",
+                "Audit",
+                "accountable",
+                "accountant",
+                "auditing",
+                "changes",
+                "eloquent",
+                "history",
+                "laravel",
+                "ledger",
+                "liable",
+                "log",
+                "logging",
+                "lumen",
+                "record"
+            ],
+            "support": {
+                "issues": "https://gitlab.com/altek/accountant/issues",
+                "source": "https://gitlab.com/altek/accountant"
+            },
+            "time": "2024-03-25T11:49:20+00:00"
+        },
         {
             "name": "brick/math",
             "version": "0.12.1",

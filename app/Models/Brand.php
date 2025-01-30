@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Brand extends Model
+class Brand extends Model implements Recordable
 {
     use HasFactory;
+    use \Altek\Accountant\Recordable;
 
     protected $guarded = [];
 
