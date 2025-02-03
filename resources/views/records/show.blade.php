@@ -31,6 +31,7 @@
                     <ul class="list-group">
                         <li class="list-group-item"><strong>Marca: </strong>{{ $record->vehicle->vehicle_model->brand->name }}</li>
                         <li class="list-group-item"><strong>Modelo: </strong>{{ $record->vehicle->vehicle_model->name }}</li>
+                        <li class="list-group-item"><strong>Año: </strong>{{ $record->vehicle->year }}</li>
                     </ul>
                 </div>
             </div>
@@ -40,9 +41,11 @@
                     <p>{{ $record->short_description }}</p>
                 </div>
                 <div class="col-12 col-md-6">
-                    <h4>Descripción</h4>
-                    <p>{{ $record->long_description }}</p>
+                <h4>Descripción</h4>
+                <div class="border p-3 rounded bg-light">
+                    {!! nl2br(e($record->long_description)) !!}
                 </div>
+            </div>
             </div>
             <div class="row">
                 <div class="col-12 col-md-6">

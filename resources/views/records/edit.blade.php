@@ -37,6 +37,7 @@
                         <ul id="vehicle-details" class="list-group mt-3">
                             <li class="list-group-item"><strong>Marca: </strong><span id="sp-vehicle-brand">{{ $record->vehicle->brand->name ?? '' }}</span></li>
                             <li class="list-group-item"><strong>Modelo: </strong><span id="sp-vehicle-model">{{ $record->vehicle->model->name ?? '' }}</span></li>
+                            <li class="list-group-item"><strong>Año: </strong><span id="sp-vehicle-year">{{ $record->vehicle->year ?? '' }}</span></li>
                         </ul>
                     </div>
                 </div>
@@ -48,6 +49,7 @@
                     <div class="col-12 col-md-6">
                         <label for="long_description" class="form-label mt-3">Descripción</label>
                         <input name="long_description" type="text" class="form-control" id="long_description" value="{{ $record->long_description }}" required>
+                        <textarea name="long_description" class="form-control" id="long_description" value="{{ $record->long_description }}" required></textarea>
                     </div>
                 </div>
                 <div class="row">
@@ -149,6 +151,7 @@
                     const vehicle = res.data;
                     $("#sp-vehicle-brand").text(vehicle.vehicle_model?.brand?.name || '');
                     $("#sp-vehicle-model").text(vehicle.vehicle_model?.name || '');
+                    $("#sp-vehicle-year").text(vehicle.year || '');
                 }).catch(err => console.error("Error obteniendo los datos del vehículo:", err));
             };
 

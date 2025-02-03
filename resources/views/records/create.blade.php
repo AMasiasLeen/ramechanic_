@@ -41,6 +41,7 @@
                         <ul id="vehicle-details" class="list-group mt-3">
                             <li class="list-group-item"><strong>Marca: </strong><span id="sp-vehicle-brand"></span></li>
                             <li class="list-group-item"><strong>Modelo: </strong><span id="sp-vehicle-model"></span></li>
+                            <li class="list-group-item"><strong>Año: </strong><span id="sp-vehicle-year"></span></li>
                         </ul>
                     </div>
                 <div class="row">
@@ -50,18 +51,17 @@
                         <input name="short_description" type="text" class="form-control" id="short_description" required>
                         
                     </div>
-                    <div class="col-12 col-md-6">
-                        
-                        <label for="long_description" class="form-label mt-3">Descripción</label>
-                        <input name="long_description" type="text" class="form-control" id="long_description" required>
-                        
-                    </div>
-                </div>
-                <div class="row">
+                    
                     <div class="col-12 col-md-6">
                         <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
                         <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple >
 
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <label for="long_description" class="form-label mt-3">Descripción</label>
+                        <textarea name="long_description" class="form-control" id="long_description"></textarea>
                     </div>
                 </div>
                 <div class="card-body">
@@ -118,6 +118,7 @@
                         const vehicle = res.data;
                         $("#sp-vehicle-brand").text(vehicle.vehicle_model?.brand?.name || "N/A");
                         $("#sp-vehicle-model").text(vehicle.vehicle_model?.name || "N/A");
+                        $("#sp-vehicle-year").text(vehicle.year || 'N/A');
                     })
                     .catch(() => Swal.fire("Error", "No se pudo cargar la información del vehículo.", "error"));
             });
@@ -148,9 +149,26 @@
                     form.submit();
                 }
             });
+            
         }
 
     </script>
+    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+<script>
+    CKEDITOR.replace('long_description', {
+        resize_enabled: false, // 🚫 Deshabilita el redimensionamiento
+        removePlugins: 'resize',
+        toolbar: [
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-'] },
+            { name: 'styles', items: ['Format', 'Font', 'FontSize'] },
+            { name: 'colors', items: ['TextColor', 'BGColor'] },
+            { name: 'align', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+            { name: 'insert', items: ['Table', 'HorizontalRule'] }
+        ],
+        height: 250
+    });
+</script>
 @endpush
 
 

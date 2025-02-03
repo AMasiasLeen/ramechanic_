@@ -213,8 +213,8 @@
             </div>
             <div class="col-md-6 text-center text-md-end">
                 <h5 class="text-white">Contacto</h5>
-                <p>Teléfono: +123 456 7890</p>
-                <p>Email: contacto@solochevy.com</p>
+                <p>Teléfono: +593 0987944417</p>
+                <p>Email: Solochevy_@hotmail.com</p>
             </div>
         </div>
         <hr class="bg-secondary">
