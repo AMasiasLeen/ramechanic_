@@ -16,20 +16,21 @@
                     <h4>Placa del Vehículo</h4>
                     <h3>{{ $vehicle->plate }}</h3>
                 </div>
+ 
                 <div class="col-12 col-md-6">
-                    <h4>Propietario</h4>
-                    <h3>{{ $vehicle->owner->name }}</h3>
+                    <h4>Año del Vehículo</h4>
+                    <h3>{{ $vehicle->year }}</h3>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-12 col-md-6">
-                    <h4>Marca</h4>
-                    <h3>{{ $vehicle->vehicle_model->brand->name }}</h3>
+                    <h4>Propietario</h4>
+                    <h3>{{ $vehicle->owner->name }}</h3>
                 </div>
                 <div class="col-12 col-md-6">
-                    <h4>Modelo</h4>
-                    <h3>{{ $vehicle->vehicle_model->name }}</h3>
+                    <h4>Modelo y Marca del Vehículo</h4>
+                    <h3>{{ $vehicle->vehicle_model->brand->name }} - {{ $vehicle->vehicle_model->name }}</h3>
                 </div>
             </div>
 
@@ -39,7 +40,7 @@
                     <h3>{{ $vehicle->engine_serial }}</h3>
                 </div>
                 <div class="col-12 col-md-6">
-                    <h4>Número de Serie</h4>
+                    <h4>Serie del Chasis</h4>
                     <h3>{{ $vehicle->serial_number }}</h3>
                 </div>
             </div>

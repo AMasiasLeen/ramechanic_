@@ -21,6 +21,7 @@ class VehicleFactory extends Factory
             "engine_serial" => fake()->randomNumber(9, true) . fake()->randomNumber(9, true),
             "serial_number" => fake()->randomNumber(9, true) . fake()->randomNumber(6, true),
             "color" => fake()->word(),
+            "year" => fake()->numberBetween(1990, date('Y')),
             "vehicle_model_id" => fake()->numberBetween(1, 6),
             "owner_id" => fake()->numberBetween(1, 3),
             "user_id" => 1

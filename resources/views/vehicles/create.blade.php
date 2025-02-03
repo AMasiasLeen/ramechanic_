@@ -19,7 +19,11 @@
                         <input name="plate" type="text" class="form-control" id="plate" required>
                     
                     </div>
-                    
+                    <div class="col-12 col-md-6">
+                        <label for="year" class="form-label">Año del Vehículo</label>
+                        <input name="year" type="number" class="form-control" id="year" min="1900" required>
+                    </div>
+                </div>   
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <label for="owner_id" class="form-label">Propietario</label>
@@ -34,20 +38,20 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <label for="engine_serial" class="form-label">Número Serie del Motor</label>
-                        <input name="engine_serial" type="text" class="form-control" id="engine_serial" required>
+                        <label for="engine_serial" class="form-label">Serie del Motor</label>
+                        <input name="engine_serial" type="text" class="form-control" id="engine_serial" >
 
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="serial_number" class="form-label">Número de Serie</label>
-                        <input name="serial_number" type="text" class="form-control" id="serial_number" required>
+                        <label for="serial_number" class="form-label">Serie del Chasis</label>
+                        <input name="serial_number" type="text" class="form-control" id="serial_number" >
 
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
                         <label for="color" class="form-label">Color</label>
-                        <input name="color" type="text" class="form-control" id="color" required>
+                        <input name="color" type="text" class="form-control" id="color" >
 
                     </div>
                     <div class="col-12 col-md-6">
