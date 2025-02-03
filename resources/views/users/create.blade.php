@@ -44,7 +44,7 @@
                     <div class="col-12 col-md-6">
                         <label for="password" class="form-label">Contraseña:</label>
                         <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" 
-                               id="password" value="{{ old('password') }}" required minlength="8" 
+                               id="password" value="{{ old('password') }}"  minlength="8" 
                                placeholder="entre 8 y 20 caracteres">
                         @error('password')
                             <div class="invalid-feedback">{{ $message }}</div>

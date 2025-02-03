@@ -26,6 +26,10 @@ class UsersTableSeeder extends Seeder
             ]
         );
         
+        $roleu = Role::updateOrCreate([
+            "name" => "user"
+        ]);
+        
         $role = Role::updateOrCreate([
             "name" => "admin"
         ]);
@@ -34,9 +38,6 @@ class UsersTableSeeder extends Seeder
             "name" => "mecanico"
         ]);
 
-        $roleu = Role::updateOrCreate([
-            "name" => "user"
-        ]);
 
         $user->assignRole($role);
 

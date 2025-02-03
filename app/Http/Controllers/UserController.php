@@ -85,7 +85,7 @@ class UserController extends Controller
                 'email' => 'required|email|max:255|unique:users,email',
                 'phone' => 'nullable|numeric|digits_between:7,15',
                 'address' => 'nullable|string|max:255',
-                'password' => 'required|string|min:8',
+                'password' => 'nullable|string|min:8', // Cambiado a 'nullable'
                 'rol' => 'required|array',
             ],
             [
@@ -101,29 +101,22 @@ class UserController extends Controller
                 'phone.numeric' => 'El teléfono debe ser un número.',
                 'phone.digits_between' => 'El teléfono debe tener entre 7 y 15 dígitos.',
                 'address.max' => 'La dirección no debe exceder los 255 caracteres.',
-                'password.required' => 'La contraseña es obligatoria.',
-                'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+                'password.min' => 'La contraseña debe tener al menos 8 caracteres.', // Mensaje para 'min'
                 'rol.required' => 'Debe seleccionar al menos un rol.',
             ]
         );
-
+        
         $user = new User();
         $user->fill($request->all());
-
-        if ($request->hasFile('profile_picture')) {
-            $path = $request->file('profile_picture')->store('public/profile_pictures');
-            $user->profile_picture = str_replace('public/', '', $path);
-        } else {
-            $user->profile_picture = 'images/userImg.png';
-        }
-
-        if ($request->password != null) {
+        
+        // Solo aplicar hash a la contraseña si se proporciona
+        if ($request->password) {
             $user->password = Hash::make($request->password);
         }
-
+        
         $user->save();
         $user->syncRoles($request->rol);
-
+        
         return redirect()->route("users.show", ["user" => $user]);
     }
 
