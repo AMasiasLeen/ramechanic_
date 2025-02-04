@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
         $this->call(VehicleModelsTableSeeder::class);
 
 
-        Vehicle::factory()->count(20)->create();
+        Vehicle::factory()->count(60)->create();
         Record::factory()->count(25)->create();
     }
 }
