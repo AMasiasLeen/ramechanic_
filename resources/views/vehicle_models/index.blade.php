@@ -32,7 +32,7 @@
                                 <form id="formdel{{ $vehicle_model->id }}" action="{{ route('vehicle-models.destroy', ['vehicle_model' => $vehicle_model]) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-outline-danger btn-sm btndel" type="button" data-id="{{ $vehicle_model->id }}">Eliminar</button>
+                                    <!-- <button class="btn btn-outline-danger btn-sm btndel" type="button" data-id="{{ $vehicle_model->id }}">Eliminar</button> -->
                                 </form>
                             </div>
                         </td>

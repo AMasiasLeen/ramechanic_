@@ -32,8 +32,8 @@
                                     class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-outline-danger btn-sm btndel" type="button"
-                                        data-id="{{ $brand->id }}">Eliminar</button>
+                                    <!-- <button class="btn btn-outline-danger btn-sm btndel" type="button"
+                                        data-id="{{ $brand->id }}">Eliminar</button> -->
                                 </form>
                             </div>
                         </td>

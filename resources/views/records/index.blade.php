@@ -54,7 +54,7 @@
                                 <form id="formdel{{ $record->id }}" action="{{ route('records.destroy', ['record' => $record]) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn btn-outline-danger btn-sm btndel" type="button" data-id="{{ $record->id }}">Eliminar</button>
+                                    <!-- <button class="btn btn-outline-danger btn-sm btndel" type="button" data-id="{{ $record->id }}">Eliminar</button> -->
                                 </form>
                             </div>
                         </td>
