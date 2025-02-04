@@ -40,18 +40,20 @@
                     <h4>Detalle</h4>
                     <p>{{ $record->short_description }}</p>
                 </div>
-                <div class="col-12 col-md-6">
-                <h4>Descripción</h4>
-                <div class="border p-3 rounded bg-light">
-                    {!! nl2br(e($record->long_description)) !!}
-                </div>
-            </div>
+                
             </div>
             <div class="row">
+            <div class="col-12 col-md-6">
+                    <h4>Descripción</h4>
+                    <div class="border p-3 rounded bg-light ckeditor-content">
+                    {!! strip_tags($record->long_description, 
+                        '<p><strong><em><u><ol><ul><li><table><tr><td><th><img><br><h1><h2><h3><h4><h5><h6>') !!}
+                    </div>
+                </div>
                 <div class="col-12 col-md-6">
                     <h4>Imágenes de Proceso</h4>
                     @if ($record->images)
-                <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
+                 <div id="carouselImages" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         @foreach (json_decode($record->images) as $index => $image)
                             <div class="carousel-item @if ($index === 0) active @endif">
@@ -71,12 +73,12 @@
                         <span class="visually-hidden">Siguiente</span>
                     </button>
                 </div>
-            @else
-                <p>No hay imágenes adicionales disponibles.</p>
-            @endif
-        </div>
+                @else
+                    <p>No hay imágenes adicionales disponibles.</p>
+                @endif
             </div>
         </div>
+    </div>
 
         <div class="card-footer">
             <a class='btn btn-primary' href="{{ route('records.edit', ['record' => $record]) }}">Modificar</a>
@@ -109,4 +111,6 @@
             })
         }
     </script>
+
+    
 @endpush

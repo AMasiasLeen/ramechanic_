@@ -47,15 +47,21 @@
                         <input name="short_description" type="text" class="form-control" id="short_description" value="{{ $record->short_description }}" required>
                     </div>
                     <div class="col-12 col-md-6">
-                        <label for="long_description" class="form-label mt-3">Descripción</label>
-                        <input name="long_description" type="text" class="form-control" id="long_description" value="{{ $record->long_description }}" required>
-                        <textarea name="long_description" class="form-control" id="long_description" value="{{ $record->long_description }}" required></textarea>
+                        <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
+                        <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple>
                     </div>
+                    
+                    <div class="col-12 col-md-6">
+                    <h4>Descripción</h4>
+                    <textarea name="long_description" class="form-control" id="editor" required>
+                            {!! old('long_description', $record->long_description) !!}
+                        </textarea>
+                    </div>
+                
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
-                        <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple>
+                        
                     </div>
                 </div>
                 
@@ -188,4 +194,20 @@
 
         };
     </script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            toolbar: {
+                items: [
+                    'bold', 'italic', 'underline', 'strikethrough',
+                    'bulletedList', 'numberedList',
+                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor',
+                    'alignment', 'insertTable', 'horizontalLine'
+                ]
+            },
+            height: '250px'
+        })
+        .catch(error => console.error(error));
+</script>
 @endpush

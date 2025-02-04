@@ -20,6 +20,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -51,12 +52,13 @@
                         <input name="short_description" type="text" class="form-control" id="short_description" required>
                         
                     </div>
-                    
                     <div class="col-12 col-md-6">
                         <label for="images" class="form-label mt-3">Imágenes de Proceso</label>
                         <input name="images[]" type="file" class="form-control" id="images" accept="image/*" multiple >
 
                     </div>
+                    
+                    
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
@@ -153,22 +155,24 @@
         }
 
     </script>
-    <script src="https://cdn.ckeditor.com/4.20.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.3.1/classic/ckeditor.js"></script>
 <script>
-    CKEDITOR.replace('long_description', {
-        resize_enabled: false, // 🚫 Deshabilita el redimensionamiento
-        removePlugins: 'resize',
-        toolbar: [
-            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike'] },
-            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-'] },
-            { name: 'styles', items: ['Format', 'Font', 'FontSize'] },
-            { name: 'colors', items: ['TextColor', 'BGColor'] },
-            { name: 'align', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
-            { name: 'insert', items: ['Table', 'HorizontalRule'] }
-        ],
-        height: 250
-    });
+    ClassicEditor
+        .create(document.querySelector('#long_description'), {
+            toolbar: {
+                items: [
+                    'bold', 'italic', 'underline', 'strikethrough',
+                    'bulletedList', 'numberedList',
+                    'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor',
+                    'alignment', 'insertTable', 'horizontalLine'
+                ]
+            },
+            height: '250px'
+        })
+        .catch(error => console.error(error));
 </script>
+
+
 @endpush
 
 
