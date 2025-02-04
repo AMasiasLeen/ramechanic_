@@ -44,7 +44,7 @@ class UsersTableSeeder extends Seeder
         $user = User::updateOrCreate(
             ["email" => "admin2@admin.com"],
             [
-                "name" => "leen",
+                "name" => "Pablo",
                 "password" => Hash::make("admin2leen"),
                 "identification" => "2300566276",
                 "phone" => "0999999999",
@@ -52,7 +52,7 @@ class UsersTableSeeder extends Seeder
             ]
         );
 
-        $user->assignRole($roleu);
+        $user->assignRole($rolem);
 
         $user = User::updateOrCreate(
             ["email" => "admin3@admin.com"],
