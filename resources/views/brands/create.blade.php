@@ -13,7 +13,7 @@
             <form id="brandForm" action="{{ route('brands.store') }}" method="POST">
                 @csrf
                 <div class="row">
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-3">
                         <label for="name" class="form-label">Nombre de la Marca</label>
                         <input name="name" type="text" class="form-control" id="name" required>
                     </div>

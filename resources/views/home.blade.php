@@ -72,7 +72,7 @@
                     <div class="card shadow-sm border-0">
                         <div class="card-body">
                             <h5 class="card-title text-center">Distribución de Vehículos por Modelo</h5>
-                            <div style="max-width: 100%; height: 300px;">
+                            <div style="max-width: 100%; height: 265px;">
                                 <canvas id="vehiclesByModelChart"></canvas>
                             </div>
                         </div>

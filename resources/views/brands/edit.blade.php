@@ -14,7 +14,7 @@
             <form action="{{ route('brands.update', ['brand' => $brand]) }}" method="POST">
                 @csrf
                 @method('PUT')
-                <div class="mb-3">
+                <div class="col-12 col-md-3">
                     <label for="name" class="form-label">Nombre de la Marca</label>
                     <input name="name" type="text" class="form-control" id="name" value="{{ $brand->name }}"
                         required>

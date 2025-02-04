@@ -20,6 +20,10 @@
                         <label for="plate" class="form-label">Placa del Vehículo</label>
                         <input name="plate" type="text" class="form-control" id="plate" value="{{ $vehicle->plate }}" required>
                     </div>
+                    <div class="col-12 col-md-6">
+                        <label for="year" class="form-label">Año del Vehículo</label>
+                        <input name="year" type="number" class="form-control" id="year" min="1900" value="{{ $vehicle->year }}" required>
+                    </div>
                 </div>
                 
                 <div class="row">
