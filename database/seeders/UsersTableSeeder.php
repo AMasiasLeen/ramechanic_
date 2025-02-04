@@ -16,10 +16,10 @@ class UsersTableSeeder extends Seeder
     public function run(): void
     {
         $user = User::updateOrCreate(
-            ["email" => "admin@admin.com"],
+            ["email" => "Solochevy_@hotmail.com"],
             [
                 "name" => "Administrador",
-                "password" => Hash::make("admin"),
+                "password" => Hash::make("solochevy@2025"),
                 "identification" => "999999999",
                 "phone" => "0999999999",
                 "user_id" => 1
@@ -44,9 +44,9 @@ class UsersTableSeeder extends Seeder
         $user = User::updateOrCreate(
             ["email" => "admin2@admin.com"],
             [
-                "name" => "erick",
-                "password" => Hash::make("admin"),
-                "identification" => "999999999",
+                "name" => "leen",
+                "password" => Hash::make("admin2leen"),
+                "identification" => "2300566276",
                 "phone" => "0999999999",
                 "user_id" => 2
             ]
@@ -58,7 +58,7 @@ class UsersTableSeeder extends Seeder
             ["email" => "admin3@admin.com"],
             [
                 "name" => "leo",
-                "password" => Hash::make("admin"),
+                "password" => Hash::make("adminuser"),
                 "identification" => "999999999",
                 "phone" => "0999999999",
                 "user_id" => 3
