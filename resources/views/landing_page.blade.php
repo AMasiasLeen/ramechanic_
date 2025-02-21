@@ -141,49 +141,60 @@
                 </div>
 
                 <!-- Modal -->
-                <div class="modal fade" id="recordModal{{ $record->id }}" tabindex="-1"
-                    aria-labelledby="recordModalLabel{{ $record->id }}" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content bg-dark text-white">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="recordModalLabel{{ $record->id }}">Detalles del Antecedente</h5>
-                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <p><strong>Vehículo:</strong>
-                                    {{ $record->vehicle->vehicle_model->brand->name }} - {{ $record->vehicle->vehicle_model->name }}</p>
-                                <p><strong>Fecha de Registro:</strong> {{ $record->date_in }}</p>
-                                <p><strong>Descripción:</strong> {!! strip_tags($record->long_description, 
-                                    '<p><strong><em><u><ol><ul><li><table><tr><td><th><img><br><h1><h2><h3><h4><h5><h6>') !!}
-                                @if ($record->images)
-                                    <div id="carousel{{ $record->id }}" class="carousel slide" data-bs-ride="carousel">
-                                        <div class="carousel-inner">
-                                            @foreach (json_decode($record->images) as $index => $image)
-                                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
-                                                    <img src="{{ Storage::url('records/' . $image) }}"
-                                                        class="d-block w-100 img-thumbnail" alt="Imagen {{ $index + 1 }}">
-                                                </div>
-                                            @endforeach
-                                        </div>
-                                        <button class="carousel-control-prev" type="button"
-                                            data-bs-target="#carousel{{ $record->id }}" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button class="carousel-control-next" type="button"
-                                            data-bs-target="#carousel{{ $record->id }}" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                            </div>
+<div class="modal fade" id="recordModal{{ $record->id }}" tabindex="-1"
+    aria-labelledby="recordModalLabel{{ $record->id }}" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"> <!-- Clases añadidas -->
+        <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+                <h5 class="modal-title" id="recordModalLabel{{ $record->id }}">Detalles del Antecedente</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;"> <!-- Estilo añadido -->
+                <div class="container-fluid">
+                    <p><strong>Vehículo:</strong>
+                        {{ $record->vehicle->vehicle_model->brand->name }} - {{ $record->vehicle->vehicle_model->name }}</p>
+                    <p><strong>Fecha de Registro:</strong> {{ $record->date_in }}</p>
+                    <div class="mb-3"> <!-- Contenedor para descripción -->
+                        <strong>Descripción:</strong>
+                        <div class="ckeditor-content mt-2" style="word-break: break-word; max-width: 75%;">
+                            {!! $record->long_description !!}
                         </div>
                     </div>
+                    @if ($record->images)
+                    <div id="carousel{{ $record->id }}" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            @foreach (json_decode($record->images) as $index => $image)
+            
+                                <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                    <div class="image-container" style="height: 400px; display: flex; align-items: center; justify-content: center;">
+                                        <img src="{{ Storage::url('records/' . $image) }}" 
+                                            class="d-block img-fluid mx-auto"
+                                            style="max-height: 100%; max-width: 100%; object-fit: contain;"
+                                            alt="Imagen {{ $index + 1 }}">
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                        <button class="carousel-control-prev" type="button"
+                            data-bs-target="#carousel{{ $record->id }}" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button"
+                            data-bs-target="#carousel{{ $record->id }}" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    @endif
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
             @endforeach
         </div>
 
@@ -229,3 +240,5 @@
 </body>
 
 </html>
+
+

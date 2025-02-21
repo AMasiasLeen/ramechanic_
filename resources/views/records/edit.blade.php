@@ -205,9 +205,29 @@
                     'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor',
                     'alignment', 'insertTable', 'horizontalLine'
                 ]
-            },
-            height: '250px'
+            }
         })
         .catch(error => console.error(error));
 </script>
+
+<style>
+    /* Mismos estilos que en el formulario de registro */
+    .ckeditor-container {
+        height: 250px;
+        overflow: hidden;
+    }
+
+    .ck-editor__editable {
+        min-height: 250px !important;
+        max-height: 250px !important;
+        resize: none !important;
+        overflow-y: auto !important;
+    }
+
+    /* Elimina espacios innecesarios en el textarea */
+    textarea.form-control {
+        white-space: pre-wrap;
+        line-height: normal;
+    }
+</style>
 @endpush

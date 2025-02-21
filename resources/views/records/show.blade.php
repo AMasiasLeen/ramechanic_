@@ -43,13 +43,17 @@
                 
             </div>
             <div class="row">
+            
             <div class="col-12 col-md-6">
-                    <h4>Descripción</h4>
-                    <div class="border p-3 rounded bg-light ckeditor-content">
-                    {!! strip_tags($record->long_description, 
-                        '<p><strong><em><u><ol><ul><li><table><tr><td><th><img><br><h1><h2><h3><h4><h5><h6>') !!}
-                    </div>
-                </div>
+    <!-- Elimina el margen inferior del título -->
+    <h4 class="mb-0">Descripción</h4> <!-- Clase "mb-0" de Bootstrap -->
+    
+    <!-- Contenedor sin padding superior -->
+    <div class="border rounded bg-light ckeditor-content mt-2"> <!-- "mt-2" para espacio mínimo -->
+        {!! $record->long_description !!}
+    </div>
+</div>
+
                 <div class="col-12 col-md-6">
                     <h4>Imágenes de Proceso</h4>
                     @if ($record->images)
@@ -112,5 +116,21 @@
         }
     </script>
 
+
+<style>
+ .ckeditor-content {
+        height: 250px;
+        overflow-y: auto;
+        word-break: break-word;
+        padding: 1rem !important; /* Padding uniforme */
+        margin-top: 0; /* Elimina espacio extra */
+    }
+
+    /* Elimina márgenes de elementos internos */
+    .ckeditor-content p:first-child,
+    .ckeditor-content ul:first-child {
+        margin-top: 0 !important;
+    }
+</style>
     
 @endpush

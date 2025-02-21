@@ -34,7 +34,7 @@
                         <span>Perfil</span>
                     </a>
                 </li>
-                @if (Auth::user()->hasRole('user'))
+                @if (Auth::user()->hasRole('usuario'))
                 <li class="sidebar-header">
                         Registros
                     </li>

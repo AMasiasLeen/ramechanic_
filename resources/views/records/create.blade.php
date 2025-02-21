@@ -166,11 +166,31 @@
                     'fontFamily', 'fontSize', 'fontColor', 'fontBackgroundColor',
                     'alignment', 'insertTable', 'horizontalLine'
                 ]
-            },
-            height: '250px'
+            }
         })
         .catch(error => console.error(error));
 </script>
+
+<style>
+    /* Estilos clave para tamaño fijo */
+    .ckeditor-container {
+        height: 250px; /* Altura fija */
+        overflow: hidden; /* Evita desbordamientos */
+    }
+
+    .ck-editor__editable {
+        min-height: 150px !important;
+        max-height: 200px !important;
+        resize: none !important; /* Desactiva el redimensionamiento */
+        overflow-y: auto !important; /* Scroll vertical si el contenido excede la altura */
+    }
+
+    /* Opcional: Elimina el borde de enfoque de Bootstrap */
+    .ck-editor__editable:focus {
+        box-shadow: none !important;
+        border-color: #ced4da !important;
+    }
+</style>
 
 
 @endpush
