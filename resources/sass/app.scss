@@ -40,3 +40,67 @@
         }
     }
 }
+
+.ckeditor-content ul {
+    list-style-type: disc !important;
+    padding-left: 2rem !important;
+    margin: 1rem 0 !important;
+}
+
+.ckeditor-content ol {
+    list-style-type: decimal !important;
+    padding-left: 2rem !important;
+    margin: 1rem 0 !important;
+}
+
+.ckeditor-content li {
+    list-style: inherit !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.ck-editor__editable ul {
+    list-style-type: disc !important;
+    padding-left: 2rem !important;
+    margin: 1rem 0 !important;
+}
+
+.ck-editor__editable ol {
+    list-style-type: decimal !important;
+    padding-left: 2rem !important;
+    margin: 1rem 0 !important;
+}
+
+.ck-editor__editable li {
+    list-style: inherit !important;
+    margin-bottom: 0.5rem !important;
+}
+
+/* Estilos para TABLAS */
+.ckeditor-content table,
+.ck-editor__editable table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 1rem 0 !important;
+    background-color: transparent !important;
+}
+
+.ckeditor-content td,
+.ckeditor-content th,
+.ck-editor__editable td,
+.ck-editor__editable th {
+    border: 1px solid #dee2e6 !important;
+    padding: 0.75rem !important;
+    vertical-align: top !important;
+}
+
+.ckeditor-content th,
+.ck-editor__editable th {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    font-weight: 600 !important;
+}
+
+/* Asegurar visibilidad en móviles */
+.ckeditor-content,
+.ck-editor__editable {
+    overflow-x: auto !important;
+}
