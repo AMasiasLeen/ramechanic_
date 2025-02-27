@@ -8,6 +8,7 @@
 
     @include('vehicles.filters')
 
+    @if($vehicles->isNotEmpty())
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped align-middle">
             <thead class="table-dark">
@@ -36,15 +37,12 @@
                         <td>{{ $vehicle->engine_serial }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Acciones">
-                                <a class="btn btn-outline-warning btn-sm"
-                                    href="{{ route('vehicles.edit', ['vehicle' => $vehicle]) }}">Editar</a>
-                                <form id="formdel{{ $vehicle->id }}"
-                                    action="{{ route('vehicles.destroy', ['vehicle' => $vehicle]) }}" method="POST"
-                                    class="d-inline-block">
+                                <a class="btn btn-outline-warning btn-sm" href="{{ route('vehicles.edit', ['vehicle' => $vehicle]) }}">Editar</a>
+                                <form id="formdel{{ $vehicle->id }}" action="{{ route('vehicles.destroy', ['vehicle' => $vehicle]) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <!-- <button class="btn btn-outline-danger btn-sm btndel" type="button"
-                                        data-id="{{ $vehicle->id }}">Eliminar</button> -->
+                                    <!-- Botón de eliminar deshabilitado, activa si lo requieres -->
+                                    <!-- <button class="btn btn-outline-danger btn-sm" type="submit">Eliminar</button> -->
                                 </form>
                             </div>
                         </td>
@@ -53,6 +51,11 @@
             </tbody>
         </table>
     </div>
+@else
+    <div class="alert alert-info text-center">
+        No se encontraron vehículos.
+    </div>
+@endif
     <div class="d-flex justify-content-center mt-4">
         {{ $vehicles->appends(request()->query())->links('pagination::bootstrap-4') }}
     </div>

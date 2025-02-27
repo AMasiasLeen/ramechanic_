@@ -9,6 +9,7 @@
 
     @include("records.filters")
 
+    @if($records->isNotEmpty())
     <div class="table-responsive">
         <table class="table table-bordered table-hover table-striped align-middle">
             <thead class="table-dark">
@@ -27,34 +28,22 @@
                 @foreach ($records as $record)
                     <tr>
                         <td>{{ $record->id }}</td>
-                        
                         <td>{{ $record->vehicle->owner->name }}</td>
-
-                        
                         <td>{{ $record->vehicle->plate }}</td>
-
-                        
                         <td>{{ $record->vehicle->vehicle_model->brand->name }}</td>
-
-                        
                         <td>{{ $record->vehicle->vehicle_model->name }}</td>
-
-                        
                         <td>{{ $record->short_description }}</td>
-
-                        
-                        <td>{{ $record->date_in}}</td>
-
+                        <td>{{ $record->date_in }}</td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Acciones">
                                 <!-- Botón para editar el registro -->
                                 <a class="btn btn-outline-warning btn-sm" href="{{ route('records.edit', ['record' => $record]) }}">Editar</a>
-                                
                                 <!-- Botón para eliminar el registro -->
                                 <form id="formdel{{ $record->id }}" action="{{ route('records.destroy', ['record' => $record]) }}" method="POST" class="d-inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <!-- <button class="btn btn-outline-danger btn-sm btndel" type="button" data-id="{{ $record->id }}">Eliminar</button> -->
+                                    <!-- Puedes activar el botón de eliminar si lo requieres -->
+                                    <!-- <button class="btn btn-outline-danger btn-sm" type="submit">Eliminar</button> -->
                                 </form>
                             </div>
                         </td>
@@ -63,9 +52,16 @@
             </tbody>
         </table>
     </div>
-    <div class="d-flex justify-content-center mt-4">
-        {{ $records->appends(request()->query())->links('pagination::bootstrap-4') }}
+@else
+    <div class="alert alert-info text-center">
+        No se encontraron registros de antecedentes.
     </div>
+@endif
+
+<div class="d-flex justify-content-center mt-4">
+    {{ $records->appends(request()->query())->links('pagination::bootstrap-4') }}
+</div>
+
 
 @endsection
 
