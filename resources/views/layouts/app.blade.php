@@ -36,59 +36,59 @@
                 </li>
                 @if (Auth::user()->hasRole('usuario'))
                 <li class="sidebar-header">
-                        Registros
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="{{ route('records.user_records') }}" class="sidebar-link">
-                            <i class="fa-solid fa-book-open"></i>
-                            <span>Antecedentes</span>
-                        </a>
-                    </li>
-                    {{-- <li class="sidebar-item">
+                    Registros
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('records.user_records') }}" class="sidebar-link">
+                        <i class="fa-solid fa-book-open"></i>
+                        <span>Antecedentes</span>
+                    </a>
+                </li>
+                {{-- <li class="sidebar-item">
                         <a href="{{ route('vehicles.user_vehicles') }}" class="sidebar-link">
-                            <i class="fa-solid fa-book-open"></i>
-                            <span>Vehiculos</span>
-                        </a>
-                    </li> --}}
+                <i class="fa-solid fa-book-open"></i>
+                <span>Vehiculos</span>
+                </a>
+                </li> --}}
                 @endif
-                @if (Auth::user()->hasRole('admin') || Auth::user()->hasRole('mecanico'))
-                    <li class="sidebar-header">
-                        Formularios
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="{{ route('brands.index') }}" class="sidebar-link">
-                            <i class="fa-solid fa-car-side"></i>
-                            <span>Marcas</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="{{ route('vehicle-models.index') }}" class="sidebar-link">
-                            <i class="fa-solid fa-boxes-stacked"></i>
-                            <span>Modelos</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="{{ route('vehicles.index') }}" class="sidebar-link">
-                            <i class="fa-solid fa-car"></i>
-                            <span>Vehículos</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="{{ route('records.index') }}" class="sidebar-link">
-                            <i class="fa-solid fa-book-bookmark"></i>
-                            <span>Antecedentes</span>
-                        </a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="{{ route('users.index') }}" class="sidebar-link">
-                            <i class="fa-solid fa-users"></i>
-                            <span>Usuarios</span>
-                        </a>
-                    </li>
+                @if (Auth::user()->hasRole('administrador') || Auth::user()->hasRole('mecanico'))
+                <li class="sidebar-header">
+                    Formularios
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('brands.index') }}" class="sidebar-link">
+                        <i class="fa-solid fa-car-side"></i>
+                        <span>Marcas</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('vehicle-models.index') }}" class="sidebar-link">
+                        <i class="fa-solid fa-boxes-stacked"></i>
+                        <span>Modelos</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('vehicles.index') }}" class="sidebar-link">
+                        <i class="fa-solid fa-car"></i>
+                        <span>Vehículos</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('records.index') }}" class="sidebar-link">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                        <span>Antecedentes</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="{{ route('users.index') }}" class="sidebar-link">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Usuarios</span>
+                    </a>
+                </li>
                 @endif
                 <li class="sidebar-header">
-                        
-                    </li>
+
+                </li>
                 <li class="sidebar-item">
                     <a class="sidebar-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><i
