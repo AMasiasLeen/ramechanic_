@@ -40,12 +40,17 @@
                             <td>{{ $vehicle->engine_serial }}</td>
                             <td class="text-end">
                                 <div class="d-inline-flex gap-3">
+
+                                @if (Auth::user()->hasRole('administrador') || Auth::user()->hasRole('mecanico'))
                                     <!-- Ver -->
                                     <a href="{{ route('vehicles.show', $vehicle) }}" 
                                        class="text-primary text-decoration-none">
                                         Ver
                                     </a>
+                                    @endif
                                     
+
+                                    @if (Auth::user()->hasRole('administrador'))
                                     <!-- Editar -->
                                     <a href="{{ route('vehicles.edit', $vehicle) }}" 
                                        class="text-warning text-decoration-none">
@@ -65,6 +70,7 @@
                                             Eliminar
                                         </button>
                                     </form>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

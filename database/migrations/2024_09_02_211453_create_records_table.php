@@ -20,7 +20,8 @@ return new class extends Migration
             // $table->string("main_image");
             $table->text("images")->nullable();
             $table->timestamps();
-            $table->foreignId("user_id")->constrained("users");
+            $table->foreignId("user_id")->constrained("users")->onDelete("cascade");
+            $table->softDeletes();
         });
     }
 

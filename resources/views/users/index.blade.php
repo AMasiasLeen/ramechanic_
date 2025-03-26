@@ -43,11 +43,15 @@
                             <td class="text-end">
                                 <div class="d-inline-flex gap-3">
                                     <!-- Ver -->
+
+                                    @if (Auth::user()->hasRole('administrador') || Auth::user()->hasRole('mecanico'))
                                     <a href="{{ route('users.show', $user) }}" 
                                        class="text-primary text-decoration-none">
                                         Ver
                                     </a>
-                                    
+                                    @endif
+
+                                    @if (Auth::user()->hasRole('administrador'))
                                     <!-- Editar -->
                                     <a href="{{ route('users.edit', $user) }}" 
                                        class="text-warning text-decoration-none">
@@ -67,6 +71,7 @@
                                             Eliminar
                                         </button>
                                     </form>
+                                    @endif
                                 </div>
                             </td>
                         </tr>

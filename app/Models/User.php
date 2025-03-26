@@ -9,10 +9,13 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 use Altek\Accountant\Contracts\Identifiable;
+use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class User extends Authenticatable implements Identifiable
 {
     use HasFactory, Notifiable, HasRoles;
+    use SoftDeletes;
 
     protected $guarded = ["rol", "password"];
 
@@ -35,6 +38,12 @@ class User extends Authenticatable implements Identifiable
     {
         parent::boot();
 
+        static::deleting(function ($model) {
+
+            $model->records()->delete();
+        });
+
+
         static::creating(function ($model) {
 
             if (Auth::check()) {
@@ -51,5 +60,10 @@ class User extends Authenticatable implements Identifiable
     function vehicle()
     {
         return $this->hasMany(Vehicle::class);
+    }
+
+    function records()
+    {
+        return $this->hasMany(Record::class);
     }
 }

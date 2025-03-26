@@ -5,12 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Record extends Model implements Recordable
 {
     use HasFactory;
     use \Altek\Accountant\Recordable;
+    use SoftDeletes;
 
     protected $guarded = ["owner_id"];
 
