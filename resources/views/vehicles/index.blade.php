@@ -5,8 +5,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-between mb-3">
             <h1>Vehículos Registrados</h1>
-            <a class="btn btn-success btn-sm align-self-center" href="{{ route('vehicles.create') }}"> Agregar Nuevo
-            </a>
+            <a class="btn btn-success btn-sm align-self-center" href="{{ route('vehicles.create') }}"> Agregar Nuevo</a>
         </div>
 
         @include('vehicles.filters')
@@ -29,9 +28,10 @@
                 </thead>
                 <tbody>
                     @foreach ($vehicles as $vehicle)
+                        @if($vehicle->owner && $vehicle->owner->name)
                         <tr class="border-bottom">
                             <td>{{ $vehicle->id }}</td>
-                            <td>{{ $vehicle->owner->name ?? 'N/A' }}</td>
+                            <td>{{ $vehicle->owner->name }}</td>
                             <td>{{ $vehicle->plate }}</td>
                             <td>{{ $vehicle->vehicle_model->brand->name ?? 'N/A' }}</td>
                             <td>{{ $vehicle->vehicle_model->name ?? 'N/A' }}</td>
@@ -40,24 +40,19 @@
                             <td>{{ $vehicle->engine_serial }}</td>
                             <td class="text-end">
                                 <div class="d-inline-flex gap-3">
-
-                                @if (Auth::user()->hasRole('administrador') || Auth::user()->hasRole('mecanico'))
-                                    <!-- Ver -->
+                                    @if (Auth::user()->hasRole('administrador') || Auth::user()->hasRole('mecanico'))
                                     <a href="{{ route('vehicles.show', $vehicle) }}" 
                                        class="text-primary text-decoration-none">
                                         Ver
                                     </a>
                                     @endif
                                     
-
                                     @if (Auth::user()->hasRole('administrador'))
-                                    <!-- Editar -->
                                     <a href="{{ route('vehicles.edit', $vehicle) }}" 
                                        class="text-warning text-decoration-none">
                                         Editar
                                     </a>
                                     
-                                    <!-- Eliminar -->
                                     <form id="formdel{{ $vehicle->id }}" 
                                           action="{{ route('vehicles.destroy', $vehicle) }}" 
                                           method="POST"
@@ -74,6 +69,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

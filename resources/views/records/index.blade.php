@@ -5,8 +5,7 @@
     <div class="col-md-12">
         <div class="d-flex justify-content-between mb-3">
             <h1>Listado de Antecedentes</h1>
-            <a class="btn btn-success btn-sm align-self-center" href="{{ route('records.create') }}">Agregar Nuevo
-            </a>
+            <a class="btn btn-success btn-sm align-self-center" href="{{ route('records.create') }}">Agregar Nuevo</a>
         </div>
 
         @include("records.filters")
@@ -28,9 +27,10 @@
                 </thead>
                 <tbody>
                     @foreach ($records as $record)
+                        @if($record->vehicle->owner && $record->vehicle->owner->name)
                         <tr class="border-bottom">
                             <td>{{ $record->id }}</td>
-                            <td>{{ $record->vehicle->owner->name ?? 'N/A' }}</td>
+                            <td>{{ $record->vehicle->owner->name }}</td>
                             <td>{{ $record->vehicle->plate ?? 'N/A' }}</td>
                             <td>{{ $record->vehicle->vehicle_model->brand->name ?? 'N/A' }}</td>
                             <td>{{ $record->vehicle->vehicle_model->name ?? 'N/A' }}</td>
@@ -38,7 +38,6 @@
                             <td>{{ $record->date_in}}</td>
                             <td class="text-end">
                                 <div class="d-inline-flex gap-3">
-                                    <!-- Ver -->
                                     @if (Auth::user()->hasRole('administrador') || Auth::user()->hasRole('mecanico'))
                                     <a href="{{ route('records.show', $record) }}" 
                                        class="text-primary text-decoration-none">
@@ -47,14 +46,11 @@
                                     @endif
 
                                     @if (Auth::user()->hasRole('administrador'))
-
-                                    <!-- Editar -->
                                     <a href="{{ route('records.edit', $record) }}" 
                                        class="text-warning text-decoration-none">
                                         Editar
                                     </a>
                                     
-                                    <!-- Eliminar -->
                                     <form id="formdel{{ $record->id }}" 
                                           action="{{ route('records.destroy', $record) }}" 
                                           method="POST"
@@ -71,6 +67,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                 </tbody>
             </table>

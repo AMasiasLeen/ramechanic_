@@ -5,12 +5,14 @@ namespace App\Models;
 use Altek\Accountant\Contracts\Recordable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
 class Vehicle extends Model implements Recordable
 {
     use HasFactory;
     use \Altek\Accountant\Recordable;
+    use SoftDeletes;
 
 
     protected $guarded = [];

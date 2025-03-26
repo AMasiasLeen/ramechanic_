@@ -41,6 +41,7 @@ class User extends Authenticatable implements Identifiable
         static::deleting(function ($model) {
 
             $model->records()->delete();
+            $model->vehicle()->delete();
         });
 
 
