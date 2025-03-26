@@ -15,7 +15,6 @@
             <table class="table table-borderless table-hover align-middle">
                 <thead class="border-bottom">
                     <tr>
-                        <th>ID</th>
                         <th>Propietario</th>
                         <th>Vehículo</th>
                         <th>Marca</th>
@@ -29,7 +28,6 @@
                     @foreach ($records as $record)
                         @if($record->vehicle->owner && $record->vehicle->owner->name)
                         <tr class="border-bottom">
-                            <td>{{ $record->id }}</td>
                             <td>{{ $record->vehicle->owner->name }}</td>
                             <td>{{ $record->vehicle->plate ?? 'N/A' }}</td>
                             <td>{{ $record->vehicle->vehicle_model->brand->name ?? 'N/A' }}</td>
