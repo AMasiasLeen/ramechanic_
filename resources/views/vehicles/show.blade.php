@@ -6,8 +6,10 @@
         <div class="d-flex justify-content-between mb-3">
             <a class="btn btn-secondary btn-sm" href="{{ route('vehicles.index') }}">Regresar
             </a>
+            @if (Auth::user()->hasRole('administrador'))
             <a class="btn btn-success btn-sm" href="{{ route('vehicles.create') }}"> Nuevo
             </a>
+            @endif
         </div>
 
         <div class="card">
@@ -68,9 +70,11 @@
             </div>
 
             <div class="card-footer p-3 d-flex gap-2">
+            @if (Auth::user()->hasRole('administrador'))
                 <a href="{{ route('vehicles.edit', $vehicle) }}" 
                    class="btn btn-primary btn-sm px-4"> Modificar
                 </a>
+                @endif
                 
                 <form id="deleteForm" action="{{ route('vehicles.destroy', $vehicle) }}" method="POST">
                     @csrf

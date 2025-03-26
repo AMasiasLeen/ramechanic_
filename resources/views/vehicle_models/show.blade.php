@@ -5,7 +5,9 @@
     <div class="col-md-5">
         <div class="d-flex justify-content-between mb-3">
             <a class="btn btn-secondary btn-sm" href="{{ route('vehicle-models.index') }}">Regresar</a>
-            <a class="btn btn-success btn-sm" href="{{ route('vehicle-models.create') }}">Agregar Nuevo</a>
+            @if (Auth::user()->hasRole('administrador'))
+            <a class="btn btn-success btn-sm" href="{{ route('vehicle-models.create') }}">Agregar Nuevo</a>\
+            @endif
         </div>
 
         <div class="card">
@@ -30,10 +32,12 @@
             </div>
 
             <div class="card-footer p-3 d-flex gap-2">
+            @if (Auth::user()->hasRole('administrador'))
                 <a class="btn btn-primary btn-sm px-4" 
                    href="{{ route('vehicle-models.edit', $vehicle_model) }}">
                     Modificar
                 </a>
+                @endif
                 
                 <form id="deleteForm" 
                       action="{{ route('vehicle-models.destroy', $vehicle_model) }}" 

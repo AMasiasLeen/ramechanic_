@@ -6,7 +6,9 @@
     <div class="col-md-5">
         <div class="d-flex justify-content-between mb-3">
             <a class="btn btn-secondary btn-sm" href="{{ route('brands.index') }}">Regresar</a>
+            @if (Auth::user()->hasRole('administrador'))
             <a class="btn btn-success btn-sm" href="{{ route('brands.create') }}">Agregar Nuevo</a>
+            @endif
         </div>
         <div class="card">
             <div class="card-header p-3">
@@ -21,7 +23,9 @@
                 </div>
             </div>
             <div class="card-footer p-3 d-flex gap-2">
+            @if (Auth::user()->hasRole('administrador'))
                 <a class='btn btn-primary btn-sm px-4' href="{{ route('brands.edit', ['brand' => $brand]) }}">Modificar</a>
+                @endif
                 <!-- <button id="btndel" class="btn btn-danger btn-sm">Eliminar</button> -->
                 <form id="formdel" action="{{ route('brands.destroy', ['brand'=>$brand]) }}" method="POST" style="display:inline;">
                     @csrf

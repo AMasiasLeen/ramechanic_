@@ -3,7 +3,9 @@
 @section('content')
     <div class="d-flex justify-content-between mb-3">
         <a class="btn btn-secondary" href="{{ route('users.index') }}">Regresar</a>
+        @if (Auth::user()->hasRole('administrador'))
         <a class="btn btn-success" href="{{ route('users.create') }}">Agregar Nuevo</a>
+        @endif
     </div>
 
     <div class="card">
@@ -47,7 +49,9 @@
             </div>
         </div>
         <div class="card-footer d-flex justify-content-between">
+        @if (Auth::user()->hasRole('administrador'))
             <a class="btn btn-primary" href="{{ route('users.edit', ['user' => $user]) }}">Modificar</a>
+            @endif
             <form id="formdel" action="{{ route('users.destroy', ['user' => $user]) }}" method="POST" onsubmit="return confirm('¿Está seguro de eliminar este usuario?');">
                 @csrf
                 @method("DELETE")
