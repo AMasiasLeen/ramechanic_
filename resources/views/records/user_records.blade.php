@@ -68,8 +68,12 @@
                             <p><strong>Vehículo:</strong>
                                 {{ $record->vehicle->vehicle_model->brand->name }} - {{ $record->vehicle->vehicle_model->name }}</p>
                             <p><strong>Fecha de Registro:</strong> {{ $record->date_in }}</p>
-                            <p><strong>Descripción:</strong> {!! strip_tags($record->long_description, 
-                                '<p><strong><em><u><ol><ul><li><table><tr><td><th><img><br><h1><h2><h3><h4><h5><h6>') !!}
+                            <div class="mb-3">
+                                            <strong>Descripción:</strong>
+                                            <div class="ckeditor-content mt-2" style="word-break: break-word; max-width: 75%;">
+                                                {!! $record->long_description !!}
+                                            </div>
+                                        </div>
                             @if ($record->images)
                                 <div id="carousel{{ $record->id }}" class="carousel slide" data-bs-ride="carousel">
                                     <div class="carousel-inner">
