@@ -1,19 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-between mb-3">
-        <a class="btn btn-secondary" href="{{ route('records.index') }}">Regresar</a>
-    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-5">
+            <div class="d-flex justify-content-between mb-3">
+                <a class="btn btn-secondary btn-sm" href="{{ route('records.index') }}">Regresar</a>
+            </div>
 
-    <div class="card">
-        <div class="card-header">
-            <h1>Editar Antecedente</h1>
-        </div>
-        <div class="card-body">
-            <form id="recordEditForm" action="{{ route('records.update', ['record' => $record]) }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="row">
+            <div class="card">
+                <div class="card-header p-3">
+                    <h5 class="mb-0">Editar Antecedente</h5>
+                </div>
+
+                <form id="recordEditForm" action="{{ route('records.update', ['record' => $record]) }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="card-body p-3">
+                    <div class="row">
                     <div class="col-12 col-md-6">
                         <label for="date_in" class="form-label mt-3">Fecha de Registro</label>
                         <input name="date_in" type="date" class="form-control" id="date_in" value="{{ $record->date_in }}" required>
@@ -64,9 +67,12 @@
                         
                     </div>
                 </div>
-                
-                <button type="submit" class="btn btn-primary mt-3" id="submitBtn">GUARDAR</button>
-            </form>
+                    </div>
+                    <div class="card-footer p-3 d-flex gap-2">
+                        <button type="submit" class="btn btn-primary btn-sm px-4">Guardar</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

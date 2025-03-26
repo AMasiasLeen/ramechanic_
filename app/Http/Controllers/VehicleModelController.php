@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\VehicleModel;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class VehicleModelController extends Controller
 {
@@ -58,13 +59,23 @@ class VehicleModelController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $vehicle_model = new VehicleModel();
-        $vehicle_model->fill($request->all());
-        $vehicle_model->save();
+{
+    $validated = $request->validate([
+        'brand_id' => 'required|exists:brands,id',
+        'name' => [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('vehicle_models')->where(function ($query) use ($request) {
+                return $query->where('brand_id', $request->brand_id);
+            })
+        ]
+    ]);
 
-        return redirect()->route("vehicle-models.show", ["vehicle_model" => $vehicle_model]);
-    }
+    $vehicleModel = VehicleModel::create($validated);
+    
+    return redirect()->route("vehicle-models.show", $vehicleModel);
+}
 
     /**
      * Display the specified resource.
@@ -89,12 +100,25 @@ class VehicleModelController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, VehicleModel $vehicle_model)
-    {
-        $vehicle_model->fill($request->all());
-        $vehicle_model->save();
+{
+    $validated = $request->validate([
+        'brand_id' => 'required|exists:brands,id',
+        'name' => [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('vehicle_models')
+                ->ignore($vehicle_model->id)
+                ->where(function ($query) use ($request) {
+                    return $query->where('brand_id', $request->brand_id);
+                })
+        ]
+    ]);
 
-        return redirect()->route("vehicle-models.show", ["vehicle_model" => $vehicle_model]);
-    }
+    $vehicle_model->update($validated);
+    
+    return redirect()->route("vehicle-models.show", $vehicle_model);
+}
 
     /**
      * Remove the specified resource from storage.

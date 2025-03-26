@@ -28,6 +28,8 @@ Route::middleware(["auth"])->group(function () {
 });
 
 Route::get('/', [HomeController::class, 'landing_page'])->name('landing_page');
+Route::delete('/vehicles/{vehicle}/image', [VehicleController::class, 'deleteImage'])
+     ->name('vehicles.delete-image');
 
 
 Route::middleware(["auth", AdminMiddleware::class])->group(function () {

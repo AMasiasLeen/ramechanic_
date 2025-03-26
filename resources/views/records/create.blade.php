@@ -1,18 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="d-flex justify-content-between mb-3">
-        <a class="btn btn-secondary" href="{{ route('records.index') }}">Regresar</a>
-    </div>
-
-    <div class="card">
-        <div class="card-header">
-            <h1>Agregar Nuevo</h1>
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="d-flex justify-content-between mb-3">
+            <a class="btn btn-secondary btn-sm" href="{{ route('records.index') }}">Regresar</a>
         </div>
-        <div class="card-body">
-            <form id="recordForm" action="{{ route('records.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="row">
+
+        <div class="card">
+            <div class="card-header p-3">
+                <h5 class="mb-0">Agregar Nuevo</h5>
+            </div>
+
+            <div class="card-body p-3">
+                <form id="recordForm" action="{{ route('records.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <div class="row">
                     <div class="col-12 col-md-6">
                     <label for="date_in" class="form-label mt-3">Fecha de Registro</label>
                     <input name="date_in" type="date" class="form-control" id="date_in" required>
@@ -66,14 +69,18 @@
                         <textarea name="long_description" class="form-control" id="long_description"></textarea>
                     </div>
                 </div>
-                <div class="card-body">
-                    <button type="submit" class="btn btn-primary" id="submitBtn">GUARDAR</button>
-                </div>
-            </form>
+
+                        <!-- Botón -->
+                        <div class="col-12 mt-4">
+                            <button type="submit" class="btn btn-primary btn-sm px-4" id="submitBtn">GUARDAR</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+</div>
 @endsection
-
 @push('js')
     <script defer>
         window.onload = () => {

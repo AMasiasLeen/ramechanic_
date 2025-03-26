@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class BrandController extends Controller
 {
@@ -46,13 +47,20 @@ class BrandController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
-        $brand = new Brand();
-        $brand->fill($request->all());
-        $brand->save();
+{
+    $validated = $request->validate([
+        'name' => [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('brands')
+        ]
+    ]);
 
-        return redirect()->route("brands.show", ["brand" => $brand]);
-    }
+    $brand = Brand::create($validated);
+    
+    return redirect()->route("brands.show", $brand);
+}
 
     /**
      * Display the specified resource.
@@ -74,12 +82,23 @@ class BrandController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Brand $brand)
-    {
-        $brand->fill($request->all());
-        $brand->save();
+{
+    // Validación para actualización
+    $validated = $request->validate([
+        'name' => [
+            'required',
+            'string',
+            'max:255',
+            Rule::unique('brands')
+                ->ignore($brand->id) // Ignora el registro actual
+                
+        ]
+    ]);
 
-        return redirect()->route("brands.show", ["brand" => $brand]);
-    }
+    $brand->update($validated);
+    
+    return redirect()->route("brands.show", $brand);
+}
 
     /**
      * Remove the specified resource from storage.

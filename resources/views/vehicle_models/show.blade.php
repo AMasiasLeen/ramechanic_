@@ -1,28 +1,53 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-between mb-3">
-    <a class="btn btn-secondary" href="{{ route('vehicle-models.index') }}">Regresar</a>
-    <a class="btn btn-success" href="{{ route('vehicle-models.create') }}">Agregar Nuevo</a>
-</div>
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="d-flex justify-content-between mb-3">
+            <a class="btn btn-secondary btn-sm" href="{{ route('vehicle-models.index') }}">Regresar</a>
+            <a class="btn btn-success btn-sm" href="{{ route('vehicle-models.create') }}">Agregar Nuevo</a>
+        </div>
 
-<div class="card">
-    <div class="card-header">
-        <h1>Modelo de Vehículo</h1>
-    </div>
-    <div class="card-body">
-        <h4>Modelo</h4>
-        <h3>{{ $vehicle_model->name }}</h3>
-        <h4>Marca</h4>
-        <h3>{{ $vehicle_model->brand->name }}</h3>
-    </div>
-    <div class="card-footer">
-        <a class='btn btn-primary' href="{{ route('vehicle-models.edit', ['vehicle_model' => $vehicle_model]) }}">Modificar</a>
-        {{-- <button id="btndel" class="btn btn-danger">Eliminar</button> --}}
-        <form id="formdel" action="{{ route('vehicle-models.destroy', ['vehicle_model'=>$vehicle_model]) }}" method="POST" style="display:inline;">
-            @csrf
-            @method("DELETE") 
-        </form>
+        <div class="card">
+            <div class="card-header p-3">
+                <h5 class="mb-0">Detalles del Modelo</h5>
+            </div>
+            
+            <div class="card-body p-3">
+                <div class="row g-3">
+                    <!-- Detalle Modelo -->
+                    <div class="col-12">
+                        <label class="form-label text-muted">Modelo:</label>
+                        <p class="h5">{{ $vehicle_model->name }}</p>
+                    </div>
+
+                    <!-- Detalle Marca -->
+                    <div class="col-12">
+                        <label class="form-label text-muted">Marca:</label>
+                        <p class="h5">{{ $vehicle_model->brand->name }}</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer p-3 d-flex gap-2">
+                <a class="btn btn-primary btn-sm px-4" 
+                   href="{{ route('vehicle-models.edit', $vehicle_model) }}">
+                    Modificar
+                </a>
+                
+                <form id="deleteForm" 
+                      action="{{ route('vehicle-models.destroy', $vehicle_model) }}" 
+                      method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <!-- <button type="button" 
+                            class="btn btn-danger btn-sm" 
+                            onclick="confirmDelete()">
+                        Eliminar
+                    </button> -->
+                </form>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
